@@ -145,7 +145,7 @@ body{
   box-shadow:var(--shadow-sm);
   transition:box-shadow var(--t);
 }
-.section:hover{box-shadow:var(--shadow-md)}
+.section:hover{box-shadow:var(--shadow-md);scroll-margin-top:70px}
 
 .section-head{
   display:flex;align-items:center;gap:12px;
@@ -181,20 +181,24 @@ body{
 .item:last-child{border-bottom:1px solid var(--border)}
 
 .item-row1{display:flex;align-items:flex-start;gap:8px;margin-bottom:4px}
-.item-tags{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:8px}
 .item-title{
   font-size:15px;font-weight:600;line-height:1.4;letter-spacing:-.15px;
   color:var(--text);text-decoration:none;flex:1;
 }
 .item-title:hover{color:var(--blue)}
 .item-summary{font-size:13px;color:var(--text2);line-height:1.6;margin-bottom:10px}
+.item-source{
+  font-size:12px;color:var(--text3);font-weight:400;
+  padding-right:10px;margin-right:2px;
+  border-right:1px solid var(--border);
+  white-space:nowrap;
+}
 .item-row2{display:flex;gap:8px;flex-wrap:wrap;align-items:center}
 
 .tag{
   font-size:11px;font-weight:500;padding:3px 10px;
   border-radius:var(--rp);letter-spacing:.1px;
 }
-.tag-src{background:rgba(0,0,0,.035);color:var(--text2)}
 .tag-cp{background:var(--blue-bg);color:var(--blue)}
 .tag-hi{background:rgba(255,159,10,.1);color:#b25e00;font-weight:600}
 .tag-pos{background:rgba(52,199,89,.1);color:#1b7a30}
@@ -617,20 +621,39 @@ function renderItem(item){
   if(item.importance_level==='high') tags.push('<span class="tag tag-hi">高优</span>');
   if(item.sentiment==='negative') tags.push('<span class="tag tag-neg">负面</span>');
   if(item.is_our_brand) tags.push('<span class="tag tag-our">本品</span>');
-  if(item.source) tags.push(`<span class="tag tag-src">${item.source}</span>`);
-  if(item._date) tags.push(`<span class="tag tag-date">${item._date}</span>`);
   (item.companies||[]).forEach(c=>tags.push(`<span class="tag tag-cp">${c}</span>`));
 
-  return`<div class="item">
+  // Source + date combined in special format
+  let srcInfo='';
+  if(item.source||item._date){
+    srcInfo=`<span class="item-source">${item.source||''}${item.source&&item._date?' · ':''}${item._date||''}</span>`;
+  }
+
+  // Cap summary at 100 chars
+  let summary='';
+  if(item.summary){
+    summary=item.summary.length>100?item.summary.slice(0,97)+'...':item.summary;
+  }
+
+  return`<div class="item"${!validateUrl(item.url)?' data-invalid="1" style="display:none"':''}>
     <div class="item-row1">
       <a class="item-title" href="${item.url||'#'}" target="_blank" rel="noopener">${item.title||'(无标题)'}</a>
     </div>
-    ${tags.length?`<div class="item-tags">${tags.join('')}</div>`:''}
-    ${item.summary?`<div class="item-summary">${item.summary}</div>`:''}
+    ${summary?`<div class="item-summary">${summary}</div>`:''}
     <div class="item-row2">
+      ${srcInfo}
+      ${tags.join('')}
       <a class="item-url" href="${item.url||'#'}" target="_blank" rel="noopener">查看原文 →</a>
     </div>
   </div>`;
+}
+
+function validateUrl(url){
+  if(!url||url==='#') return true; // allow placeholder
+  try{
+    const u=new URL(url);
+    return u.protocol==='http:'||u.protocol==='https:';
+  }catch(e){return false;}
 }
 
 function toggleSection(head){
