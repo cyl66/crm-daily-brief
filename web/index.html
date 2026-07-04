@@ -2,10 +2,20 @@
 <html lang="zh-CN">
 <head>
 <meta charset="UTF-8">
+<script>
+/* 自动缓存破坏：绕过 GitHub Pages CDN 的 max-age=600 缓存
+   首次访问自动跳转到带时间戳的 URL，3分钟内不重复跳转避免闪烁 */
+(function(){
+  var k='_cv',now=Date.now();
+  var last=parseInt(sessionStorage.getItem(k)||'0',10);
+  if(now-last>180000 && !/[?&]_v=/.test(location.search)){
+    sessionStorage.setItem(k,String(now));
+    var s=location.search?location.search+'&':'?';
+    location.replace(location.pathname+s+'_v='+now+location.hash);
+  }
+})();
+</script>
 <meta name="viewport" content="width=device-width,initial-scale=1.0">
-<meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
-<meta http-equiv="Pragma" content="no-cache">
-<meta http-equiv="Expires" content="0">
 <title>行业资讯</title>
 <style>
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
