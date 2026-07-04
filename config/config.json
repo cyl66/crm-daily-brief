@@ -1,0 +1,152 @@
+{
+  "wecom": {
+    "webhook_url": "https://qyapi.weixin.qq.com/cgi-bin/webhook/send?key=95f4bc9c-17c9-43b9-bd54-6a115acfaefd",
+    "push_time": "09:00",
+    "push_enabled": true,
+    "push_days": [1, 2, 3, 4, 5],
+    "saturday_lite": false
+  },
+
+  "crm_companies": {
+    "overseas": [
+      {"name": "Salesforce", "keywords": ["Salesforce", "Einstein GPT", "Salesforce CRM"], "url": "https://www.salesforce.com/news/"},
+      {"name": "HubSpot", "keywords": ["HubSpot", "HubSpot CRM", "Content Hub"], "url": "https://blog.hubspot.com/"},
+      {"name": "Zoho", "keywords": ["Zoho CRM", "Zoho One", "Zoho"], "url": "https://www.zoho.com/blog/"},
+      {"name": "Microsoft Dynamics 365", "keywords": ["Dynamics 365", "Microsoft CRM", "Power Platform"], "url": "https://cloudblogs.microsoft.com/dynamics365/"},
+      {"name": "Oracle CX", "keywords": ["Oracle CX", "Oracle CRM", "Oracle Fusion"], "url": "https://blogs.oracle.com/cx/"}
+    ],
+    "domestic": [
+      {"name": "销售易", "keywords": ["销售易", "销售易CRM", "Neocrm"], "url": "https://www.xiaoshouyi.com/"},
+      {"name": "纷享销客", "keywords": ["纷享销客", "纷享销客CRM", "Fxiaoke"], "url": "https://www.fxiaoke.com/"},
+      {"name": "悟空CRM", "keywords": ["悟空CRM", "5kcrm", "悟空"], "url": "https://www.5kcrm.com/"},
+      {"name": "EC（六度人和）", "keywords": ["六度人和", "EC CRM", "EC SCRM"], "url": "https://www.liudu.com/"},
+      {"name": "励销云", "keywords": ["励销云", "励销CRM", "爱客CRM"], "url": "https://www.lixiaoyun.com/"},
+      {"name": "明道云", "keywords": ["明道云", "明道CRM", "Mingdao"], "url": "https://www.mingdao.com/"},
+      {"name": "探马SCRM", "keywords": ["探马SCRM", "探马", "Tanma SCRM"], "url": "https://www.tanma.com/"}
+    ]
+  },
+
+  "auto_brands": {
+    "our_brands": [
+      {"name": "领克", "keywords": ["领克", "Lynk & Co", "领克汽车"]},
+      {"name": "吉利", "keywords": ["吉利汽车", "吉利", "Geely"]},
+      {"name": "极氪", "keywords": ["极氪", "ZEEKR", "极氪汽车"]}
+    ],
+    "competitor_brands": [
+      {"name": "特斯拉", "keywords": ["特斯拉", "Tesla", "Model Y", "Model 3"]},
+      {"name": "比亚迪", "keywords": ["比亚迪", "BYD", "比亚迪汽车"]},
+      {"name": "蔚来", "keywords": ["蔚来", "NIO", "蔚来汽车"]},
+      {"name": "小鹏", "keywords": ["小鹏", "XPeng", "小鹏汽车"]},
+      {"name": "理想", "keywords": ["理想汽车", "Li Auto", "理想"]},
+      {"name": "小米汽车", "keywords": ["小米汽车", "小米SU7", "Xiaomi Auto"]},
+      {"name": "奔驰", "keywords": ["奔驰", "Mercedes-Benz", "梅赛德斯"]},
+      {"name": "宝马", "keywords": ["宝马", "BMW", "宝马汽车"]},
+      {"name": "奥迪", "keywords": ["奥迪", "Audi", "奥迪汽车"]},
+      {"name": "丰田", "keywords": ["丰田", "Toyota", "丰田汽车"]},
+      {"name": "大众", "keywords": ["大众", "Volkswagen", "大众汽车"]}
+    ]
+  },
+
+  "sections": {
+    "A": {
+      "name": "CRM行业动态",
+      "max_items": 10,
+      "search_keywords": ["CRM 行业", "CRM 融资", "SaaS CRM", "客户关系管理 趋势", "CRM 产品更新", "SCRM"],
+      "sources": ["websearch", "rss", "wechat"]
+    },
+    "B": {
+      "name": "汽车行业动态",
+      "max_items": 10,
+      "search_keywords": ["汽车行业 新闻", "新车发布", "汽车市场 动向", "新能源车", "智能驾驶"],
+      "sources": ["websearch", "rss", "wechat", "auto_vertical"],
+      "auto_vertical_sources": [
+        {"name": "懂车帝", "url": "https://www.dongchedi.com/"},
+        {"name": "汽车之家", "url": "https://www.autohome.com.cn/"},
+        {"name": "易车", "url": "https://www.yiche.com/"}
+      ]
+    },
+    "C": {
+      "name": "汽车品牌舆情",
+      "max_items": 10,
+      "search_keywords": ["汽车 投诉", "汽车 召回", "汽车 维权", "汽车 口碑"],
+      "sources": ["websearch", "wechat"],
+      "sentiment_enabled": true
+    },
+    "D": {
+      "name": "政策法规速递",
+      "max_items": 10,
+      "search_keywords": ["新能源 政策", "汽车 法规", "数据安全 汽车", "智能网联 管理办法", "排放标准"],
+      "sources": ["websearch"],
+      "gov_sources": [
+        {"name": "工信部", "url": "https://www.miit.gov.cn/"},
+        {"name": "国家发改委", "url": "https://www.ndrc.gov.cn/"},
+        {"name": "国家网信办", "url": "https://www.cac.gov.cn/"}
+      ]
+    },
+    "E": {
+      "name": "数字营销",
+      "max_items": 10,
+      "search_keywords": ["数字营销", "私域运营", "CDP", "MA 营销自动化", "AI Agent 营销", "企微 SCRM"],
+      "sources": ["websearch", "rss", "wechat"]
+    },
+    "F": {
+      "name": "消费者购车洞察",
+      "max_items": 10,
+      "search_keywords": ["消费者 购车 调研", "购车决策", "Z世代 汽车", "汽车消费 趋势", "短视频 购车"],
+      "sources": ["websearch", "wechat"]
+    }
+  },
+
+  "rss_feeds": [
+    "https://36kr.com/feed",
+    "https://www.tmtpost.com/rss.xml",
+    "https://www.geekpark.net/rss",
+    "https://feed.infoq.com/",
+    "https://sspai.com/feed"
+  ],
+
+  "dedup": {
+    "jaccard_threshold": 0.70,
+    "bert_threshold": 0.92,
+    "time_window_hours": 4.0
+  },
+
+  "importance_scoring": {
+    "weights": {
+      "source_authority": 0.30,
+      "multi_source_coverage": 0.35,
+      "freshness": 0.20,
+      "relevance_match": 0.15
+    },
+    "authority_scores": {
+      "gov_announcement": 1.0,
+      "top_tech_media": 0.9,
+      "auto_vertical_media": 0.8,
+      "well_known_wechat": 0.7,
+      "general_media": 0.4,
+      "personal_blog": 0.3
+    }
+  },
+
+  "llm": {
+    "model": "deepseek-chat",
+    "temperature": 0.3,
+    "max_tokens_per_article": 200,
+    "batch_size": 10
+  },
+
+  "database": {
+    "path": "data/crm_brief.db"
+  },
+
+  "archive": {
+    "path": "archive/"
+  },
+
+  "web": {
+    "latest_json": "latest.json",
+    "time_granularities": ["day", "week", "month", "quarter"],
+    "default_granularity": "day",
+    "site_url": "https://cyl66.github.io/crm-daily-brief/web/"
+  }
+}
