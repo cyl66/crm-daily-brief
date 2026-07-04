@@ -128,23 +128,31 @@ body{
 .section-head .chevron{
   font-size:11px;color:var(--text3);transition:transform var(--t);
 }
-.section-body{padding:0 22px 18px}
+.section-body{padding:0 22px 22px;display:flex;flex-direction:column;gap:10px}
 
-/* ── Article ── */
+/* ── Article Card ── */
 .item{
-  padding:16px 0;border-bottom:1px solid var(--border);
+  background:var(--bg);
+  border-radius:12px;
+  padding:14px 16px;
+  border:1px solid var(--border);
+  transition:all var(--t);
   animation:in .35s ease both;
 }
+.item:hover{
+  border-color:rgba(0,113,227,.15);
+  box-shadow:0 2px 12px rgba(0,0,0,.04);
+}
 @keyframes in{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}
-.item:last-child{border-bottom:none}
+.item:last-child{border-bottom:1px solid var(--border)}
 
-.item-row1{display:flex;align-items:flex-start;gap:8px;margin-bottom:5px}
+.item-row1{display:flex;align-items:flex-start;gap:8px;margin-bottom:6px}
 .item-title{
   font-size:15px;font-weight:600;line-height:1.4;letter-spacing:-.15px;
   color:var(--text);text-decoration:none;flex:1;
 }
 .item-title:hover{color:var(--blue)}
-.item-summary{font-size:13px;color:var(--text2);line-height:1.55;margin-bottom:8px}
+.item-summary{font-size:13px;color:var(--text2);line-height:1.6;margin-bottom:10px}
 .item-row2{display:flex;gap:8px;flex-wrap:wrap;align-items:center}
 
 .tag{
@@ -190,8 +198,8 @@ body{
   .presets{gap:4px}
   .presets button{padding:5px 10px;font-size:11px}
   .section-head{padding:14px 16px}
-  .section-body{padding:0 16px 14px}
-  .item{padding:12px 0}
+  .section-body{padding:0 14px 14px;gap:8px}
+  .item{padding:12px 14px;border-radius:10px}
   .item-title{font-size:14px}
 }
 </style>
