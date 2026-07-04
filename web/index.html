@@ -33,52 +33,28 @@ body{
 .hero h1{font-size:34px;font-weight:700;letter-spacing:-.6px;line-height:1.15}
 .hero .sub{font-size:15px;color:var(--text2);margin-top:6px;font-weight:450}
 
-/* ── Filter Bar ── */
+/* ── Date Filter ── */
 .filter-bar{
   background:rgba(255,255,255,.76);
   backdrop-filter:blur(28px) saturate(180%);
   -webkit-backdrop-filter:blur(28px) saturate(180%);
   border:1px solid var(--border);
-  border-radius:var(--r);padding:14px 16px 16px;margin-bottom:28px;
+  border-radius:var(--r);padding:14px;margin-bottom:24px;
   box-shadow:var(--shadow-sm);
 }
-
-.presets{display:flex;flex-wrap:wrap;gap:6px;align-items:center}
+.presets{display:flex;gap:6px}
 .presets button{
-  padding:6px 14px;border:none;border-radius:var(--rp);
+  flex:1;padding:9px 0;border:none;border-radius:12px;
   font-size:13px;font-weight:500;color:var(--text2);
   background:rgba(0,0,0,.035);cursor:pointer;
   transition:var(--t);font-family:inherit;white-space:nowrap;
 }
 .presets button:hover{background:rgba(0,0,0,.06);color:var(--text)}
 .presets button.active{background:var(--text);color:#fff;font-weight:600}
-
-.search-row{
-  display:flex;gap:8px;align-items:center;margin-top:12px;
-  padding-top:12px;border-top:1px solid var(--border);
+.date-range{
+  font-size:12px;color:var(--text3);margin-top:10px;
+  padding:0 4px;text-align:center;
 }
-.search-wrap{flex:1;position:relative;display:flex;align-items:center}
-.search-row input{
-  width:100%;border:none;background:rgba(0,0,0,.03);border-radius:var(--rp);
-  padding:9px 36px 9px 16px;font-size:13px;font-family:inherit;outline:none;
-  color:var(--text);transition:var(--t);
-}
-.search-row input:focus{background:rgba(0,0,0,.055)}
-.search-row input::placeholder{color:var(--text3)}
-.search-clear{
-  position:absolute;right:11px;cursor:pointer;
-  font-size:13px;color:var(--text3);padding:2px 5px;
-  border-radius:50%;line-height:1;user-select:none;
-  transition:all var(--t);
-}
-.search-clear:hover{color:var(--text);background:rgba(0,0,0,.06)}
-.search-row button{
-  padding:9px 20px;border:none;border-radius:var(--rp);
-  font-size:13px;font-weight:600;cursor:pointer;
-  font-family:inherit;transition:var(--t);
-}
-.btn-go{background:var(--blue);color:#fff}
-.btn-go:hover{opacity:.88}
 
 /* ── Tab Navigation ── */
 .tab-nav{
@@ -172,7 +148,7 @@ body{
   .page{padding:28px 14px 60px}
   .hero h1{font-size:26px}
   .presets{gap:4px}
-  .presets button{padding:5px 10px;font-size:11px}
+  .presets button{padding:8px 0;font-size:12px}
   .section-head{padding:14px 16px}
   .section-body{padding:0 14px 14px;gap:8px}
   .item{padding:12px 14px;border-radius:10px}
@@ -198,14 +174,7 @@ body{
       <button data-preset="this_month">本月</button>
       <button data-preset="last_month">上月</button>
     </div>
-
-    <div class="search-row">
-      <div class="search-wrap">
-        <input type="text" id="searchInput" placeholder="搜索标题或内容...">
-        <span class="search-clear" id="searchClear" onclick="clearSearch()" style="display:none">✕</span>
-      </div>
-      <button class="btn-go" onclick="doSearch()">查询</button>
-    </div>
+    <div class="date-range" id="dateRange"></div>
   </div>
 
   <div class="tab-nav" id="tabNav">
@@ -603,30 +572,18 @@ const yesterday=()=>{const d=today();d.setDate(d.getDate()-1);return d};
 /* ── Init ── */
 document.addEventListener('DOMContentLoaded',()=>{
   applyPreset('yesterday');
+  updateDateRange();
 
   document.querySelectorAll('#presets button[data-preset]').forEach(btn=>{
     btn.addEventListener('click',function(){
       applyPreset(this.dataset.preset);
+      updateDateRange();
       loadData();
     });
   });
 
-  document.getElementById('searchInput').addEventListener('keydown',e=>{
-    if(e.key==='Enter') doSearch();
-  });
-  document.getElementById('searchInput').addEventListener('input',function(){
-    document.getElementById('searchClear').style.display=this.value.trim()?'block':'none';
-  });
-
   loadData();
 });
-
-function clearSearch(){
-  document.getElementById('searchInput').value='';
-  document.getElementById('searchClear').style.display='none';
-  loadData();
-}
-function doSearch(){loadData()}
 
 /* ── Date ── */
 function applyPreset(preset){
@@ -655,9 +612,13 @@ function applyPreset(preset){
   }
 }
 
+function updateDateRange(){
+  const el=document.getElementById('dateRange');
+  if(el) el.textContent = startDate===endDate ? startDate : `${startDate} ~ ${endDate}`;
+}
+
 /* ── Data ── */
 async function loadData(){
-  const term=document.getElementById('searchInput').value.trim().toLowerCase();
   let brief=null;
   const isMulti=startDate!==endDate;
 
@@ -703,7 +664,6 @@ async function loadData(){
     if(!brief.sections[k].items) brief.sections[k].items=[];
   });
 
-  if(term) brief=filterBrief(brief,term);
   render(brief);
 }
 
@@ -728,14 +688,6 @@ async function aggregate(s,e){
     total+=secs[k].items.length;
   }
   return {sections:secs,total_articles:total,days_covered:days};
-}
-
-function filterBrief(b,term){
-  const f=JSON.parse(JSON.stringify(b));
-  for(const k of['A','B','C','D','E','F']){
-    f.sections[k].items=f.sections[k].items.filter(i=>(i.title||'').toLowerCase().includes(term)||(i.summary||'').toLowerCase().includes(term));
-  }
-  return f;
 }
 
 /* ── Render ── */
