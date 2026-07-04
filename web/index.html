@@ -188,7 +188,6 @@ body{
 
   <div class="hero">
     <h1>行业资讯</h1>
-    <div class="sub" id="headerSub">昨日动态</div>
   </div>
 
   <div class="filter-bar">
@@ -198,10 +197,6 @@ body{
       <button data-preset="last_week">上周</button>
       <button data-preset="this_month">本月</button>
       <button data-preset="last_month">上月</button>
-      <button data-preset="this_quarter">本季</button>
-      <button data-preset="last_quarter">上季</button>
-      <button data-preset="this_year">本年</button>
-      <button data-preset="last_year">上年</button>
     </div>
 
     <div class="search-row">
@@ -642,43 +637,21 @@ function applyPreset(preset){
   const now=today(),y=yesterday(),yest=fmt(y);
 
   switch(preset){
-    case'yesterday':startDate=endDate=yest;document.getElementById('headerSub').textContent='昨日动态';break;
+    case'yesterday':startDate=endDate=yest;break;
     case'this_week':{
       const mon=new Date(now);mon.setDate(now.getDate()-(now.getDay()||7)+1);
-      startDate=fmt(mon);endDate=yest;
-      document.getElementById('headerSub').textContent='本周动态';break;
+      startDate=fmt(mon);endDate=yest;break;
     }
     case'last_week':{
       const lm=new Date(now);lm.setDate(now.getDate()-(now.getDay()||7)-6);
       const ls=new Date(lm);ls.setDate(ls.getDate()+6);
-      startDate=fmt(lm);endDate=fmt(ls);
-      document.getElementById('headerSub').textContent='上周动态';break;
+      startDate=fmt(lm);endDate=fmt(ls);break;
     }
     case'this_month':
-      startDate=fmt(new Date(now.getFullYear(),now.getMonth(),1));endDate=yest;
-      document.getElementById('headerSub').textContent='本月动态';break;
+      startDate=fmt(new Date(now.getFullYear(),now.getMonth(),1));endDate=yest;break;
     case'last_month':
       startDate=fmt(new Date(now.getFullYear(),now.getMonth()-1,1));
-      endDate=fmt(new Date(now.getFullYear(),now.getMonth(),0));
-      document.getElementById('headerSub').textContent='上月动态';break;
-    case'this_quarter':{
-      const tq=Math.floor(now.getMonth()/3)*3;
-      startDate=fmt(new Date(now.getFullYear(),tq,1));endDate=yest;
-      document.getElementById('headerSub').textContent='本季度动态';break;
-    }
-    case'last_quarter':{
-      const lq=Math.floor(now.getMonth()/3)*3-3;
-      const yr=now.getFullYear()+Math.floor(lq/12),mo=((lq%12)+12)%12;
-      startDate=fmt(new Date(yr,mo,1));endDate=fmt(new Date(yr,mo+3,0));
-      document.getElementById('headerSub').textContent='上季度动态';break;
-    }
-    case'this_year':
-      startDate=fmt(new Date(now.getFullYear(),0,1));endDate=yest;
-      document.getElementById('headerSub').textContent='本年度动态';break;
-    case'last_year':
-      startDate=fmt(new Date(now.getFullYear()-1,0,1));
-      endDate=fmt(new Date(now.getFullYear()-1,11,31));
-      document.getElementById('headerSub').textContent='上年度动态';break;
+      endDate=fmt(new Date(now.getFullYear(),now.getMonth(),0));break;
   }
 }
 
