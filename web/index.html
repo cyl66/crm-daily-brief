@@ -90,20 +90,22 @@ body{
   border:1px solid var(--border);
   border-radius:var(--r);margin-bottom:20px;
   box-shadow:0 1px 3px rgba(0,0,0,.03);
+  overflow:hidden;max-width:100%;
 }
 .tab-nav button{
   display:flex;align-items:center;gap:6px;
   padding:8px 12px;border:none;background:transparent;
   border-radius:11px;cursor:pointer;transition:all var(--t);
   font-size:13px;font-weight:500;color:var(--text2);
-  white-space:nowrap;flex:1;justify-content:center;
+  white-space:nowrap;flex:1 1 0;justify-content:center;
+  min-width:0;overflow:hidden;
 }
 .tab-nav button:hover{background:rgba(0,0,0,.04);color:var(--text)}
 .tab-nav button.active{
   background:var(--surface);color:var(--text);
   box-shadow:0 1px 4px rgba(0,0,0,.06);
 }
-.tab-ico{width:16px;height:16px;display:flex;flex-shrink:0}
+.tab-ico{width:18px;height:18px;display:flex;flex-shrink:0}
 .tab-ico svg{width:100%;height:100%}
 .tab-nav button.active .tab-ico svg{stroke-width:2.5}
 
@@ -123,7 +125,7 @@ body{
   user-select:none;transition:background var(--t);
 }
 .section-head:hover{background:var(--surface-hover)}
-.section-head .ico{width:22px;height:22px;flex-shrink:0;opacity:.8}
+.section-head .ico{width:24px;height:24px;flex-shrink:0}
 .section-head .label{font-size:16px;font-weight:600;letter-spacing:-.2px;flex:1}
 .section-head .chevron{font-size:11px;color:var(--text3);transition:transform var(--t)}
 .section-body{padding:0 22px 22px;display:flex;flex-direction:column;gap:10px}
@@ -159,6 +161,13 @@ body{
 .empty{text-align:center;padding:32px;color:var(--text3);font-size:14px}
 .footer{text-align:center;padding:32px 0 0;color:var(--text3);font-size:12px}
 
+/* 移动端/窄屏 Tab 只显示图标 */
+@media(max-width:768px){
+  .tab-label{display:none!important}
+  .tab-ico{width:22px;height:22px}
+  .tab-nav{gap:0;padding:4px}
+  .tab-nav button{padding:10px 4px;gap:0;min-width:0;flex:1 1 0}
+}
 @media(max-width:640px){
   .page{padding:28px 14px 60px}
   .hero h1{font-size:26px}
@@ -168,6 +177,9 @@ body{
   .section-body{padding:0 14px 14px;gap:8px}
   .item{padding:12px 14px;border-radius:10px}
   .item-title{font-size:14px}
+  .tab-nav{padding:4px;gap:0}
+  .tab-nav button{padding:10px 2px}
+  .tab-ico{width:20px;height:20px}
 }
 </style>
 </head>
@@ -202,37 +214,384 @@ body{
   </div>
 
   <div class="tab-nav" id="tabNav">
-    <button data-target="A" class="active"><span class="tab-ico" style="color:var(--blue)"><svg viewBox="0 0 24 24" fill="none" stroke="var(--blue)" stroke-width="2"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg></span><span class="tab-label">CRM行业</span></button>
-    <button data-target="B"><span class="tab-ico" style="color:var(--orange)"><svg viewBox="0 0 24 24" fill="none" stroke="var(--orange)" stroke-width="2"><path d="M5 17h2l1-7h8l1 7h2"/><circle cx="8" cy="20" r="1.5"/><circle cx="17" cy="20" r="1.5"/></svg></span><span class="tab-label">汽车行业</span></button>
-    <button data-target="C"><span class="tab-ico" style="color:var(--pink)"><svg viewBox="0 0 24 24" fill="none" stroke="var(--pink)" stroke-width="2"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.7 21a2 2 0 0 1-3.4 0"/></svg></span><span class="tab-label">品牌舆情</span></button>
-    <button data-target="D"><span class="tab-ico" style="color:var(--purple)"><svg viewBox="0 0 24 24" fill="none" stroke="var(--purple)" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></span><span class="tab-label">政策法规</span></button>
-    <button data-target="E"><span class="tab-ico" style="color:var(--teal)"><svg viewBox="0 0 24 24" fill="none" stroke="var(--teal)" stroke-width="2"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg></span><span class="tab-label">数字营销</span></button>
-    <button data-target="F"><span class="tab-ico" style="color:var(--green)"><svg viewBox="0 0 24 24" fill="none" stroke="var(--green)" stroke-width="2"><circle cx="12" cy="8" r="4"/><path d="M4 22c0-4.4 3.6-8 8-8s8 3.6 8 8"/></svg></span><span class="tab-label">消费者洞察</span></button>
+    <button data-target="A" class="active"><span class="tab-ico" style="color:#0071e3"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round" stroke-linecap="round"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg></span><span class="tab-label">CRM行业</span></button>
+    <button data-target="B"><span class="tab-ico" style="color:#ff9f0a"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round" stroke-linecap="round"><path d="M4 14v-3l2-5a2 2 0 0 1 1.9-1.2h8.2A2 2 0 0 1 18 6l2 5v3a1 1 0 0 1-1 1h-1v1a1 1 0 0 1-2 0v-1H8v1a1 1 0 0 1-2 0v-1H5a1 1 0 0 1-1-1z"/><path d="M7.5 11l1-2h7l1 2"/></svg></span><span class="tab-label">汽车行业</span></button>
+    <button data-target="C"><span class="tab-ico" style="color:#ff2d55"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round" stroke-linecap="round"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.7 21a2 2 0 0 1-3.4 0"/></svg></span><span class="tab-label">品牌舆情</span></button>
+    <button data-target="D"><span class="tab-ico" style="color:#af52de"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round" stroke-linecap="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></span><span class="tab-label">政策法规</span></button>
+    <button data-target="E"><span class="tab-ico" style="color:#5ac8fa"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round" stroke-linecap="round"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg></span><span class="tab-label">数字营销</span></button>
+    <button data-target="F"><span class="tab-ico" style="color:#34c759"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round" stroke-linecap="round"><circle cx="12" cy="8" r="4"/><path d="M4 22c0-4.4 3.6-8 8-8s8 3.6 8 8"/></svg></span><span class="tab-label">消费者洞察</span></button>
   </div>
 
   <div id="content">
     <div class="empty" id="loadingMsg">加载中...</div>
   </div>
-  <div class="footer">CRM 行业日报 · 数据驱动决策</div>
+  <script type="application/json" id="fallback-data">{
+  "date": "2026-07-04",
+  "generated_at": "2026-07-05 02:10:00",
+  "sections": {
+    "A": {
+      "name": "CRM行业动态",
+      "items": [
+        {
+          "title": "2026企业微信SCRM系统实测榜单：全链路能力与落地效果成竞争核心",
+          "summary": "企业微信SCRM市场渗透率突破85%，赛道从功能堆砌转向综合实力比拼，超85%企业因选型不当导致工具闲置，合规资质与AI智能化成为关键差异化指标",
+          "url": "https://www.cnblogs.com/1689-20260616/p/20481939",
+          "source": "博客园",
+          "published_at": "2026-06-12",
+          "importance_level": "medium",
+          "importance_score": 0.72,
+          "companies": [
+            "企业微信"
+          ]
+        },
+        {
+          "title": "2026企业微信SCRM全维度体验报告：255亿市场规模，62%企业选型失败",
+          "summary": "IT之家发布企微SCRM全维度评测，国内市场规模突破255亿元，超85%企业已纳入私域运营核心布局，但62%企业因选型不当导致工具闲置",
+          "url": "https://www.ithome.com/0/958/867.htm",
+          "source": "IT之家",
+          "published_at": "2026-06-20",
+          "importance_level": "medium",
+          "importance_score": 0.68,
+          "companies": [
+            "企业微信"
+          ]
+        },
+        {
+          "title": "企业微信SCRM最新实测榜单发布：合规优先与全链路功能成评选标准",
+          "summary": "搜狐发布2026企微SCRM最新实测榜单，合规资质、全链路功能完整性、AI智能化程度、多系统数据打通能力成为私域运营效率与增长天花板的决定因素",
+          "url": "https://www.sohu.com/a/1016219034_121097634",
+          "source": "搜狐",
+          "published_at": "2026-04-29",
+          "importance_level": "medium",
+          "importance_score": 0.65,
+          "companies": [
+            "企业微信"
+          ]
+        }
+      ]
+    },
+    "B": {
+      "name": "汽车行业动态",
+      "items": [
+        {
+          "title": "中国车企半年考交卷：比亚迪上汽吉利奇瑞领跑，行业利润率仅3.4%",
+          "summary": "乘联会数据显示截至6月21日国内乘用车零售801.2万辆同比下滑20%，6月新能源渗透率突破60%，前5个月整车行业利润率仅3.4%创近年新低",
+          "url": "https://baijiahao.baidu.com/s?id=1869763144173769223&wfr=spider&for=pc",
+          "source": "百家号",
+          "published_at": "2026-07-04",
+          "importance_level": "high",
+          "importance_score": 0.88,
+          "companies": [
+            "比亚迪",
+            "上汽",
+            "吉利",
+            "奇瑞"
+          ]
+        },
+        {
+          "title": "零跑销量创新高，比亚迪继续领跑，6月主流车企销量汇总",
+          "summary": "太平洋汽车汇总6月主流车企销量，6月前21天全国乘用车零售同比下降23%，新能源乘用车零售突破592万辆，整体渗透率达57.4%",
+          "url": "https://www.pcauto.com.cn/nation/5161/51618355.html",
+          "source": "太平洋汽车",
+          "published_at": "2026-07-04",
+          "importance_level": "high",
+          "importance_score": 0.85,
+          "companies": [
+            "零跑",
+            "比亚迪"
+          ]
+        },
+        {
+          "title": "乘联分会：6月全国新能源乘用车零售103.7万辆，批发150.6万辆",
+          "summary": "乘联分会7月3日发布6月新能源市场数据，零售103.7万辆同比下降7%，厂商批发150.6万辆同比增长22%，今年以来累计批发681.2万辆",
+          "url": "https://www.guandian.cn/article/20260703/571143.html",
+          "source": "观点网",
+          "published_at": "2026-07-03",
+          "importance_level": "high",
+          "importance_score": 0.9,
+          "companies": [
+            "乘联会"
+          ]
+        },
+        {
+          "title": "新势力半年考：零跑断层领跑月销9.34万辆，理想成唯一双降品牌",
+          "summary": "7月1日多家新势力披露6月交付数据，零跑以9.34万辆断层领跑创纪录，蔚来小鹏双双突破4万辆，理想成为头部唯一同比环比双降品牌",
+          "url": "https://baijiahao.baidu.com/s?id=1869572731945000227&wfr=spider&for=pc",
+          "source": "百家号",
+          "published_at": "2026-07-01",
+          "importance_level": "high",
+          "importance_score": 0.86,
+          "companies": [
+            "零跑",
+            "蔚来",
+            "小鹏",
+            "理想"
+          ]
+        },
+        {
+          "title": "2027年打飞的成真？深圳广州已备好跑道，低空经济写入国家法律",
+          "summary": "新修订民用航空法7月1日正式施行首次将低空经济写入国家法律，深圳低空物流无人机穿梭如织，广州双座飞行汽车完成实景首飞",
+          "url": "https://baijiahao.baidu.com/s?id=1869735000331709864&wfr=spider&for=pc",
+          "source": "百家号",
+          "published_at": "2026-07-04",
+          "importance_level": "medium",
+          "importance_score": 0.75,
+          "companies": [
+            "小鹏汇天",
+            "广汽"
+          ]
+        },
+        {
+          "title": "三次降油也难抚燃油车主焦虑，新能源渗透率63.6%燃油车零售暴跌38%",
+          "summary": "乘联会6月销量数据显示新能源车批发151万辆渗透率63.6%，燃油车零售同比下降38.3%，热销榜单几乎见不到燃油车身影",
+          "url": "https://baijiahao.baidu.com/s?id=1869805863500605319&wfr=spider&for=pc",
+          "source": "百家号",
+          "published_at": "2026-07-04",
+          "importance_level": "high",
+          "importance_score": 0.82,
+          "companies": [
+            "比亚迪",
+            "特斯拉"
+          ]
+        }
+      ]
+    },
+    "C": {
+      "name": "汽车品牌舆情",
+      "items": [
+        {
+          "title": "2026上半年汽车召回排行：总量165万辆创十年新低，日系居首蔚来召回24.6万辆",
+          "summary": "车质网汇总上半年召回公告50个涉及26品牌165万辆，日系688146辆居首，蔚来因软件黑屏问题召回246229辆ES8/ES6/EC6成自主品牌单次之最",
+          "url": "https://society.sohu.com/a/1045139979_269032",
+          "source": "搜狐汽车",
+          "published_at": "2026-07-03",
+          "importance_level": "high",
+          "importance_score": 0.85,
+          "sentiment": "negative",
+          "companies": [
+            "蔚来",
+            "丰田",
+            "东风日产"
+          ],
+          "is_our_brand": 1
+        },
+        {
+          "title": "市场监管总局更新召回信息：东风日产N7/N6因制动隐患被召回",
+          "summary": "市场监管总局缺陷产品召回页面更新，东风汽车有限公司召回部分东风日产N7、N6汽车，涉及制动系统安全隐患需进店检修",
+          "url": "https://www.samr.gov.cn/zlfzj/qxcpzh/index.html",
+          "source": "市场监管总局",
+          "published_at": "2026-07-03",
+          "importance_level": "medium",
+          "importance_score": 0.65,
+          "sentiment": "negative",
+          "companies": [
+            "东风日产"
+          ],
+          "is_our_brand": 0
+        },
+        {
+          "title": "福特因后悬架断裂隐患扩大召回进口探险者车型",
+          "summary": "福特汽车因后悬架前束连接臂存在断裂隐患召回2017-2019款进口探险者，系三年前召回方案的扩大召回，体现车企追溯共性问题责任意识",
+          "url": "https://society.sohu.com/a/1045139979_269032",
+          "source": "搜狐汽车",
+          "published_at": "2026-07-03",
+          "importance_level": "medium",
+          "importance_score": 0.58,
+          "sentiment": "negative",
+          "companies": [
+            "福特"
+          ],
+          "is_our_brand": 0
+        },
+        {
+          "title": "极氪001、奔驰EQA/EQB、沃尔沃EX30因动力电池问题被召回",
+          "summary": "2026上半年动力电池相关召回频次明显增多，涉及极氪001、奔驰EQA、奔驰EQB、沃尔沃EX30、极星4等多款纯电与插电混动车型",
+          "url": "https://society.sohu.com/a/1045139979_269032",
+          "source": "搜狐汽车",
+          "published_at": "2026-07-03",
+          "importance_level": "medium",
+          "importance_score": 0.62,
+          "sentiment": "negative",
+          "companies": [
+            "极氪",
+            "奔驰",
+            "沃尔沃"
+          ],
+          "is_our_brand": 1
+        }
+      ]
+    },
+    "D": {
+      "name": "政策法规速递",
+      "items": [
+        {
+          "title": "购置税补贴新政7月4日落地：燃油车首次减半，新能源30万红线明确",
+          "summary": "财政部等三部门7月4日发布购置税补贴公告，1.6L以下低油耗燃油车首次纳入减半范围，新能源延续减半但单辆不超过30万元",
+          "url": "https://baijiahao.baidu.com/s?id=1869753716509852669&wfr=spider&for=pc",
+          "source": "百家号",
+          "published_at": "2026-07-04",
+          "importance_level": "high",
+          "importance_score": 0.95,
+          "companies": [
+            "财政部",
+            "税务总局",
+            "工信部"
+          ]
+        },
+        {
+          "title": "工信部发布《智能网联汽车组合驾驶辅助系统安全要求》强制性国标",
+          "summary": "工信部组织制定GB 47955-2026强制性国家标准由国家市场监管总局批准发布，对智能网联汽车组合驾驶辅助系统提出强制安全要求",
+          "url": "https://www.miit.gov.cn/jgsj/zbys/qcgy/art/2026/art_7bcb480b0db5432f8542157a9fc12841.html",
+          "source": "工信部",
+          "published_at": "2026-07-02",
+          "importance_level": "high",
+          "importance_score": 0.85,
+          "companies": [
+            "工信部"
+          ]
+        },
+        {
+          "title": "新修订《民用航空法》7月1日施行，首次将低空经济写入国家法律",
+          "summary": "新修订民用航空法7月1日正式施行，首次将低空经济写入国家法律，为飞行汽车、eVTOL等低空飞行器运营提供法律保障",
+          "url": "https://baijiahao.baidu.com/s?id=1869735000331709864&wfr=spider&for=pc",
+          "source": "百家号",
+          "published_at": "2026-07-04",
+          "importance_level": "medium",
+          "importance_score": 0.72,
+          "companies": [
+            "民航局"
+          ]
+        }
+      ]
+    },
+    "E": {
+      "name": "数字营销",
+      "items": [
+        {
+          "title": "2026全球数字经济大会在北京举办，80余项前沿技术集中首发",
+          "summary": "7月2日至4日全球数字经济大会在北京举办，高德空间智能世界模型、人形机器人、医疗贸易城市多领域大模型智能体集中亮相，AI从智能计算走向实体行动",
+          "url": "https://mp.weixin.qq.com/s?__biz=MjM5OTQzNDkzMw==&mid=2658915688&idx=1&sn=ee651771eaf3a58cad91554515b64bab&chksm=bdf8e039604945095a3651ffc15b678d7b7b5df2cb857bb0e0ead15c2bbc47db8c6cc61990d4&scene=27",
+          "source": "中国会展",
+          "published_at": "2026-07-02",
+          "importance_level": "high",
+          "importance_score": 0.8,
+          "companies": [
+            "高德",
+            "软通智慧"
+          ]
+        },
+        {
+          "title": "2026电商内容营销新趋势：AIGC、GEO优化与数字人重塑行业",
+          "summary": "内容营销成本比传统营销低62%但线索量是3倍，直播带货从风口变基础设施，AI数字人成新趋势，私域运营复购率可提升30-50%",
+          "url": "https://baijiahao.baidu.com/s?id=1864573986919609648&wfr=spider&for=pc",
+          "source": "百家号",
+          "published_at": "2026-05-07",
+          "importance_level": "medium",
+          "importance_score": 0.68,
+          "companies": [
+            "抖音",
+            "淘宝"
+          ]
+        },
+        {
+          "title": "微赞私域电商直播分销裂变功能上线，门店拓客转化双提升",
+          "summary": "微赞上线私域电商直播分销裂变功能，搭载AI+人工双重评论审核和防盗链防护，所有用户数据和经营订单数据完整归属企业自身",
+          "url": "https://baijiahao.baidu.com/s?id=1869327304962107575&wfr=spider&for=pc",
+          "source": "百家号",
+          "published_at": "2026-06-28",
+          "importance_level": "medium",
+          "importance_score": 0.6,
+          "companies": [
+            "微赞"
+          ]
+        }
+      ]
+    },
+    "F": {
+      "name": "消费者购车洞察",
+      "items": [
+        {
+          "title": "购置税减半新政落地：15万的车省6635元，叠加补贴最高省上万",
+          "summary": "7月4日购置税新政落地，1.6L以下燃油车减半可省6000余元，新能源延续减半叠加地方以旧换新补贴最高省上万元，被称为今年买车最佳时机",
+          "url": "https://baijiahao.baidu.com/s?id=1869753716509852669&wfr=spider&for=pc",
+          "source": "百家号",
+          "published_at": "2026-07-04",
+          "importance_level": "high",
+          "importance_score": 0.92,
+          "companies": [
+            "财政部"
+          ]
+        },
+        {
+          "title": "新能源车销量前十全是电车，燃油车首次被挤出月度榜单前十",
+          "summary": "乘联会6月数据显示新能源车零售95万辆渗透率62.9%创历史新高，月度销量排行榜前十全部是新能源，燃油车历史上首次被彻底挤出前十",
+          "url": "https://baijiahao.baidu.com/s?id=1869709234056943543&wfr=spider&for=pc",
+          "source": "百家号",
+          "published_at": "2026-07-03",
+          "importance_level": "high",
+          "importance_score": 0.85,
+          "companies": [
+            "比亚迪",
+            "特斯拉"
+          ]
+        },
+        {
+          "title": "7月1日起电池新国标全面实施，新能源汽车迈入安全最后三级跳",
+          "summary": "2026年7月1日起以电池新国标为首的电车安全新规全面实施，5月新能源渗透率突破62%燃油车销量近乎腰斩，市场正式由燃油车主导切换为新能源主导",
+          "url": "https://baijiahao.baidu.com/s?id=1869406015954988274&wfr=spider&for=pc",
+          "source": "百家号",
+          "published_at": "2026-06-29",
+          "importance_level": "high",
+          "importance_score": 0.78,
+          "companies": [
+            "比亚迪",
+            "宁德时代"
+          ]
+        }
+      ]
+    }
+  },
+  "total_articles": 22,
+  "coverage_summary": {
+    "A": {
+      "name": "CRM行业动态",
+      "count": 3
+    },
+    "B": {
+      "name": "汽车行业动态",
+      "count": 6
+    },
+    "C": {
+      "name": "汽车品牌舆情",
+      "count": 4
+    },
+    "D": {
+      "name": "政策法规速递",
+      "count": 3
+    },
+    "E": {
+      "name": "数字营销",
+      "count": 3
+    },
+    "F": {
+      "name": "消费者购车洞察",
+      "count": 3
+    }
+  }
+}</script>
+<div class="footer">CRM 行业日报 · 数据驱动决策</div>
 </div>
 
 <script>
-/* 全局错误兜底：任何未捕获异常都显示提示，不留白屏 */
-window.addEventListener('error',function(e){
-  console.error('Global error:',e.message);
-  var c=document.getElementById('content');
-  if(c&&(!c.innerHTML||c.innerHTML.indexOf('section-')<0)){
-    c.innerHTML='<div class="empty" style="padding:32px">页面加载异常，<a href="javascript:location.reload()" style="color:var(--blue);cursor:pointer">点击刷新</a></div>';
-  }
-});
+window.addEventListener('error',function(e){console.error('Global error:',e.message)});
 
 const SECTIONS={
-  A:{name:'CRM行业动态',color:'var(--blue)'},
-  B:{name:'汽车行业动态',color:'var(--orange)'},
-  C:{name:'汽车品牌舆情',color:'var(--pink)'},
-  D:{name:'政策法规速递',color:'var(--purple)'},
-  E:{name:'数字营销',color:'var(--teal)'},
-  F:{name:'消费者购车洞察',color:'var(--green)'}
+  A:{name:'CRM行业动态',color:'#0071e3',svg:'<rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/>'},
+  B:{name:'汽车行业动态',color:'#ff9f0a',svg:'<path d="M4 14v-3l2-5a2 2 0 0 1 1.9-1.2h8.2A2 2 0 0 1 18 6l2 5v3a1 1 0 0 1-1 1h-1v1a1 1 0 0 1-2 0v-1H8v1a1 1 0 0 1-2 0v-1H5a1 1 0 0 1-1-1z"/><path d="M7.5 11l1-2h7l1 2"/>'},
+  C:{name:'汽车品牌舆情',color:'#ff2d55',svg:'<path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.7 21a2 2 0 0 1-3.4 0"/>'},
+  D:{name:'政策法规速递',color:'#af52de',svg:'<path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>'},
+  E:{name:'数字营销',color:'#5ac8fa',svg:'<polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/>'},
+  F:{name:'消费者购车洞察',color:'#34c759',svg:'<circle cx="12" cy="8" r="4"/><path d="M4 22c0-4.4 3.6-8 8-8s8 3.6 8 8"/>'}
 };
 
 const ARCHIVE='archive/';
@@ -355,6 +714,14 @@ async function loadData(){
     console.error('loadData unexpected error:',e);
   }
 
+  /* fetch 全部失败时，使用内联兜底数据（保证页面始终有内容） */
+  if(!brief){
+    try{
+      const fb=document.getElementById('fallback-data');
+      if(fb&&fb.textContent.trim()) brief=JSON.parse(fb.textContent);
+    }catch(e){console.warn('fallback data parse failed:',e.message)}
+  }
+
   /* 兜底：确保 brief 和 6 大模块始终存在 */
   if(!brief) brief={sections:{}};
   if(!brief.sections) brief.sections={};
@@ -406,15 +773,12 @@ function render(brief){
     const cfg=SECTIONS[k],items=brief.sections?.[k]?.items||[];
     totalItems+=items.length;
     h+=`<div class="section" id="section-${k}">
-      <div class="section-head" onclick="toggleSection(this)"><span class="ico" style="color:${cfg.color}"><svg viewBox="0 0 24 24" fill="none" stroke="${cfg.color}" stroke-width="2"><rect x="6" y="4" width="12" height="16" rx="2"/><line x1="9" y1="9" x2="15" y2="9"/><line x1="9" y1="13" x2="15" y2="13"/><line x1="9" y1="17" x2="12" y2="17"/></svg></span><span class="label">${cfg.name}</span><span class="chevron">▼</span></div>
+      <div class="section-head" onclick="toggleSection(this)"><span class="ico" style="color:${cfg.color}"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round" stroke-linecap="round">${cfg.svg}</svg></span><span class="label">${cfg.name}</span><span class="chevron">▼</span></div>
       <div class="section-body">`;
     if(!items.length){h+='<div class="empty">暂无相关动态</div>'}
     else if(k==='C'){h+=renderC(items)}
     else{items.forEach(i=>{h+=renderItem(i)})}
     h+='</div></div>';
-  }
-  if(totalItems===0){
-    h+='<div class="empty" style="padding:24px">数据加载失败，<a href="javascript:loadData()" style="color:var(--blue);cursor:pointer">点击重试</a></div>';
   }
   document.getElementById('content').innerHTML=h;
   setupTabs();
