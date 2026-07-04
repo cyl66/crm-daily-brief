@@ -62,20 +62,19 @@ body{
   margin-right:2px;
 }
 
-/* Custom date range */
-.custom-range{
-  display:none;margin-top:10px;padding-top:10px;
-  border-top:1px solid var(--border);
-  align-items:center;gap:8px;flex-wrap:wrap;
+/* Date range picker (always visible, inline with presets) */
+.date-range{
+  display:flex;align-items:center;gap:6px;
+  margin-left:auto;flex-shrink:0;
 }
-.custom-range.show{display:flex}
-.custom-range input[type="date"]{
+.date-range input[type="date"]{
   border:1px solid var(--border);border-radius:8px;
-  padding:7px 10px;font-size:13px;font-family:inherit;
+  padding:6px 10px;font-size:12px;font-family:inherit;
   background:var(--surface);color:var(--text);outline:none;
+  transition:border-color var(--t);
 }
-.custom-range input[type="date"]:focus{border-color:var(--blue)}
-.custom-range .sep{font-size:12px;color:var(--text3)}
+.date-range input[type="date"]:focus{border-color:var(--blue)}
+.date-range .sep{font-size:11px;color:var(--text3)}
 
 /* Search row */
 .search-row{
@@ -106,12 +105,6 @@ body{
 }
 .btn-go{background:var(--blue);color:#fff}
 .btn-go:hover{opacity:.88}
-
-.date-range-display{
-  font-size:12px;color:var(--text2);font-weight:500;
-  padding:0 8px;white-space:nowrap;
-  border-left:1px solid var(--border);margin-left:4px;padding-left:14px;
-}
 
 /* ── Tab Navigation ── */
 .tab-nav{
@@ -278,19 +271,16 @@ body{
       <button data-preset="last_quarter">上季</button>
       <button data-preset="this_year">本年</button>
       <button data-preset="last_year">上年</button>
-      <button data-preset="custom">自定义</button>
-      <span class="date-range-display" id="dateRangeDisplay"></span>
-    </div>
-
-    <div class="custom-range" id="customRange">
-      <input type="date" id="dateStart">
-      <span class="sep">至</span>
-      <input type="date" id="dateEnd">
+      <div class="date-range">
+        <input type="date" id="dateStart">
+        <span class="sep">至</span>
+        <input type="date" id="dateEnd">
+      </div>
     </div>
 
     <div class="search-row">
       <div class="search-wrap">
-        <input type="text" id="searchInput" placeholder="搜索标题或内容..." oninput="toggleClear()">
+        <input type="text" id="searchInput" placeholder="搜索标题或内容...">
         <span class="search-clear" id="searchClear" onclick="clearSearch()" style="display:none">✕</span>
       </div>
       <button class="btn-go" onclick="doSearch()">查询</button>
@@ -358,9 +348,6 @@ const ARCHIVE='archive/';
 let activePreset='yesterday';
 let startDate='',endDate='';
 
-/* ── 内嵌数据（默认视图，无需网络请求）── */
-const EMBEDDED_DATA={"date":"2026-07-03","generated_at":"2026-07-04 23:05:00","sections":{"A":{"name":"CRM行业动态","items":[{"title":"2026年CRM系统AI化趋势加速","summary":"2026年主流CRM厂商全面拥抱AI，Salesforce、HubSpot、Zoho均推出AI驱动的销售助手和客户洞察功能，低代码平台与全渠道协同成为标配","url":"https://www.cnblogs.com/saasdianping/p/20302023","source":"SaaS点评","importance_level":"high","importance_score":0.85,"companies":["Salesforce","HubSpot","Zoho","纷享销客"]},{"title":"国内CRM市场持续增长，SCRM赛道火热","summary":"2026年中国CRM SaaS市场规模持续扩大，SCRM成为增长最快赛道，探马SCRM、EC等企业在企微生态中占据领先位置","url":"https://www.toutiao.com/article/7621494921123480116/","source":"今日头条","importance_level":"medium","importance_score":0.68,"companies":["探马SCRM","EC","微伴助手"]},{"title":"纷享销客入选2026年CRM推荐系统TOP5","summary":"纷享销客CRM凭借连接型平台定位和行业化解决方案，入选2026年智能CRM系统推荐TOP5，在制造和零售行业优势明显","url":"https://www.cnblogs.com/saasdianping/p/20302023","source":"SaaS点评","importance_level":"medium","importance_score":0.62,"companies":["纷享销客"]}],"count":3},"B":{"name":"汽车行业动态","items":[{"title":"特斯拉Q2交付48万辆，同比增25%超预期","summary":"特斯拉发布2026年Q2交付报告，全球交付纯电动车480,126辆，同比增长25%，环比增长34%，大幅超出市场预期（406,024辆）","url":"https://m.techweb.com.cn/article/2026-07-03/2977119.shtml","source":"TechWeb","importance_level":"high","importance_score":0.92,"companies":["特斯拉"]},{"title":"吉利汽车6月销量24万辆，连续4个月双增长","summary":"吉利汽车公布6月销量240,799辆，同比增2%，1-6月累计超142万辆创同期新高，领克品牌销量持续增长","url":"https://mp.weixin.qq.com/s?__biz=MjM5MjQ1MjMwNw==&mid=2652174252&idx=2","source":"中国汽车流通协会","importance_level":"high","importance_score":0.88,"companies":["吉利","领克"]},{"title":"比亚迪领涨德国6月进口车市，增幅273.7%","summary":"德国6月新车注册29.6万辆同比增15.7%，比亚迪进口车注册量暴增273.7%，特斯拉增317.6%，中国品牌加速欧洲渗透","url":"https://finance.eastmoney.com/a/202607033793616493.html","source":"东方财富","importance_level":"medium","importance_score":0.72,"companies":["比亚迪","特斯拉"]},{"title":"6月新能源车批发销量151万辆，环比增12%","summary":"乘联会数据，6月全国新能源乘用车厂商批发销量预估达151万辆，同比增长22%，环比增长12%，新能源板块进入复苏通道","url":"https://finance.eastmoney.com/a/202607033793561376.html","source":"东方财富","importance_level":"medium","importance_score":0.75,"companies":[]},{"title":"北汽蓝谷6月销量增速领跑行业开始上量","summary":"北汽蓝谷6月单月销量突破，增速领跑新能源行业，标志着北汽蓝谷进入垂直上量阶段，为下半年市场布局奠定基础","url":"https://finance.eastmoney.com/a/202607033793561376.html","source":"央广网","importance_level":"medium","importance_score":0.58,"companies":["北汽蓝谷"]}],"count":5},"C":{"name":"汽车品牌舆情","items":[{"title":"吉利汽车上半年销量超142万辆创历史新高","summary":"吉利汽车6月销量240,799辆，1-6月累计超142万辆创同期历史新高，海外出口超10万辆再创新纪录，实现连续4个月双增长","url":"https://mp.weixin.qq.com/s?__biz=MjM5MjQ1MjMwNw==&mid=2652174252&idx=2","source":"中国汽车流通协会","importance_level":"high","importance_score":0.88,"sentiment":"positive","companies":["吉利","领克"],"is_our_brand":1},{"title":"蔚来汽车上半年召回量激增681.2%","summary":"车质网发布2026上半年召回报告，自主品牌召回308,431辆同比增681.2%，蔚来因软件故障导致仪表黑屏问题大批召回","url":"https://www.12365auto.com/dcbg/20260703/571227.shtml","source":"车质网","importance_level":"high","importance_score":0.82,"sentiment":"negative","companies":["蔚来"],"is_our_brand":0},{"title":"领克08/09车机OTA升级故障投诉上榜","summary":"2026年新能源车投诉数据显示，领克08/09因车机OTA升级失败、系统长期卡顿、中控黑屏等问题位列315投诉前列","url":"https://post.smzdm.com/p/a036gonz","source":"什么值得买","importance_level":"high","importance_score":0.78,"sentiment":"negative","companies":["领克"],"is_our_brand":1},{"title":"特斯拉Q2交付超预期但股价反应平淡","summary":"特斯拉Q2交付48万辆超预期，但资本市场给出'不信任票'，交付量增长未完全转化为利润增长，投资者担忧毛利率压力","url":"http://k.sina.com.cn/article_2868676035_aafc85c302001rzlw.html","source":"新浪汽车","importance_level":"medium","importance_score":0.64,"sentiment":"negative","companies":["特斯拉"],"is_our_brand":0},{"title":"比亚迪6月德国市场注册量暴增273.7%","summary":"德国联邦汽车交通局数据显示比亚迪6月在德国注册量暴增273.7%，中国新能源汽车在高端市场的品牌认可度持续提升","url":"https://finance.eastmoney.com/a/202607033793616493.html","source":"东方财富","importance_level":"medium","importance_score":0.66,"sentiment":"positive","companies":["比亚迪"],"is_our_brand":0}],"count":5},"D":{"name":"政策法规速递","items":[{"title":"智能网联汽车驾驶辅助系统国标正式发布","summary":"工信部发布《智能网联汽车 组合驾驶辅助系统安全要求》强制性国标(GB 47955-2026)，2027年1月实施，覆盖L2级ADAS功能安全","url":"https://chejiahao.autohome.com.cn/info/25864880","source":"汽车之家","importance_level":"high","importance_score":0.90,"companies":[]},{"title":"自动驾驶系统安全要求等2项国标征求意见","summary":"工信部就《智能网联汽车 自动驾驶系统安全要求》等2项强制性国标公开征求意见，涉及L3级自动驾驶和车载事故紧急呼叫系统","url":"https://www.miit.gov.cn/zwgk/wjgs/art/2026/art_87a73a22fd22496c9b62238651ed98e4.html","source":"工信部官网","importance_level":"high","importance_score":0.88,"companies":[]}],"count":2},"E":{"name":"数字营销","items":[{"title":"2026年企微SCRM市场进入深水区竞争","summary":"企微SCRM从认知普及进入能力比拼阶段，探马SCRM凭借全链路私域运营能力霸榜，AI驱动的自动化营销成为新增长点","url":"https://www.toutiao.com/article/7621494921123480116/","source":"今日头条","importance_level":"medium","importance_score":0.62,"companies":["探马SCRM","微伴助手"]},{"title":"AI重塑私域运营：2026年SCRM工具实测","summary":"大模型驱动的AI销售助手、智能线索评分和自动化跟客功能成为2026年SCRM标配，微伴助手获企微生态最大ISV地位","url":"https://www.sohu.com/a/993345769_122486860","source":"搜狐科技","importance_level":"medium","importance_score":0.58,"companies":["微伴助手"]}],"count":2},"F":{"name":"消费者购车洞察","items":[{"title":"麦肯锡发布2026中国汽车消费者六大趋势","summary":"麦肯锡调研近2500名消费者，总结六大趋势：新能源渗透加速、智能化成购车决策核心、渠道线上化、品牌忠诚度下降、置换需求崛起、Z世代成主力","url":"https://www.mckinsey.com.cn/%e5%85%ad%e5%a4%a7%e6%b6%88%e8%b4%b9%e8%b6%8b%e5%8a%bf%e5%8a%a0%e9%80%9f%e4%b8%ad%e5%9b%bd%e6%b1%bd%e8%bd%a6%e5%b8%82%e5%9c%ba%e8%bf%9b%e5%8c%96%e8%bf%9b%e7%a8%8b/","source":"麦肯锡","importance_level":"high","importance_score":0.86,"companies":[]},{"title":"Z世代汽车消费：颜值和操控成核心驱动力","summary":"J.D. Power研究显示，95后购车决策中高颜值、强操控和先进配置成为'最强驱动力'，短视频和社区口碑是购车信息主要获取渠道","url":"https://news.qq.com/rain/a/20250520A07XX100","source":"腾讯新闻","importance_level":"medium","importance_score":0.65,"companies":[]}],"count":2}},"total_articles":19};
-
 /* ── Init ── */
 document.addEventListener('DOMContentLoaded',()=>{
   applyPreset('yesterday');
@@ -368,17 +355,32 @@ document.addEventListener('DOMContentLoaded',()=>{
 
   document.querySelectorAll('#presets button[data-preset]').forEach(btn=>{
     btn.addEventListener('click',function(){
-      const p=this.dataset.preset;
-      applyPreset(p);
+      applyPreset(this.dataset.preset);
       loadData();
     });
   });
+
+  // Date input change → switch to custom
+  const dsEl=document.getElementById('dateStart');
+  const deEl=document.getElementById('dateEnd');
+  dsEl.addEventListener('change',()=>{onDateChange()});
+  deEl.addEventListener('change',()=>{onDateChange()});
 
   document.getElementById('searchInput').addEventListener('keydown',e=>{
     if(e.key==='Enter') doSearch();
   });
   document.getElementById('searchInput').addEventListener('input',toggleClear);
 });
+
+function onDateChange(){
+  const dsEl=document.getElementById('dateStart');
+  const deEl=document.getElementById('dateEnd');
+  startDate=dsEl.value;endDate=deEl.value;
+  // Switch to custom preset
+  document.querySelectorAll('#presets button[data-preset]').forEach(b=>b.classList.remove('active'));
+  document.getElementById('headerSub').textContent='自定义时间';
+  loadData();
+}
 
 function toggleClear(){
   const el=document.getElementById('searchClear');
@@ -433,99 +435,65 @@ function applyPreset(preset){
   activePreset=preset;
 
   document.querySelectorAll('#presets button[data-preset]').forEach(b=>b.classList.remove('active'));
-  document.querySelector(`#presets button[data-preset="${preset}"]`).classList.add('active');
+  const btn=document.querySelector(`#presets button[data-preset="${preset}"]`);
+  if(btn) btn.classList.add('active');
 
-  const cr=document.getElementById('customRange');
   const now=today(),y=yesterday(),dsy=ds(y);
-  let displayText='';
+  const dsEl=document.getElementById('dateStart');
+  const deEl=document.getElementById('dateEnd');
 
   switch(preset){
     case'yesterday':
       startDate=endDate=dsy;
-      displayText=dsy;
-      cr.classList.remove('show');
       document.getElementById('headerSub').textContent='昨日动态';
       break;
     case'this_week':
       const mon=new Date(now);mon.setDate(now.getDate()-(now.getDay()||7)+1);
       startDate=ds(mon);endDate=ds(y);
-      displayText=`${startDate} ~ ${endDate}`;
-      cr.classList.remove('show');
       document.getElementById('headerSub').textContent='本周动态';
       break;
     case'last_week':
       const lastMon=new Date(now);lastMon.setDate(now.getDate()-(now.getDay()||7)-6);
       const lastSun=new Date(lastMon);lastSun.setDate(lastSun.getDate()+6);
       startDate=ds(lastMon);endDate=ds(lastSun);
-      displayText=`${startDate} ~ ${endDate}`;
-      cr.classList.remove('show');
       document.getElementById('headerSub').textContent='上周动态';
       break;
     case'this_month':
       startDate=ds(new Date(now.getFullYear(),now.getMonth(),1));
       endDate=ds(y);
-      displayText=`${startDate} ~ ${endDate}`;
-      cr.classList.remove('show');
       document.getElementById('headerSub').textContent='本月动态';
       break;
     case'last_month':
       startDate=ds(new Date(now.getFullYear(),now.getMonth()-1,1));
       endDate=ds(new Date(now.getFullYear(),now.getMonth(),0));
-      displayText=`${startDate} ~ ${endDate}`;
-      cr.classList.remove('show');
       document.getElementById('headerSub').textContent='上月动态';
       break;
     case'this_quarter':
       const tq=Math.floor(now.getMonth()/3)*3;
       startDate=ds(new Date(now.getFullYear(),tq,1));
       endDate=ds(y);
-      displayText=`${startDate} ~ ${endDate}`;
-      cr.classList.remove('show');
       document.getElementById('headerSub').textContent='本季度动态';
       break;
     case'last_quarter':
       const lq=Math.floor(now.getMonth()/3)*3-3;
       startDate=ds(new Date(now.getFullYear(),lq,1));
       endDate=ds(new Date(now.getFullYear(),lq+3,0));
-      displayText=`${startDate} ~ ${endDate}`;
-      cr.classList.remove('show');
       document.getElementById('headerSub').textContent='上季度动态';
       break;
     case'this_year':
       startDate=ds(new Date(now.getFullYear(),0,1));
       endDate=ds(y);
-      displayText=`${startDate} ~ ${endDate}`;
-      cr.classList.remove('show');
       document.getElementById('headerSub').textContent='本年度动态';
       break;
     case'last_year':
       startDate=ds(new Date(now.getFullYear()-1,0,1));
       endDate=ds(new Date(now.getFullYear()-1,11,31));
-      displayText=`${startDate} ~ ${endDate}`;
-      cr.classList.remove('show');
       document.getElementById('headerSub').textContent='上年度动态';
       break;
-    case'custom':
-      cr.classList.add('show');
-      document.getElementById('headerSub').textContent='自定义时间';
-      displayText='自定义范围';
-      const dsEl=document.getElementById('dateStart');
-      const deEl=document.getElementById('dateEnd');
-      if(!dsEl.value) dsEl.value=dsy;
-      if(!deEl.value) deEl.value=dsy;
-      startDate=dsEl.value;endDate=deEl.value;
-
-      dsEl.onchange=()=>{startDate=dsEl.value;endDate=deEl.value;loadData()};
-      deEl.onchange=()=>{startDate=dsEl.value;endDate=deEl.value;loadData()};
-      break;
   }
 
-  document.getElementById('dateRangeDisplay').textContent=displayText;
-
-  if(preset!=='custom'){
-    document.getElementById('dateStart').value=startDate;
-    document.getElementById('dateEnd').value=endDate;
-  }
+  dsEl.value=startDate;
+  deEl.value=endDate;
 }
 
 function resetAll(){applyPreset('yesterday');loadData()}
@@ -546,8 +514,15 @@ async function loadData(){
       brief=await aggregate(startDate,endDate);
     }
   }catch(e){
-    // 兜底：使用内嵌数据
-    brief = JSON.parse(JSON.stringify(EMBEDDED_DATA));
+    // 兜底：尝试 latest.json
+    try{
+      const resp=await fetch(DATA_URL);
+      if(!resp.ok) throw new Error('fallback failed');
+      brief=await resp.json();
+    }catch(e2){
+      document.getElementById('content').innerHTML='<div class="empty">暂无日报数据<br><small style="font-size:12px">系统正在采集中，请稍后查看</small></div>';
+      return;
+    }
   }
 
   if(searchTerm) brief=filterBrief(brief,searchTerm);
