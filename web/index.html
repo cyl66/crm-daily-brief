@@ -144,8 +144,9 @@ body{
   border:1px solid var(--border);
   box-shadow:var(--shadow-sm);
   transition:box-shadow var(--t);
+  scroll-margin-top:80px;
 }
-.section:hover{box-shadow:var(--shadow-md);scroll-margin-top:70px}
+.section:hover{box-shadow:var(--shadow-md)}
 
 .section-head{
   display:flex;align-items:center;gap:12px;
@@ -172,6 +173,7 @@ body{
   border:1px solid var(--border);
   transition:all var(--t);
   animation:in .35s ease both;
+  cursor:pointer;
 }
 .item:hover{
   border-color:rgba(0,113,227,.15);
@@ -635,14 +637,14 @@ function renderItem(item){
     summary=item.summary.length>100?item.summary.slice(0,97)+'...':item.summary;
   }
 
-  return`<div class="item"${!validateUrl(item.url)?' data-invalid="1" style="display:none"':''}>
+  return`<div class="item"${!validateUrl(item.url)?' data-invalid="1" style="display:none"':''} onclick="event.target.closest('a')||window.open('${item.url||'#'}','_blank')">
     <div class="item-row1">
       <a class="item-title" href="${item.url||'#'}" target="_blank" rel="noopener">${item.title||'(无标题)'}</a>
     </div>
     ${summary?`<div class="item-summary">${summary}</div>`:''}
     <div class="item-row2">
-      ${srcInfo}
       ${tags.join('')}
+      ${srcInfo}
       <a class="item-url" href="${item.url||'#'}" target="_blank" rel="noopener">查看原文 →</a>
     </div>
   </div>`;
