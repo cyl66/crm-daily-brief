@@ -34,6 +34,7 @@ body{
 
 /* ── Filter Bar ── */
 .filter-bar{
+  position:relative;overflow:visible;
   background:rgba(255,255,255,.76);
   backdrop-filter:blur(28px) saturate(180%);
   -webkit-backdrop-filter:blur(28px) saturate(180%);
@@ -76,10 +77,11 @@ body{
 /* Calendar panel */
 .cal-panel{
   display:none;position:absolute;z-index:50;
-  margin-top:8px;padding:20px 18px 16px;
+  left:0;right:0;top:calc(100% + 4px);
+  padding:20px 18px 16px;
   background:var(--surface);border:1px solid var(--border);
   border-radius:16px;box-shadow:0 12px 40px rgba(0,0,0,.12);
-  max-width:580px;
+  max-width:100%;overflow-x:auto;
 }
 .cal-panel.open{display:flex;animation:panelIn .2s ease}
 @keyframes panelIn{from{opacity:0;transform:translateY(-6px)}to{opacity:1;transform:translateY(0)}}
@@ -176,7 +178,6 @@ body{
   .date-range-trigger{margin-left:0;width:100%;justify-content:center;margin-top:4px}
   .presets{gap:4px}
   .presets button{padding:5px 10px;font-size:11px}
-  .filter-bar{position:relative}
 }
 
 /* ── Tab Navigation ── */
@@ -764,7 +765,7 @@ async function loadData(){
 
   try{
     if(!isMulti){
-      const resp=await fetch(`${ARCHIVE}${startDate}.json`);
+      const resp=await fetch(`${ARCHIVE}${startDate}.json?_t=${Date.now()}`);
       if(!resp.ok) throw new Error('not found');
       brief=await resp.json();
     }else{
@@ -772,7 +773,7 @@ async function loadData(){
     }
   }catch(e){
     try{
-      const resp=await fetch(DATA_URL);
+      const resp=await fetch(DATA_URL+`?_t=${Date.now()}`);
       if(!resp.ok) throw new Error('fallback failed');
       brief=await resp.json();
     }catch(e2){
@@ -792,7 +793,7 @@ async function aggregate(start,end){
   for(let d=new Date(s);d<=e;d.setDate(d.getDate()+1)){
     const dateStr=ds(d);
     try{
-      const resp=await fetch(`${ARCHIVE}${dateStr}.json`);
+      const resp=await fetch(`${ARCHIVE}${dateStr}.json?_t=${Date.now()}`);
       if(!resp.ok) continue;
       const daily=await resp.json();days++;
       for(const sec of['A','B','C','D','E','F']){
