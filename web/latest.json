@@ -1,36 +1,36 @@
 {
-  "date": "2026-07-03",
-  "generated_at": "2026-07-04 23:05:00",
+  "date": "2026-07-04",
+  "generated_at": "2026-07-05 00:35:00",
   "sections": {
     "A": {
       "name": "CRM行业动态",
       "items": [
         {
-          "title": "2026年CRM系统AI化趋势加速",
-          "summary": "2026年主流CRM厂商全面拥抱AI，Salesforce、HubSpot、Zoho均推出AI驱动的销售助手和客户洞察功能，低代码平台与全渠道协同成为标配",
-          "url": "https://www.cnblogs.com/saasdianping/p/20302023",
-          "source": "SaaS点评",
-          "importance_level": "high",
-          "importance_score": 0.85,
-          "companies": ["Salesforce", "HubSpot", "Zoho", "纷享销客"]
-        },
-        {
-          "title": "国内CRM市场持续增长，SCRM赛道火热",
-          "summary": "2026年中国CRM SaaS市场规模持续扩大，SCRM成为增长最快赛道，探马SCRM、EC等企业在企微生态中占据领先位置",
-          "url": "https://www.toutiao.com/article/7621494921123480116/",
-          "source": "今日头条",
+          "title": "2026年AI+企微SCRM实测报告发布",
+          "summary": "2026年企微SCRM进入AI深度融合阶段，实测显示探马SCRM、微伴助手在AI全链路私域运营方面领先，工具选型逻辑已从功能堆砌转向场景落地与合规体系评估",
+          "url": "https://www.cnblogs.com/whyykj/p/20081498",
+          "source": "博客园",
           "importance_level": "medium",
-          "importance_score": 0.68,
-          "companies": ["探马SCRM", "EC", "微伴助手"]
+          "importance_score": 0.65,
+          "companies": ["探马SCRM", "微伴助手"]
         },
         {
-          "title": "纷享销客入选2026年CRM推荐系统TOP5",
-          "summary": "纷享销客CRM凭借连接型平台定位和行业化解决方案，入选2026年智能CRM系统推荐TOP5，在制造和零售行业优势明显",
-          "url": "https://www.cnblogs.com/saasdianping/p/20302023",
-          "source": "SaaS点评",
+          "title": "CRM选型新趋势：AI驱动与低代码成标配",
+          "summary": "2026年CRM选型从传统SFA向AI驱动+低代码+全渠道协同转变，Salesforce、HubSpot、纷享销客均推出AI销售助手，行业进入智能化阶段",
+          "url": "https://www.sohu.com/a/1033622380_121438893",
+          "source": "搜狐",
           "importance_level": "medium",
           "importance_score": 0.62,
-          "companies": ["纷享销客"]
+          "companies": ["Salesforce", "HubSpot", "纷享销客"]
+        },
+        {
+          "title": "国内CRM市场竞争格局：12款主流系统深度对比",
+          "summary": "2026年国内CRM市场形成三大梯队，Zoho CRM和Salesforce领跑国际品牌，销售易、纷享销客在国内中大型企业市场占据优势",
+          "url": "https://segmentfault.com/a/1190000047782192",
+          "source": "SegmentFault",
+          "importance_level": "medium",
+          "importance_score": 0.58,
+          "companies": ["Zoho", "Salesforce", "销售易", "纷享销客"]
         }
       ],
       "count": 3
@@ -39,49 +39,49 @@
       "name": "汽车行业动态",
       "items": [
         {
-          "title": "特斯拉Q2交付48万辆，同比增25%超预期",
-          "summary": "特斯拉发布2026年Q2交付报告，全球交付纯电动车480,126辆，同比增长25%，环比增长34%，大幅超出市场预期（406,024辆）",
-          "url": "https://m.techweb.com.cn/article/2026-07-03/2977119.shtml",
-          "source": "TechWeb",
+          "title": "国务院：开展新能源汽车、绿色建材下乡活动",
+          "summary": "7月3日国务院印发《美丽中国建设"十五五"规划》，提出推广绿色低碳生活方式，开展新能源汽车下乡活动，拓展政府采购绿色产品范围和规模",
+          "url": "https://so.html5.qq.com/page/real/search_news?docid=70000021_1676a48577040752",
+          "source": "财联社",
           "importance_level": "high",
-          "importance_score": 0.92,
-          "companies": ["特斯拉"]
+          "importance_score": 0.90,
+          "companies": ["国务院"]
         },
         {
-          "title": "吉利汽车6月销量24万辆，连续4个月双增长",
-          "summary": "吉利汽车公布6月销量240,799辆，同比增2%，1-6月累计超142万辆创同期新高，领克品牌销量持续增长",
-          "url": "https://mp.weixin.qq.com/s?__biz=MjM5MjQ1MjMwNw==&mid=2652174252&idx=2",
-          "source": "中国汽车流通协会",
+          "title": "三部门：2027年起取消新能源汽车车船税减免",
+          "summary": "财政部、税务总局、工信部7月3日联合公告，自2027年1月1日起取消节能汽车减半征收车船税及新能源商用车免征政策，短期或利好纯电动乘用车",
+          "url": "https://baijiahao.baidu.com/s?id=1869743449508082000",
+          "source": "财联社",
           "importance_level": "high",
-          "importance_score": 0.88,
-          "companies": ["吉利", "领克"]
+          "importance_score": 0.95,
+          "companies": ["财政部", "工信部"]
         },
         {
-          "title": "比亚迪领涨德国6月进口车市，增幅273.7%",
-          "summary": "德国6月新车注册29.6万辆同比增15.7%，比亚迪进口车注册量暴增273.7%，特斯拉增317.6%，中国品牌加速欧洲渗透",
-          "url": "https://finance.eastmoney.com/a/202607033793616493.html",
-          "source": "东方财富",
+          "title": "中国乘用车在欧洲市场份额首次超越日本",
+          "summary": "欧洲汽车制造商协会最新数据显示，5月五家中国汽车制造商在31个欧洲国家售出13.84万辆同比增65%，市场份额首次超过日本，中国品牌加速欧洲渗透",
+          "url": "https://so.html5.qq.com/page/real/search_news?docid=70000021_1676a48577040752",
+          "source": "财联社",
+          "importance_level": "high",
+          "importance_score": 0.85,
+          "companies": ["比亚迪", "吉利"]
+        },
+        {
+          "title": "奕境汽车携手华为乾崑亮相央视，发布天穹智盾安全架构",
+          "summary": "7月2日奕境汽车与华为乾崑亮相央视新闻《超凡一步》大型直播，发布行业最高标准安全架构「天穹智盾」，ADS 5全网首测同时进行",
+          "url": "https://info.xcar.com.cn/",
+          "source": "爱卡汽车",
           "importance_level": "medium",
           "importance_score": 0.72,
-          "companies": ["比亚迪", "特斯拉"]
+          "companies": ["奕境汽车", "华为"]
         },
         {
-          "title": "6月新能源车批发销量151万辆，环比增12%",
-          "summary": "乘联会数据，6月全国新能源乘用车厂商批发销量预估达151万辆，同比增长22%，环比增长12%，新能源板块进入复苏通道",
-          "url": "https://finance.eastmoney.com/a/202607033793561376.html",
-          "source": "东方财富",
+          "title": "鸿蒙智行6月交付50624台，尚界Z7交付破万",
+          "summary": "鸿蒙智行公布6月交付数据，总交付50624台，不被看好的尚界Z7系列交付突破万台，智选车模式持续验证",
+          "url": "http://news.16888.com/",
+          "source": "车主之家",
           "importance_level": "medium",
-          "importance_score": 0.75,
-          "companies": []
-        },
-        {
-          "title": "北汽蓝谷6月销量增速领跑行业开始上量",
-          "summary": "北汽蓝谷6月单月销量突破，增速领跑新能源行业，标志着北汽蓝谷进入垂直上量阶段，为下半年市场布局奠定基础",
-          "url": "https://finance.eastmoney.com/a/202607033793561376.html",
-          "source": "央广网",
-          "importance_level": "medium",
-          "importance_score": 0.58,
-          "companies": ["北汽蓝谷"]
+          "importance_score": 0.68,
+          "companies": ["鸿蒙智行", "尚界"]
         }
       ],
       "count": 5
@@ -90,30 +90,30 @@
       "name": "汽车品牌舆情",
       "items": [
         {
-          "title": "吉利汽车上半年销量超142万辆创历史新高",
-          "summary": "吉利汽车6月销量240,799辆，1-6月累计超142万辆创同期历史新高，海外出口超10万辆再创新纪录，实现连续4个月双增长",
-          "url": "https://mp.weixin.qq.com/s?__biz=MjM5MjQ1MjMwNw==&mid=2652174252&idx=2",
-          "source": "中国汽车流通协会",
+          "title": "极氪因电池热失控风险召回3.8万辆001 WE版",
+          "summary": "极氪向国家市场监管总局备案大规模召回，自3月6日起召回38277辆001 WE版，因高压动力电池部件一致性问题存在热失控隐患，免费更换电池总成",
+          "url": "https://browser.qq.com/mobile/news?doc_id=720698aa6b789152",
+          "source": "腾讯新闻",
           "importance_level": "high",
-          "importance_score": 0.88,
-          "sentiment": "positive",
-          "companies": ["吉利", "领克"],
+          "importance_score": 0.90,
+          "sentiment": "negative",
+          "companies": ["极氪"],
           "is_our_brand": 1
         },
         {
-          "title": "蔚来汽车上半年召回量激增681.2%",
-          "summary": "车质网发布2026上半年召回报告，自主品牌召回308,431辆同比增681.2%，蔚来因软件故障导致仪表黑屏问题大批召回",
-          "url": "https://www.12365auto.com/dcbg/20260703/571227.shtml",
-          "source": "车质网",
+          "title": "吉利召回1473辆极星4纯电动车型",
+          "summary": "因高压动力电池制造一致性问题，浙江吉利汽车自5月16日起召回1473辆配备86kWh电池的极星4，内阻异常升高可能导致性能下降和热失控",
+          "url": "https://baijiahao.baidu.com/s?id=1863077285970189022",
+          "source": "百度百家号",
           "importance_level": "high",
           "importance_score": 0.82,
           "sentiment": "negative",
-          "companies": ["蔚来"],
-          "is_our_brand": 0
+          "companies": ["吉利", "极星"],
+          "is_our_brand": 1
         },
         {
-          "title": "领克08/09车机OTA升级故障投诉上榜",
-          "summary": "2026年新能源车投诉数据显示，领克08/09因车机OTA升级失败、系统长期卡顿、中控黑屏等问题位列315投诉前列",
+          "title": "领克08/09车机OTA升级故障投诉持续上榜",
+          "summary": "2026年新能源车投诉数据显示，领克08/09因车机OTA升级失败、系统长期卡顿、中控黑屏等问题位列315投诉前列，用户满意度受冲击",
           "url": "https://post.smzdm.com/p/a036gonz",
           "source": "什么值得买",
           "importance_level": "high",
@@ -123,25 +123,25 @@
           "is_our_brand": 1
         },
         {
-          "title": "特斯拉Q2交付超预期但股价反应平淡",
-          "summary": "特斯拉Q2交付48万辆超预期，但资本市场给出'不信任票'，交付量增长未完全转化为利润增长，投资者担忧毛利率压力",
-          "url": "http://k.sina.com.cn/article_2868676035_aafc85c302001rzlw.html",
-          "source": "新浪汽车",
+          "title": "奔驰及国产E级因前驱动轴缺陷召回",
+          "summary": "部分进口奔驰S级及国产E级因前驱动轴缺陷被召回，涉及制动系统和动力传输安全隐患，奔驰在中国市场累计召回量持续增加",
+          "url": "http://news.16888.com/2026/0629/",
+          "source": "车主之家",
           "importance_level": "medium",
-          "importance_score": 0.64,
+          "importance_score": 0.60,
           "sentiment": "negative",
-          "companies": ["特斯拉"],
+          "companies": ["奔驰"],
           "is_our_brand": 0
         },
         {
-          "title": "比亚迪6月德国市场注册量暴增273.7%",
-          "summary": "德国联邦汽车交通局数据显示比亚迪6月在德国注册量暴增273.7%，中国新能源汽车在高端市场的品牌认可度持续提升",
-          "url": "https://finance.eastmoney.com/a/202607033793616493.html",
-          "source": "东方财富",
+          "title": "国产沃尔沃EX30因电池热失控风险召回",
+          "summary": "部分国产沃尔沃EX30因电池存在热失控风险被召回，继极氪、吉利之后又一起电池相关召回事件凸显行业电池安全问题",
+          "url": "http://news.16888.com/2026/0618/",
+          "source": "车主之家",
           "importance_level": "medium",
-          "importance_score": 0.66,
-          "sentiment": "positive",
-          "companies": ["比亚迪"],
+          "importance_score": 0.65,
+          "sentiment": "negative",
+          "companies": ["沃尔沃"],
           "is_our_brand": 0
         }
       ],
@@ -151,22 +151,22 @@
       "name": "政策法规速递",
       "items": [
         {
-          "title": "智能网联汽车驾驶辅助系统国标正式发布",
-          "summary": "工信部发布《智能网联汽车 组合驾驶辅助系统安全要求》强制性国标(GB 47955-2026)，2027年1月实施，覆盖L2级ADAS功能安全",
-          "url": "https://chejiahao.autohome.com.cn/info/25864880",
-          "source": "汽车之家",
+          "title": "三部门联合公告：2027年取消新能源车船税减免",
+          "summary": "财政部、税务总局、工信部7月3日发布公告，2027年1月1日起取消节能汽车减半及新能源商用车免征税政策，标志着新能源补贴全面退坡进入倒计时",
+          "url": "https://baijiahao.baidu.com/s?id=1869743449508082000",
+          "source": "财联社",
           "importance_level": "high",
-          "importance_score": 0.90,
-          "companies": []
+          "importance_score": 0.95,
+          "companies": ["财政部"]
         },
         {
-          "title": "自动驾驶系统安全要求等2项国标征求意见",
-          "summary": "工信部就《智能网联汽车 自动驾驶系统安全要求》等2项强制性国标公开征求意见，涉及L3级自动驾驶和车载事故紧急呼叫系统",
-          "url": "https://www.miit.gov.cn/zwgk/wjgs/art/2026/art_87a73a22fd22496c9b62238651ed98e4.html",
-          "source": "工信部官网",
+          "title": "国务院印发美丽中国"十五五"规划：推广新能源汽车下乡",
+          "summary": "国务院7月3日印发规划明确提出推广新能源车充绿电、居民绿电零售套餐，健全绿色消费激励机制，拓展政府采购绿色产品范围",
+          "url": "https://so.html5.qq.com/page/real/search_news?docid=70000021_1676a48577040752",
+          "source": "财联社",
           "importance_level": "high",
           "importance_score": 0.88,
-          "companies": []
+          "companies": ["国务院"]
         }
       ],
       "count": 2
@@ -175,22 +175,22 @@
       "name": "数字营销",
       "items": [
         {
-          "title": "2026年企微SCRM市场进入深水区竞争",
-          "summary": "企微SCRM从认知普及进入能力比拼阶段，探马SCRM凭借全链路私域运营能力霸榜，AI驱动的自动化营销成为新增长点",
-          "url": "https://www.toutiao.com/article/7621494921123480116/",
-          "source": "今日头条",
+          "title": "2026年AI+企微SCRM实测：谁在重新定义私域效率",
+          "summary": "2026年企业微信成为私域运营主阵地，AI智能运营、全渠道打通、合规安全成为选型核心，微伴助手获企微生态最大ISV地位",
+          "url": "https://www.cnblogs.com/whyykj/p/20081498",
+          "source": "博客园",
           "importance_level": "medium",
-          "importance_score": 0.62,
-          "companies": ["探马SCRM", "微伴助手"]
+          "importance_score": 0.68,
+          "companies": ["微伴助手", "探马SCRM"]
         },
         {
-          "title": "AI重塑私域运营：2026年SCRM工具实测",
-          "summary": "大模型驱动的AI销售助手、智能线索评分和自动化跟客功能成为2026年SCRM标配，微伴助手获企微生态最大ISV地位",
-          "url": "https://www.sohu.com/a/993345769_122486860",
-          "source": "搜狐科技",
+          "title": "2026企微SCRM评估：AI全链路赋能私域（权威体验）",
+          "summary": "企微SCRM选型从功能堆砌转向场景落地+生态融合+AI效能评估，大模型驱动的AI销售助手和智能线索评分成标配",
+          "url": "https://www.ithome.com/0/948/244.htm",
+          "source": "IT之家",
           "importance_level": "medium",
-          "importance_score": 0.58,
-          "companies": ["微伴助手"]
+          "importance_score": 0.62,
+          "companies": ["微伴助手", "探马SCRM"]
         }
       ],
       "count": 2
@@ -199,21 +199,21 @@
       "name": "消费者购车洞察",
       "items": [
         {
-          "title": "麦肯锡发布2026中国汽车消费者六大趋势",
-          "summary": "麦肯锡调研近2500名消费者，总结六大趋势：新能源渗透加速、智能化成购车决策核心、渠道线上化、品牌忠诚度下降、置换需求崛起、Z世代成主力",
-          "url": "https://www.mckinsey.com.cn/%e5%85%ad%e5%a4%a7%e6%b6%88%e8%b4%b9%e8%b6%8b%e5%8a%bf%e5%8a%a0%e9%80%9f%e4%b8%ad%e5%9b%bd%e6%b1%bd%e8%bd%a6%e5%b8%82%e5%9c%ba%e8%bf%9b%e5%8c%96%e8%bf%9b%e7%a8%8b/",
-          "source": "麦肯锡",
-          "importance_level": "high",
-          "importance_score": 0.86,
+          "title": "2026年6月汽车消费指数75.3，购车需求放缓",
+          "summary": "中国汽车流通协会发布6月汽车消费指数，需求分指数降至74.7，受6月冲量活动透支和7月高温多雨影响，新增购车需求有所放缓",
+          "url": "https://mp.weixin.qq.com/s?__biz=MjM5ODk1NzUxMw==&mid=2658056051&idx=4",
+          "source": "汽车流通协会",
+          "importance_level": "medium",
+          "importance_score": 0.75,
           "companies": []
         },
         {
-          "title": "Z世代汽车消费：颜值和操控成核心驱动力",
-          "summary": "J.D. Power研究显示，95后购车决策中高颜值、强操控和先进配置成为'最强驱动力'，短视频和社区口碑是购车信息主要获取渠道",
-          "url": "https://news.qq.com/rain/a/20250520A07XX100",
-          "source": "腾讯新闻",
+          "title": "2026年购车决策周期缩短至2.5个月，Z世代仅1.9月",
+          "summary": "2026年乘用车用户趋势报告显示平均购车周期从2.7个月缩至2.5个月，30岁以下仅需1.9个月。决策越来越快，短视频和车主口碑成为核心信息源",
+          "url": "https://baijiahao.baidu.com/s?id=1860886421796555885",
+          "source": "百度百家号",
           "importance_level": "medium",
-          "importance_score": 0.65,
+          "importance_score": 0.70,
           "companies": []
         }
       ],
