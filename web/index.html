@@ -2,20 +2,9 @@
 <html lang="zh-CN">
 <head>
 <meta charset="UTF-8">
-<script>
-/* 自动缓存破坏：绕过 GitHub Pages CDN 的 max-age=600 缓存
-   首次访问自动跳转到带时间戳的 URL，3分钟内不重复跳转避免闪烁 */
-(function(){
-  var k='_cv',now=Date.now();
-  var last=parseInt(sessionStorage.getItem(k)||'0',10);
-  if(now-last>180000 && !/[?&]_v=/.test(location.search)){
-    sessionStorage.setItem(k,String(now));
-    var s=location.search?location.search+'&':'?';
-    location.replace(location.pathname+s+'_v='+now+location.hash);
-  }
-})();
-</script>
 <meta name="viewport" content="width=device-width,initial-scale=1.0">
+<meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+<meta http-equiv="Pragma" content="no-cache">
 <title>行业资讯</title>
 <style>
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
@@ -221,11 +210,22 @@ body{
     <button data-target="F"><span class="tab-ico" style="color:var(--green)"><svg viewBox="0 0 24 24" fill="none" stroke="var(--green)" stroke-width="2"><circle cx="12" cy="8" r="4"/><path d="M4 22c0-4.4 3.6-8 8-8s8 3.6 8 8"/></svg></span><span class="tab-label">消费者洞察</span></button>
   </div>
 
-  <div id="content"></div>
+  <div id="content">
+    <div class="empty" id="loadingMsg">加载中...</div>
+  </div>
   <div class="footer">CRM 行业日报 · 数据驱动决策</div>
 </div>
 
 <script>
+/* 全局错误兜底：任何未捕获异常都显示提示，不留白屏 */
+window.addEventListener('error',function(e){
+  console.error('Global error:',e.message);
+  var c=document.getElementById('content');
+  if(c&&(!c.innerHTML||c.innerHTML.indexOf('section-')<0)){
+    c.innerHTML='<div class="empty" style="padding:32px">页面加载异常，<a href="javascript:location.reload()" style="color:var(--blue);cursor:pointer">点击刷新</a></div>';
+  }
+});
+
 const SECTIONS={
   A:{name:'CRM行业动态',color:'var(--blue)'},
   B:{name:'汽车行业动态',color:'var(--orange)'},
@@ -326,26 +326,43 @@ function applyPreset(preset){
 /* ── Data ── */
 async function loadData(){
   const term=document.getElementById('searchInput').value.trim().toLowerCase();
-  let brief;
+  let brief=null;
   const isMulti=startDate!==endDate;
 
-  if(!isMulti){
-    const resp=await fetch(`${ARCHIVE}${startDate}.json?cb=${Date.now()}`);
-    if(resp.ok){
-      brief=await resp.json();
+  try{
+    if(!isMulti){
+      try{
+        const resp=await fetch(`${ARCHIVE}${startDate}.json?cb=${Date.now()}`);
+        if(resp.ok){
+          brief=await resp.json();
+        }else{
+          const r2=await fetch(DATA_URL+`?cb=${Date.now()}`);
+          if(r2.ok) brief=await r2.json();
+        }
+      }catch(e){
+        console.warn('fetch archive failed, trying latest:',e.message);
+        try{
+          const r2=await fetch(DATA_URL+`?cb=${Date.now()}`);
+          if(r2.ok) brief=await r2.json();
+        }catch(e2){console.warn('fetch latest also failed:',e2.message)}
+      }
     }else{
-      const r2=await fetch(DATA_URL+`?cb=${Date.now()}`);
-      if(r2.ok) brief=await r2.json();
-      else{brief=null}
+      try{
+        brief=await aggregate(startDate,endDate);
+      }catch(e){console.warn('aggregate failed:',e.message)}
     }
-  }else{
-    brief=await aggregate(startDate,endDate);
+  }catch(e){
+    console.error('loadData unexpected error:',e);
   }
 
-  if(!brief){
-    brief={sections:{}};
-    ['A','B','C','D','E','F'].forEach(k=>{brief.sections[k]={items:[]}});
-  }
+  /* 兜底：确保 brief 和 6 大模块始终存在 */
+  if(!brief) brief={sections:{}};
+  if(!brief.sections) brief.sections={};
+  ['A','B','C','D','E','F'].forEach(k=>{
+    if(!brief.sections[k]) brief.sections[k]={items:[]};
+    if(!brief.sections[k].items) brief.sections[k].items=[];
+  });
+
   if(term) brief=filterBrief(brief,term);
   render(brief);
 }
@@ -384,8 +401,10 @@ function filterBrief(b,term){
 /* ── Render ── */
 function render(brief){
   let h='';
+  let totalItems=0;
   for(const k of['A','B','C','D','E','F']){
     const cfg=SECTIONS[k],items=brief.sections?.[k]?.items||[];
+    totalItems+=items.length;
     h+=`<div class="section" id="section-${k}">
       <div class="section-head" onclick="toggleSection(this)"><span class="ico" style="color:${cfg.color}"><svg viewBox="0 0 24 24" fill="none" stroke="${cfg.color}" stroke-width="2"><rect x="6" y="4" width="12" height="16" rx="2"/><line x1="9" y1="9" x2="15" y2="9"/><line x1="9" y1="13" x2="15" y2="13"/><line x1="9" y1="17" x2="12" y2="17"/></svg></span><span class="label">${cfg.name}</span><span class="chevron">▼</span></div>
       <div class="section-body">`;
@@ -393,6 +412,9 @@ function render(brief){
     else if(k==='C'){h+=renderC(items)}
     else{items.forEach(i=>{h+=renderItem(i)})}
     h+='</div></div>';
+  }
+  if(totalItems===0){
+    h+='<div class="empty" style="padding:24px">数据加载失败，<a href="javascript:loadData()" style="color:var(--blue);cursor:pointer">点击重试</a></div>';
   }
   document.getElementById('content').innerHTML=h;
   setupTabs();
