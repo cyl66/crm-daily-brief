@@ -73,39 +73,74 @@ body{
 }
 .date-range-trigger .ico svg{width:100%;height:100%}
 
-/* Date range panel */
-.date-range-panel{
-  display:none;
-  margin-top:12px;padding:14px;
+/* Calendar panel */
+.cal-panel{
+  display:none;position:absolute;z-index:50;
+  margin-top:8px;padding:20px 18px 16px;
   background:var(--surface);border:1px solid var(--border);
-  border-radius:12px;box-shadow:var(--shadow-md);
+  border-radius:16px;box-shadow:0 12px 40px rgba(0,0,0,.12);
+  max-width:580px;
 }
-.date-range-panel.open{display:block;animation:panelIn .2s ease}
+.cal-panel.open{display:flex;animation:panelIn .2s ease}
 @keyframes panelIn{from{opacity:0;transform:translateY(-6px)}to{opacity:1;transform:translateY(0)}}
 
-.drp-title{
-  font-size:13px;font-weight:600;color:var(--text);margin-bottom:12px;
+.cal-month{flex:1;min-width:240px}
+.cal-month:first-child{padding-right:12px}
+.cal-month:last-child{padding-left:12px}
+.cal-month-header{
+  display:flex;align-items:center;justify-content:space-between;
+  margin-bottom:10px;padding:0 4px;
 }
-.drp-row{
-  display:flex;gap:10px;align-items:center;flex-wrap:wrap;
+.cal-month-title{font-size:15px;font-weight:600;color:var(--text)}
+.cal-month-nav{
+  width:28px;height:28px;border:none;border-radius:50%;
+  background:rgba(0,0,0,.04);cursor:pointer;display:flex;
+  align-items:center;justify-content:center;transition:var(--t);
+  font-size:12px;color:var(--text2);
 }
-.drp-row label{
-  font-size:12px;color:var(--text2);font-weight:500;
+.cal-month-nav:hover{background:rgba(0,0,0,.08);color:var(--text)}
+
+.cal-weekdays{
+  display:grid;grid-template-columns:repeat(7,1fr);
+  text-align:center;margin-bottom:4px;
 }
-.drp-row input[type=date]{
-  border:1px solid var(--border);border-radius:8px;
-  padding:7px 10px;font-size:13px;font-family:inherit;
-  background:var(--bg);color:var(--text);outline:none;
-  transition:border-color var(--t);
+.cal-weekdays span{
+  font-size:11px;font-weight:600;color:var(--text3);
+  padding:4px 0;
 }
-.drp-row input[type=date]:focus{border-color:var(--blue)}
-.drp-row .btn-go{
-  padding:7px 18px;border:none;border-radius:var(--rp);
-  font-size:13px;font-weight:600;cursor:pointer;
-  font-family:inherit;transition:var(--t);
-  background:var(--blue);color:#fff;margin-left:auto;
+.cal-days{
+  display:grid;grid-template-columns:repeat(7,1fr);
+  text-align:center;
 }
-.drp-row .btn-go:hover{opacity:.88}
+.cal-day{
+  aspect-ratio:1;display:flex;align-items:center;
+  justify-content:center;border:none;background:none;
+  font-size:14px;font-family:inherit;color:var(--text);
+  cursor:pointer;border-radius:50%;transition:var(--t);
+  position:relative;font-weight:450;
+}
+.cal-day:hover{background:rgba(0,113,227,.08);color:var(--blue)}
+.cal-day.empty{cursor:default}
+.cal-day.today{font-weight:600;color:var(--blue)}
+.cal-day.today::after{
+  content:'';position:absolute;bottom:2px;width:4px;height:4px;
+  border-radius:50%;background:var(--blue);
+}
+.cal-day.in-range{background:var(--blue-bg);border-radius:0;color:var(--blue)}
+.cal-day.range-start,.cal-day.range-end{
+  background:var(--blue);color:#fff;border-radius:50%;font-weight:600;
+}
+.cal-day.range-start{border-radius:50% 0 0 50%}
+.cal-day.range-start.range-end{border-radius:50%}
+.cal-day.range-end{border-radius:0 50% 50% 0}
+.cal-day.range-end.range-start{border-radius:50%}
+
+/* single-month on mobile */
+@media(max-width:680px){
+  .cal-panel{flex-direction:column;max-width:300px;padding:14px 12px}
+  .cal-month:first-child, .cal-month:last-child{padding:0}
+  .cal-month+.cal-month{margin-top:16px;padding-top:16px;border-top:1px solid var(--border)}
+}
 
 /* Search row */
 .search-row{
@@ -141,9 +176,7 @@ body{
   .date-range-trigger{margin-left:0;width:100%;justify-content:center;margin-top:4px}
   .presets{gap:4px}
   .presets button{padding:5px 10px;font-size:11px}
-  .drp-row{gap:8px}
-  .drp-row input[type=date]{flex:1;min-width:120px}
-  .drp-row .btn-go{width:100%;margin-left:0}
+  .filter-bar{position:relative}
 }
 
 /* ── Tab Navigation ── */
@@ -314,14 +347,24 @@ body{
       </button>
     </div>
 
-    <div class="date-range-panel" id="rangePanel">
-      <div class="drp-title">自定义时间段</div>
-      <div class="drp-row">
-        <label for="startDate">开始</label>
-        <input type="date" id="startDate">
-        <label for="endDate">结束</label>
-        <input type="date" id="endDate">
-        <button class="btn-go" onclick="applyCustomRange()">应用</button>
+    <div class="cal-panel" id="calPanel">
+      <div class="cal-month" id="calMonth0">
+        <div class="cal-month-header">
+          <button class="cal-month-nav" onclick="calPrev()">‹</button>
+          <span class="cal-month-title" id="calTitle0"></span>
+          <span style="width:28px"></span>
+        </div>
+        <div class="cal-weekdays"><span>日</span><span>一</span><span>二</span><span>三</span><span>四</span><span>五</span><span>六</span></div>
+        <div class="cal-days" id="calDays0"></div>
+      </div>
+      <div class="cal-month" id="calMonth1">
+        <div class="cal-month-header">
+          <span style="width:28px"></span>
+          <span class="cal-month-title" id="calTitle1"></span>
+          <button class="cal-month-nav" onclick="calNext()">›</button>
+        </div>
+        <div class="cal-weekdays"><span>日</span><span>一</span><span>二</span><span>三</span><span>四</span><span>五</span><span>六</span></div>
+        <div class="cal-days" id="calDays1"></div>
       </div>
     </div>
 
@@ -394,7 +437,6 @@ const ARCHIVE='archive/';
 
 let activePreset='yesterday';
 let startDate='',endDate='';
-let isCustomRange=false;
 
 /* ── Helpers ── */
 const pad=n=>String(n).padStart(2,'0');
@@ -402,35 +444,32 @@ const formatDate=d=>`${d.getFullYear()}-${pad(d.getMonth()+1)}-${pad(d.getDate()
 const today=()=>new Date();
 const yesterday=()=>{const d=today();d.setDate(d.getDate()-1);return d;};
 const ds=d=>formatDate(d);
+const cmp=d=>`${d.getFullYear()}-${pad(d.getMonth()+1)}-${pad(d.getDate())}`;
 
 /* ── Init ── */
 document.addEventListener('DOMContentLoaded',()=>{
   applyPreset('yesterday');
-  syncRangeInputs();
   updateRangeLabel();
 
   // 预设按钮
   document.querySelectorAll('#presets button[data-preset]').forEach(btn=>{
     btn.addEventListener('click',function(){
-      closeRangePanel();
+      closeCalPanel();
       applyPreset(this.dataset.preset);
       loadData();
     });
   });
 
-  // 自定义时间段触发按钮
-  document.getElementById('rangeTrigger').addEventListener('click',()=>{
-    toggleRangePanel();
+  // 点击外部关闭日历
+  document.addEventListener('click',e=>{
+    const cal=document.getElementById('calPanel');
+    const trig=document.getElementById('rangeTrigger');
+    if(cal.classList.contains('open')&&!cal.contains(e.target)&&e.target!==trig&&!trig.contains(e.target)){
+      closeCalPanel();
+    }
   });
 
-  // 时间段输入框变化
-  document.getElementById('startDate').addEventListener('change',()=>{
-    enforceStartBeforeEnd();
-  });
-  document.getElementById('endDate').addEventListener('change',()=>{
-    enforceStartBeforeEnd();
-  });
-
+  // 搜索
   document.getElementById('searchInput').addEventListener('keydown',e=>{
     if(e.key==='Enter') doSearch();
   });
@@ -450,69 +489,170 @@ function clearSearch(){
   loadData();
 }
 
-/* ── Range panel ── */
-function toggleRangePanel(){
-  const p=document.getElementById('rangePanel');
-  const t=document.getElementById('rangeTrigger');
-  if(p.classList.contains('open')){
-    closeRangePanel();
+/* ── Calendar (飞猪式) ── */
+let calAnchorMonth=new Date(); // which month pair is displayed
+let calPicking=null; // null=waiting start, {y,m,d}=start picked, waiting end
+let calHover=null;  // hovered date for range preview
+
+document.getElementById('rangeTrigger').addEventListener('click',function(e){
+  e.stopPropagation();
+  const panel=document.getElementById('calPanel');
+  if(panel.classList.contains('open')){
+    closeCalPanel();
+    return;
+  }
+  // 初始化：显示包含当前 startDate 的月份对
+  if(startDate){
+    const s=new Date(startDate+'T00:00:00');
+    calAnchorMonth=new Date(s.getFullYear(),s.getMonth(),1);
   }else{
-    p.classList.add('open');
-    p.style.display='block';
-    t.classList.add('active');
+    calAnchorMonth=new Date(today().getFullYear(),today().getMonth(),1);
   }
-}
-function closeRangePanel(){
-  const p=document.getElementById('rangePanel');
+  // 让第一个月是该月，第二个月是下一个月
+  calAnchorMonth.setMonth(calAnchorMonth.getMonth()); // ensure first month is current
+  
+  // 同步拾取状态
+  calPicking=null;
+  calHover=null;
+  
+  renderCalendar();
+  panel.classList.add('open');
+  panel.style.display='flex';
+  document.getElementById('rangeTrigger').classList.add('active');
+});
+
+function closeCalPanel(){
+  const p=document.getElementById('calPanel');
   const t=document.getElementById('rangeTrigger');
-  p.classList.remove('open');
-  p.style.display='none';
+  p.classList.remove('open');p.style.display='none';
   t.classList.remove('active');
+  calPicking=null;calHover=null;
 }
-function syncRangeInputs(){
-  document.getElementById('startDate').value=startDate;
-  document.getElementById('endDate').value=endDate;
+
+function calPrev(){
+  calAnchorMonth.setMonth(calAnchorMonth.getMonth()-1);
+  renderCalendar();
 }
-function enforceStartBeforeEnd(){
-  const s=document.getElementById('startDate').value;
-  const e=document.getElementById('endDate').value;
-  if(s&&e&&s>e){
-    document.getElementById('endDate').value=s;
+function calNext(){
+  calAnchorMonth.setMonth(calAnchorMonth.getMonth()+1);
+  renderCalendar();
+}
+
+const MONTH_NAMES=['1月','2月','3月','4月','5月','6月','7月','8月','9月','10月','11月','12月'];
+
+function renderCalendar(){
+  const todayDate=cmp(today());
+  const m0=new Date(calAnchorMonth.getFullYear(),calAnchorMonth.getMonth(),1);
+  const m1=new Date(m0.getFullYear(),m0.getMonth()+1,1);
+
+  document.getElementById('calTitle0').textContent=`${m0.getFullYear()}年 ${MONTH_NAMES[m0.getMonth()]}`;
+  document.getElementById('calTitle1').textContent=`${m1.getFullYear()}年 ${MONTH_NAMES[m1.getMonth()]}`;
+
+  document.getElementById('calDays0').innerHTML=buildMonthDays(m0,todayDate);
+  document.getElementById('calDays1').innerHTML=buildMonthDays(m1,todayDate);
+}
+
+function buildMonthDays(monthStart,todayDate){
+  let html='';
+  const y=monthStart.getFullYear(),m=monthStart.getMonth();
+  const firstDay=(new Date(y,m,1).getDay()+7)%7; // 0=Sun
+  const daysInMonth=new Date(y,m+1,0).getDate();
+
+  // Leading empty cells
+  for(let i=0;i<firstDay;i++) html+='<span class="cal-day empty"></span>';
+
+  for(let d=1;d<=daysInMonth;d++){
+    const date=cmp(new Date(y,m,d));
+    let cls='cal-day';
+    if(date===todayDate) cls+=' today';
+
+    // 范围高亮
+    let isStart=false,isEnd=false,inRange=false;
+    const selStart=calPicking?cmp(new Date(calPicking.y,calPicking.m,calPicking.d)):startDate;
+    const selEnd=calPicking?null:endDate; // if picking, no end yet
+    
+    if(calPicking){
+      // 正在拾取中，只需要高亮 start
+      if(date===selStart){isStart=true;}
+    }else if(startDate&&endDate){
+      if(date===startDate){isStart=true;}
+      if(date===endDate){isEnd=true;}
+      if(date>startDate&&date<endDate){inRange=true;}
+    }
+    
+    // Hover preview (only when picking end)
+    if(calPicking&&calHover){
+      const pickCmp=cmp(new Date(calPicking.y,calPicking.m,calPicking.d));
+      if(date>pickCmp&&date<=calHover){inRange=true;}
+      if(date===calHover){isEnd=true;}
+    }
+
+    if(isStart) cls+=' range-start';
+    if(isEnd) cls+=' range-end';
+    if(inRange&&!isStart&&!isEnd) cls+=' in-range';
+
+    html+=`<button class="${cls}" data-date="${date}" onclick="calDayClick('${date}',event)">${d}</button>`;
+  }
+  return html;
+}
+
+function calDayClick(dateStr,e){
+  e.stopPropagation();
+  if(!calPicking){
+    // First pick → start date
+    const [y,m,d]=dateStr.split('-').map(Number);
+    calPicking={y,m,d};
+    calHover=null;
+    renderCalendar();
+  }else{
+    // Second pick → end date
+    const pickCmp=cmp(new Date(calPicking.y,calPicking.m,calPicking.d));
+    if(dateStr<pickCmp){
+      // Clicked before start → reset start
+      const [y,m,d]=dateStr.split('-').map(Number);
+      calPicking={y,m,d};
+      calHover=null;
+      renderCalendar();
+      return;
+    }
+    // Valid range selected
+    activePreset='';
+    startDate=pickCmp;
+    endDate=dateStr;
+    document.querySelectorAll('#presets button[data-preset]').forEach(b=>b.classList.remove('active'));
+    document.getElementById('headerSub').textContent=`${startDate} 至 ${endDate}`;
+    updateRangeLabel();
+    closeCalPanel();
+    loadData();
   }
 }
+
+// Hover preview for range
+document.getElementById('calPanel').addEventListener('mouseover',function(e){
+  if(!calPicking) return;
+  const btn=e.target.closest('.cal-day:not(.empty)');
+  if(!btn) return;
+  const dateStr=btn.dataset.date;
+  if(!dateStr) return;
+  const pickCmp=cmp(new Date(calPicking.y,calPicking.m,calPicking.d));
+  if(dateStr>=pickCmp){
+    calHover=dateStr;
+    renderCalendar();
+  }
+});
+
 function updateRangeLabel(){
   const label=document.getElementById('rangeLabel');
   if(startDate&&endDate){
-    label.textContent=`${startDate} 至 ${endDate}`;
+    label.textContent=startDate===endDate?startDate:`${startDate} 至 ${endDate}`;
   }else{
     label.textContent='选择时间段';
   }
-}
-function applyCustomRange(){
-  const s=document.getElementById('startDate').value;
-  const e=document.getElementById('endDate').value;
-  if(!s||!e){
-    alert('请选择开始和结束日期');
-    return;
-  }
-  if(s>e){
-    alert('开始日期不能晚于结束日期');
-    return;
-  }
-  activePreset='';
-  isCustomRange=true;
-  startDate=s;endDate=e;
-  document.querySelectorAll('#presets button[data-preset]').forEach(b=>b.classList.remove('active'));
-  document.getElementById('headerSub').textContent=`${startDate} 至 ${endDate}`;
-  updateRangeLabel();
-  closeRangePanel();
-  loadData();
 }
 
 /* ── Date logic ── */
 function applyPreset(preset){
   activePreset=preset;
-  isCustomRange=false;
 
   document.querySelectorAll('#presets button[data-preset]').forEach(b=>b.classList.remove('active'));
   const btn=document.querySelector(`#presets button[data-preset="${preset}"]`);
@@ -580,7 +720,6 @@ function applyPreset(preset){
       document.getElementById('headerSub').textContent='上年度动态';
       break;
   }
-  syncRangeInputs();
   updateRangeLabel();
 }
 
