@@ -30,11 +30,9 @@ body{
 .hero{margin-bottom:32px}
 .hero h1{font-size:34px;font-weight:700;letter-spacing:-.6px;line-height:1.15}
 .hero .sub{font-size:15px;color:var(--text2);margin-top:6px;font-weight:450}
-.hero .sub span{color:var(--blue);font-weight:600}
 
 /* ── Filter Bar ── */
 .filter-bar{
-  position:relative;overflow:visible;
   background:rgba(255,255,255,.76);
   backdrop-filter:blur(28px) saturate(180%);
   -webkit-backdrop-filter:blur(28px) saturate(180%);
@@ -43,10 +41,7 @@ body{
   box-shadow:var(--shadow-sm);
 }
 
-/* Preset chips row */
-.presets{
-  display:flex;flex-wrap:wrap;gap:6px;align-items:center;
-}
+.presets{display:flex;flex-wrap:wrap;gap:6px;align-items:center}
 .presets button{
   padding:6px 14px;border:none;border-radius:var(--rp);
   font-size:13px;font-weight:500;color:var(--text2);
@@ -54,104 +49,13 @@ body{
   transition:var(--t);font-family:inherit;white-space:nowrap;
 }
 .presets button:hover{background:rgba(0,0,0,.06);color:var(--text)}
-.presets button.active{
-  background:var(--text);color:#fff;font-weight:600;
-}
+.presets button.active{background:var(--text);color:#fff;font-weight:600}
 
-/* Date range trigger button */
-.date-range-trigger{
-  margin-left:auto;
-  display:inline-flex;align-items:center;gap:8px;
-  padding:6px 12px;border:1px solid var(--border);border-radius:10px;
-  font-size:13px;font-weight:500;color:var(--text);
-  background:var(--surface);cursor:pointer;transition:var(--t);
-  font-family:inherit;white-space:nowrap;
-}
-.date-range-trigger:hover{border-color:var(--blue);background:var(--blue-bg);color:var(--blue)}
-.date-range-trigger.active{border-color:var(--blue);background:var(--blue-bg);color:var(--blue)}
-.date-range-trigger .ico{
-  width:14px;height:14px;display:flex;align-items:center;justify-content:center;
-}
-.date-range-trigger .ico svg{width:100%;height:100%}
-
-/* Calendar panel */
-.cal-panel{
-  display:none;position:absolute;z-index:50;
-  left:0;right:0;top:calc(100% + 4px);
-  padding:20px 18px 16px;
-  background:var(--surface);border:1px solid var(--border);
-  border-radius:16px;box-shadow:0 12px 40px rgba(0,0,0,.12);
-  max-width:100%;overflow-x:auto;
-}
-.cal-panel.open{display:flex;animation:panelIn .2s ease}
-@keyframes panelIn{from{opacity:0;transform:translateY(-6px)}to{opacity:1;transform:translateY(0)}}
-
-.cal-month{flex:1;min-width:240px}
-.cal-month:first-child{padding-right:12px}
-.cal-month:last-child{padding-left:12px}
-.cal-month-header{
-  display:flex;align-items:center;justify-content:space-between;
-  margin-bottom:10px;padding:0 4px;
-}
-.cal-month-title{font-size:15px;font-weight:600;color:var(--text)}
-.cal-month-nav{
-  width:28px;height:28px;border:none;border-radius:50%;
-  background:rgba(0,0,0,.04);cursor:pointer;display:flex;
-  align-items:center;justify-content:center;transition:var(--t);
-  font-size:12px;color:var(--text2);
-}
-.cal-month-nav:hover{background:rgba(0,0,0,.08);color:var(--text)}
-
-.cal-weekdays{
-  display:grid;grid-template-columns:repeat(7,1fr);
-  text-align:center;margin-bottom:4px;
-}
-.cal-weekdays span{
-  font-size:11px;font-weight:600;color:var(--text3);
-  padding:4px 0;
-}
-.cal-days{
-  display:grid;grid-template-columns:repeat(7,1fr);
-  text-align:center;
-}
-.cal-day{
-  aspect-ratio:1;display:flex;align-items:center;
-  justify-content:center;border:none;background:none;
-  font-size:14px;font-family:inherit;color:var(--text);
-  cursor:pointer;border-radius:50%;transition:var(--t);
-  position:relative;font-weight:450;
-}
-.cal-day:hover{background:rgba(0,113,227,.08);color:var(--blue)}
-.cal-day.empty{cursor:default}
-.cal-day.today{font-weight:600;color:var(--blue)}
-.cal-day.today::after{
-  content:'';position:absolute;bottom:2px;width:4px;height:4px;
-  border-radius:50%;background:var(--blue);
-}
-.cal-day.in-range{background:var(--blue-bg);border-radius:0;color:var(--blue)}
-.cal-day.range-start,.cal-day.range-end{
-  background:var(--blue);color:#fff;border-radius:50%;font-weight:600;
-}
-.cal-day.range-start{border-radius:50% 0 0 50%}
-.cal-day.range-start.range-end{border-radius:50%}
-.cal-day.range-end{border-radius:0 50% 50% 0}
-.cal-day.range-end.range-start{border-radius:50%}
-
-/* single-month on mobile */
-@media(max-width:680px){
-  .cal-panel{flex-direction:column;max-width:300px;padding:14px 12px}
-  .cal-month:first-child, .cal-month:last-child{padding:0}
-  .cal-month+.cal-month{margin-top:16px;padding-top:16px;border-top:1px solid var(--border)}
-}
-
-/* Search row */
 .search-row{
   display:flex;gap:8px;align-items:center;margin-top:12px;
   padding-top:12px;border-top:1px solid var(--border);
 }
-.search-wrap{
-  flex:1;position:relative;display:flex;align-items:center;
-}
+.search-wrap{flex:1;position:relative;display:flex;align-items:center}
 .search-row input{
   width:100%;border:none;background:rgba(0,0,0,.03);border-radius:var(--rp);
   padding:9px 36px 9px 16px;font-size:13px;font-family:inherit;outline:none;
@@ -173,12 +77,6 @@ body{
 }
 .btn-go{background:var(--blue);color:#fff}
 .btn-go:hover{opacity:.88}
-
-@media(max-width:640px){
-  .date-range-trigger{margin-left:0;width:100%;justify-content:center;margin-top:4px}
-  .presets{gap:4px}
-  .presets button{padding:5px 10px;font-size:11px}
-}
 
 /* ── Tab Navigation ── */
 .tab-nav{
@@ -207,13 +105,6 @@ body{
 .tab-ico svg{width:100%;height:100%}
 .tab-nav button.active .tab-ico svg{stroke-width:2.5}
 
-@media(max-width:640px){
-  .tab-nav{gap:0;padding:4px;border-radius:12px}
-  .tab-nav button{padding:7px 6px;font-size:11px;gap:4px;border-radius:9px}
-  .tab-nav .tab-label{display:none}
-  .tab-ico{width:18px;height:18px}
-}
-
 /* ── Section Card ── */
 .section{
   background:var(--surface);border-radius:var(--r);
@@ -224,89 +115,44 @@ body{
   scroll-margin-top:64px;
 }
 .section:hover{box-shadow:var(--shadow-md)}
-
 .section-head{
   display:flex;align-items:center;gap:12px;
   padding:18px 22px;cursor:pointer;
   user-select:none;transition:background var(--t);
 }
 .section-head:hover{background:var(--surface-hover)}
-.section-head .ico{
-  width:22px;height:22px;flex-shrink:0;opacity:.8;
-}
-.section-head .label{
-  font-size:16px;font-weight:600;letter-spacing:-.2px;flex:1;
-}
-.section-head .chevron{
-  font-size:11px;color:var(--text3);transition:transform var(--t);
-}
+.section-head .ico{width:22px;height:22px;flex-shrink:0;opacity:.8}
+.section-head .label{font-size:16px;font-weight:600;letter-spacing:-.2px;flex:1}
+.section-head .chevron{font-size:11px;color:var(--text3);transition:transform var(--t)}
 .section-body{padding:0 22px 22px;display:flex;flex-direction:column;gap:10px}
 
 /* ── Article Card ── */
 .item{
-  background:var(--bg);
-  border-radius:12px;
-  padding:14px 16px;
-  border:1px solid var(--border);
-  transition:all var(--t);
-  animation:in .35s ease both;
-  cursor:pointer;
+  background:var(--bg);border-radius:12px;
+  padding:14px 16px;border:1px solid var(--border);
+  transition:all var(--t);animation:in .35s ease both;cursor:pointer;
 }
-.item:hover{
-  border-color:rgba(0,113,227,.15);
-  box-shadow:0 2px 12px rgba(0,0,0,.04);
-}
+.item:hover{border-color:rgba(0,113,227,.15);box-shadow:0 2px 12px rgba(0,0,0,.04)}
 @keyframes in{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}
 
 .item-row1{display:flex;align-items:flex-start;gap:8px;margin-bottom:4px}
-.item-title{
-  font-size:15px;font-weight:600;line-height:1.4;letter-spacing:-.15px;
-  color:var(--text);text-decoration:none;flex:1;
-}
+.item-title{font-size:15px;font-weight:600;line-height:1.4;letter-spacing:-.15px;color:var(--text);text-decoration:none;flex:1}
 .item-title:hover{color:var(--blue)}
 .item-summary{font-size:13px;color:var(--text2);line-height:1.6;margin-bottom:10px}
-.item-source{
-  font-size:12px;color:var(--text3);font-weight:400;
-  white-space:nowrap;
-}
-.item-sep{
-  width:1px;height:14px;background:var(--border);
-  flex-shrink:0;align-self:center;
-}
+.item-source{font-size:12px;color:var(--text3);font-weight:400;white-space:nowrap}
+.item-sep{width:1px;height:14px;background:var(--border);flex-shrink:0;align-self:center}
 .item-row2{display:flex;gap:8px;flex-wrap:wrap;align-items:center}
 
-.tag{
-  font-size:11px;font-weight:500;padding:3px 10px;
-  border-radius:var(--rp);letter-spacing:.1px;
-}
+.tag{font-size:11px;font-weight:500;padding:3px 10px;border-radius:var(--rp);letter-spacing:.1px}
 .tag-cp{background:var(--blue-bg);color:var(--blue)}
 .tag-hi{background:rgba(255,159,10,.1);color:#b25e00;font-weight:600}
-.tag-pos{background:rgba(52,199,89,.1);color:#1b7a30}
 .tag-neg{background:rgba(255,59,48,.08);color:#c41c14}
 .tag-our{background:var(--blue-bg);color:var(--blue);font-weight:600}
-.tag-date{background:rgba(0,0,0,.02);color:var(--text3);font-size:10px}
 
-.item-url{
-  font-size:12px;color:var(--blue);text-decoration:none;font-weight:500;
-  margin-left:auto;flex-shrink:0;transition:opacity var(--t);
-}
+.item-url{font-size:12px;color:var(--blue);text-decoration:none;font-weight:500;margin-left:auto;flex-shrink:0;transition:opacity var(--t)}
 .item-url:hover{opacity:.65}
 
-/* C section */
-.sub-label{
-  font-size:13px;font-weight:600;color:var(--text2);
-  margin:14px 0 8px;padding-left:10px;
-  border-left:2.5px solid var(--border);
-}
-.sent-badge{
-  display:inline-flex;align-items:center;gap:4px;
-  font-size:12px;font-weight:600;padding:3px 12px;
-  border-radius:var(--rp);margin:8px 0 2px;
-}
-.sent-pos{background:rgba(52,199,89,.08);color:#1b7a30}
-.sent-neg{background:rgba(255,59,48,.06);color:#c41c14}
-.sent-dot{width:6px;height:6px;border-radius:50%;display:inline-block}
-.sdot-pos{background:#34c759}.sdot-neg{background:#ff3b30}
+.sub-label{font-size:13px;font-weight:600;color:var(--text2);margin:14px 0 8px;padding-left:10px;border-left:2.5px solid var(--border)}
 
 .empty{text-align:center;padding:32px;color:var(--text3);font-size:14px}
 .footer{text-align:center;padding:32px 0 0;color:var(--text3);font-size:12px}
@@ -314,6 +160,8 @@ body{
 @media(max-width:640px){
   .page{padding:28px 14px 60px}
   .hero h1{font-size:26px}
+  .presets{gap:4px}
+  .presets button{padding:5px 10px;font-size:11px}
   .section-head{padding:14px 16px}
   .section-body{padding:0 14px 14px;gap:8px}
   .item{padding:12px 14px;border-radius:10px}
@@ -324,13 +172,11 @@ body{
 <body>
 <div class="page">
 
-  <!-- Hero -->
   <div class="hero">
     <h1>行业资讯</h1>
     <div class="sub" id="headerSub">昨日动态</div>
   </div>
 
-  <!-- Filter Bar -->
   <div class="filter-bar">
     <div class="presets" id="presets">
       <button data-preset="yesterday" class="active">昨日</button>
@@ -342,31 +188,6 @@ body{
       <button data-preset="last_quarter">上季</button>
       <button data-preset="this_year">本年</button>
       <button data-preset="last_year">上年</button>
-      <button id="rangeTrigger" class="date-range-trigger">
-        <span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg></span>
-        <span id="rangeLabel">选择时间段</span>
-      </button>
-    </div>
-
-    <div class="cal-panel" id="calPanel">
-      <div class="cal-month" id="calMonth0">
-        <div class="cal-month-header">
-          <button class="cal-month-nav" onclick="calPrev()">‹</button>
-          <span class="cal-month-title" id="calTitle0"></span>
-          <span style="width:28px"></span>
-        </div>
-        <div class="cal-weekdays"><span>日</span><span>一</span><span>二</span><span>三</span><span>四</span><span>五</span><span>六</span></div>
-        <div class="cal-days" id="calDays0"></div>
-      </div>
-      <div class="cal-month" id="calMonth1">
-        <div class="cal-month-header">
-          <span style="width:28px"></span>
-          <span class="cal-month-title" id="calTitle1"></span>
-          <button class="cal-month-nav" onclick="calNext()">›</button>
-        </div>
-        <div class="cal-weekdays"><span>日</span><span>一</span><span>二</span><span>三</span><span>四</span><span>五</span><span>六</span></div>
-        <div class="cal-days" id="calDays1"></div>
-      </div>
     </div>
 
     <div class="search-row">
@@ -378,488 +199,195 @@ body{
     </div>
   </div>
 
-  <!-- Tab Navigation -->
   <div class="tab-nav" id="tabNav">
-    <button data-target="A" class="active">
-      <span class="tab-ico" style="color:var(--blue)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg></span>
-      <span class="tab-label">CRM行业</span>
-    </button>
-    <button data-target="B">
-      <span class="tab-ico" style="color:var(--orange)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M5 17h2l1-7h8l1 7h2"/><circle cx="8" cy="20" r="1.5"/><circle cx="17" cy="20" r="1.5"/><path d="M12 3v5"/><path d="M9 6l3-3 3 3"/></svg></span>
-      <span class="tab-label">汽车行业</span>
-    </button>
-    <button data-target="C">
-      <span class="tab-ico" style="color:var(--pink)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.7 21a2 2 0 0 1-3.4 0"/></svg></span>
-      <span class="tab-label">品牌舆情</span>
-    </button>
-    <button data-target="D">
-      <span class="tab-ico" style="color:var(--purple)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></span>
-      <span class="tab-label">政策法规</span>
-    </button>
-    <button data-target="E">
-      <span class="tab-ico" style="color:var(--teal)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg></span>
-      <span class="tab-label">数字营销</span>
-    </button>
-    <button data-target="F">
-      <span class="tab-ico" style="color:var(--green)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="8" r="4"/><path d="M4 22c0-4.4 3.6-8 8-8s8 3.6 8 8"/></svg></span>
-      <span class="tab-label">消费者洞察</span>
-    </button>
+    <button data-target="A" class="active"><span class="tab-ico" style="color:var(--blue)"><svg viewBox="0 0 24 24" fill="none" stroke="var(--blue)" stroke-width="2"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg></span><span class="tab-label">CRM行业</span></button>
+    <button data-target="B"><span class="tab-ico" style="color:var(--orange)"><svg viewBox="0 0 24 24" fill="none" stroke="var(--orange)" stroke-width="2"><path d="M5 17h2l1-7h8l1 7h2"/><circle cx="8" cy="20" r="1.5"/><circle cx="17" cy="20" r="1.5"/></svg></span><span class="tab-label">汽车行业</span></button>
+    <button data-target="C"><span class="tab-ico" style="color:var(--pink)"><svg viewBox="0 0 24 24" fill="none" stroke="var(--pink)" stroke-width="2"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.7 21a2 2 0 0 1-3.4 0"/></svg></span><span class="tab-label">品牌舆情</span></button>
+    <button data-target="D"><span class="tab-ico" style="color:var(--purple)"><svg viewBox="0 0 24 24" fill="none" stroke="var(--purple)" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></span><span class="tab-label">政策法规</span></button>
+    <button data-target="E"><span class="tab-ico" style="color:var(--teal)"><svg viewBox="0 0 24 24" fill="none" stroke="var(--teal)" stroke-width="2"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg></span><span class="tab-label">数字营销</span></button>
+    <button data-target="F"><span class="tab-ico" style="color:var(--green)"><svg viewBox="0 0 24 24" fill="none" stroke="var(--green)" stroke-width="2"><circle cx="12" cy="8" r="4"/><path d="M4 22c0-4.4 3.6-8 8-8s8 3.6 8 8"/></svg></span><span class="tab-label">消费者洞察</span></button>
   </div>
 
   <div id="content"></div>
-
   <div class="footer">CRM 行业日报 · 数据驱动决策</div>
 </div>
 
 <script>
-/* ── Section Icons (SVG) ── */
-const ICONS={
-  A:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg>',
-  B:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M5 17h2l1-7h8l1 7h2"/><circle cx="8" cy="20" r="1.5"/><circle cx="17" cy="20" r="1.5"/><path d="M12 3v5"/><path d="M9 6l3-3 3 3"/></svg>',
-  C:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.7 21a2 2 0 0 1-3.4 0"/></svg>',
-  D:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>',
-  E:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>',
-  F:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="8" r="4"/><path d="M4 22c0-4.4 3.6-8 8-8s8 3.6 8 8"/></svg>'
-};
-
-const ICON_COLORS={A:'var(--blue)',B:'var(--orange)',C:'var(--pink)',D:'var(--purple)',E:'var(--teal)',F:'var(--green)'};
-
 const SECTIONS={
-  A:{name:'CRM行业动态',icon:ICONS.A,color:ICON_COLORS.A},
-  B:{name:'汽车行业动态',icon:ICONS.B,color:ICON_COLORS.B},
-  C:{name:'汽车品牌舆情',icon:ICONS.C,color:ICON_COLORS.C},
-  D:{name:'政策法规速递',icon:ICONS.D,color:ICON_COLORS.D},
-  E:{name:'数字营销',icon:ICONS.E,color:ICON_COLORS.E},
-  F:{name:'消费者购车洞察',icon:ICONS.F,color:ICON_COLORS.F}
+  A:{name:'CRM行业动态',color:'var(--blue)'},
+  B:{name:'汽车行业动态',color:'var(--orange)'},
+  C:{name:'汽车品牌舆情',color:'var(--pink)'},
+  D:{name:'政策法规速递',color:'var(--purple)'},
+  E:{name:'数字营销',color:'var(--teal)'},
+  F:{name:'消费者购车洞察',color:'var(--green)'}
 };
 
-const DATA_URL='latest.json';
 const ARCHIVE='archive/';
+const DATA_URL='latest.json';
 
-let activePreset='yesterday';
 let startDate='',endDate='';
 
 /* ── Helpers ── */
 const pad=n=>String(n).padStart(2,'0');
-const formatDate=d=>`${d.getFullYear()}-${pad(d.getMonth()+1)}-${pad(d.getDate())}`;
+const fmt=d=>`${d.getFullYear()}-${pad(d.getMonth()+1)}-${pad(d.getDate())}`;
 const today=()=>new Date();
-const yesterday=()=>{const d=today();d.setDate(d.getDate()-1);return d;};
-const ds=d=>formatDate(d);
-const cmp=d=>`${d.getFullYear()}-${pad(d.getMonth()+1)}-${pad(d.getDate())}`;
+const yesterday=()=>{const d=today();d.setDate(d.getDate()-1);return d};
 
 /* ── Init ── */
 document.addEventListener('DOMContentLoaded',()=>{
   applyPreset('yesterday');
-  updateRangeLabel();
 
-  // 预设按钮
   document.querySelectorAll('#presets button[data-preset]').forEach(btn=>{
     btn.addEventListener('click',function(){
-      closeCalPanel();
       applyPreset(this.dataset.preset);
       loadData();
     });
   });
 
-  // 点击外部关闭日历
-  document.addEventListener('click',e=>{
-    const cal=document.getElementById('calPanel');
-    const trig=document.getElementById('rangeTrigger');
-    if(cal.classList.contains('open')&&!cal.contains(e.target)&&e.target!==trig&&!trig.contains(e.target)){
-      closeCalPanel();
-    }
-  });
-
-  // 搜索
   document.getElementById('searchInput').addEventListener('keydown',e=>{
     if(e.key==='Enter') doSearch();
   });
-  document.getElementById('searchInput').addEventListener('input',toggleClear);
+  document.getElementById('searchInput').addEventListener('input',function(){
+    document.getElementById('searchClear').style.display=this.value.trim()?'block':'none';
+  });
 
   loadData();
 });
 
-function toggleClear(){
-  const el=document.getElementById('searchClear');
-  const has=document.getElementById('searchInput').value.trim();
-  el.style.display=has?'block':'none';
-}
 function clearSearch(){
   document.getElementById('searchInput').value='';
-  toggleClear();
+  document.getElementById('searchClear').style.display='none';
   loadData();
 }
+function doSearch(){loadData()}
 
-/* ── Calendar (飞猪式) ── */
-let calAnchorMonth=new Date(); // which month pair is displayed
-let calPicking=null; // null=waiting start, {y,m,d}=start picked, waiting end
-let calHover=null;  // hovered date for range preview
-
-document.getElementById('rangeTrigger').addEventListener('click',function(e){
-  e.stopPropagation();
-  const panel=document.getElementById('calPanel');
-  if(panel.classList.contains('open')){
-    closeCalPanel();
-    return;
-  }
-  // 初始化：显示包含当前 startDate 的月份对
-  if(startDate){
-    const s=new Date(startDate+'T00:00:00');
-    calAnchorMonth=new Date(s.getFullYear(),s.getMonth(),1);
-  }else{
-    calAnchorMonth=new Date(today().getFullYear(),today().getMonth(),1);
-  }
-  // 让第一个月是该月，第二个月是下一个月
-  calAnchorMonth.setMonth(calAnchorMonth.getMonth()); // ensure first month is current
-  
-  // 同步拾取状态
-  calPicking=null;
-  calHover=null;
-  
-  renderCalendar();
-  panel.classList.add('open');
-  panel.style.display='flex';
-  document.getElementById('rangeTrigger').classList.add('active');
-});
-
-function closeCalPanel(){
-  const p=document.getElementById('calPanel');
-  const t=document.getElementById('rangeTrigger');
-  p.classList.remove('open');p.style.display='none';
-  t.classList.remove('active');
-  calPicking=null;calHover=null;
-}
-
-function calPrev(){
-  calAnchorMonth.setMonth(calAnchorMonth.getMonth()-1);
-  renderCalendar();
-}
-function calNext(){
-  calAnchorMonth.setMonth(calAnchorMonth.getMonth()+1);
-  renderCalendar();
-}
-
-const MONTH_NAMES=['1月','2月','3月','4月','5月','6月','7月','8月','9月','10月','11月','12月'];
-
-function renderCalendar(){
-  const todayDate=cmp(today());
-  const m0=new Date(calAnchorMonth.getFullYear(),calAnchorMonth.getMonth(),1);
-  const m1=new Date(m0.getFullYear(),m0.getMonth()+1,1);
-
-  document.getElementById('calTitle0').textContent=`${m0.getFullYear()}年 ${MONTH_NAMES[m0.getMonth()]}`;
-  document.getElementById('calTitle1').textContent=`${m1.getFullYear()}年 ${MONTH_NAMES[m1.getMonth()]}`;
-
-  document.getElementById('calDays0').innerHTML=buildMonthDays(m0,todayDate);
-  document.getElementById('calDays1').innerHTML=buildMonthDays(m1,todayDate);
-}
-
-function buildMonthDays(monthStart,todayDate){
-  let html='';
-  const y=monthStart.getFullYear(),m=monthStart.getMonth();
-  const firstDay=(new Date(y,m,1).getDay()+7)%7; // 0=Sun
-  const daysInMonth=new Date(y,m+1,0).getDate();
-
-  // Leading empty cells
-  for(let i=0;i<firstDay;i++) html+='<span class="cal-day empty"></span>';
-
-  for(let d=1;d<=daysInMonth;d++){
-    const date=cmp(new Date(y,m,d));
-    let cls='cal-day';
-    if(date===todayDate) cls+=' today';
-
-    // 范围高亮
-    let isStart=false,isEnd=false,inRange=false;
-    const selStart=calPicking?cmp(new Date(calPicking.y,calPicking.m,calPicking.d)):startDate;
-    const selEnd=calPicking?null:endDate; // if picking, no end yet
-    
-    if(calPicking){
-      // 正在拾取中，只需要高亮 start
-      if(date===selStart){isStart=true;}
-    }else if(startDate&&endDate){
-      if(date===startDate){isStart=true;}
-      if(date===endDate){isEnd=true;}
-      if(date>startDate&&date<endDate){inRange=true;}
-    }
-    
-    // Hover preview (only when picking end)
-    if(calPicking&&calHover){
-      const pickCmp=cmp(new Date(calPicking.y,calPicking.m,calPicking.d));
-      if(date>pickCmp&&date<=calHover){inRange=true;}
-      if(date===calHover){isEnd=true;}
-    }
-
-    if(isStart) cls+=' range-start';
-    if(isEnd) cls+=' range-end';
-    if(inRange&&!isStart&&!isEnd) cls+=' in-range';
-
-    html+=`<button class="${cls}" data-date="${date}" onclick="calDayClick('${date}',event)">${d}</button>`;
-  }
-  return html;
-}
-
-function calDayClick(dateStr,e){
-  e.stopPropagation();
-  if(!calPicking){
-    // First pick → start date
-    const [y,m,d]=dateStr.split('-').map(Number);
-    calPicking={y,m,d};
-    calHover=null;
-    renderCalendar();
-  }else{
-    // Second pick → end date
-    const pickCmp=cmp(new Date(calPicking.y,calPicking.m,calPicking.d));
-    if(dateStr<pickCmp){
-      // Clicked before start → reset start
-      const [y,m,d]=dateStr.split('-').map(Number);
-      calPicking={y,m,d};
-      calHover=null;
-      renderCalendar();
-      return;
-    }
-    // Valid range selected
-    activePreset='';
-    startDate=pickCmp;
-    endDate=dateStr;
-    document.querySelectorAll('#presets button[data-preset]').forEach(b=>b.classList.remove('active'));
-    document.getElementById('headerSub').textContent=`${startDate} 至 ${endDate}`;
-    updateRangeLabel();
-    closeCalPanel();
-    loadData();
-  }
-}
-
-// Hover preview for range
-document.getElementById('calPanel').addEventListener('mouseover',function(e){
-  if(!calPicking) return;
-  const btn=e.target.closest('.cal-day:not(.empty)');
-  if(!btn) return;
-  const dateStr=btn.dataset.date;
-  if(!dateStr) return;
-  const pickCmp=cmp(new Date(calPicking.y,calPicking.m,calPicking.d));
-  if(dateStr>=pickCmp){
-    calHover=dateStr;
-    renderCalendar();
-  }
-});
-
-function updateRangeLabel(){
-  const label=document.getElementById('rangeLabel');
-  if(startDate&&endDate){
-    label.textContent=startDate===endDate?startDate:`${startDate} 至 ${endDate}`;
-  }else{
-    label.textContent='选择时间段';
-  }
-}
-
-/* ── Date logic ── */
+/* ── Date ── */
 function applyPreset(preset){
-  activePreset=preset;
-
   document.querySelectorAll('#presets button[data-preset]').forEach(b=>b.classList.remove('active'));
   const btn=document.querySelector(`#presets button[data-preset="${preset}"]`);
   if(btn) btn.classList.add('active');
 
-  const now=today();
-  const y=yesterday();
-  const yestStr=ds(y);
+  const now=today(),y=yesterday(),yest=fmt(y);
 
   switch(preset){
-    case'yesterday':
-      startDate=endDate=yestStr;
-      document.getElementById('headerSub').textContent='昨日动态';
-      break;
+    case'yesterday':startDate=endDate=yest;document.getElementById('headerSub').textContent='昨日动态';break;
     case'this_week':{
-      const mon=new Date(now);
-      mon.setDate(now.getDate()-(now.getDay()||7)+1);
-      startDate=ds(mon);endDate=yestStr;
-      document.getElementById('headerSub').textContent='本周动态';
-      break;
+      const mon=new Date(now);mon.setDate(now.getDate()-(now.getDay()||7)+1);
+      startDate=fmt(mon);endDate=yest;
+      document.getElementById('headerSub').textContent='本周动态';break;
     }
     case'last_week':{
-      const lastMon=new Date(now);
-      lastMon.setDate(now.getDate()-(now.getDay()||7)-6);
-      const lastSun=new Date(lastMon);
-      lastSun.setDate(lastSun.getDate()+6);
-      startDate=ds(lastMon);endDate=ds(lastSun);
-      document.getElementById('headerSub').textContent='上周动态';
-      break;
+      const lm=new Date(now);lm.setDate(now.getDate()-(now.getDay()||7)-6);
+      const ls=new Date(lm);ls.setDate(ls.getDate()+6);
+      startDate=fmt(lm);endDate=fmt(ls);
+      document.getElementById('headerSub').textContent='上周动态';break;
     }
     case'this_month':
-      startDate=ds(new Date(now.getFullYear(),now.getMonth(),1));
-      endDate=yestStr;
-      document.getElementById('headerSub').textContent='本月动态';
-      break;
+      startDate=fmt(new Date(now.getFullYear(),now.getMonth(),1));endDate=yest;
+      document.getElementById('headerSub').textContent='本月动态';break;
     case'last_month':
-      startDate=ds(new Date(now.getFullYear(),now.getMonth()-1,1));
-      endDate=ds(new Date(now.getFullYear(),now.getMonth(),0));
-      document.getElementById('headerSub').textContent='上月动态';
-      break;
+      startDate=fmt(new Date(now.getFullYear(),now.getMonth()-1,1));
+      endDate=fmt(new Date(now.getFullYear(),now.getMonth(),0));
+      document.getElementById('headerSub').textContent='上月动态';break;
     case'this_quarter':{
       const tq=Math.floor(now.getMonth()/3)*3;
-      startDate=ds(new Date(now.getFullYear(),tq,1));
-      endDate=yestStr;
-      document.getElementById('headerSub').textContent='本季度动态';
-      break;
+      startDate=fmt(new Date(now.getFullYear(),tq,1));endDate=yest;
+      document.getElementById('headerSub').textContent='本季度动态';break;
     }
     case'last_quarter':{
       const lq=Math.floor(now.getMonth()/3)*3-3;
-      const year=now.getFullYear()+Math.floor(lq/12);
-      const month=((lq%12)+12)%12;
-      startDate=ds(new Date(year,month,1));
-      endDate=ds(new Date(year,month+3,0));
-      document.getElementById('headerSub').textContent='上季度动态';
-      break;
+      const yr=now.getFullYear()+Math.floor(lq/12),mo=((lq%12)+12)%12;
+      startDate=fmt(new Date(yr,mo,1));endDate=fmt(new Date(yr,mo+3,0));
+      document.getElementById('headerSub').textContent='上季度动态';break;
     }
     case'this_year':
-      startDate=ds(new Date(now.getFullYear(),0,1));
-      endDate=yestStr;
-      document.getElementById('headerSub').textContent='本年度动态';
-      break;
+      startDate=fmt(new Date(now.getFullYear(),0,1));endDate=yest;
+      document.getElementById('headerSub').textContent='本年度动态';break;
     case'last_year':
-      startDate=ds(new Date(now.getFullYear()-1,0,1));
-      endDate=ds(new Date(now.getFullYear()-1,11,31));
-      document.getElementById('headerSub').textContent='上年度动态';
-      break;
+      startDate=fmt(new Date(now.getFullYear()-1,0,1));
+      endDate=fmt(new Date(now.getFullYear()-1,11,31));
+      document.getElementById('headerSub').textContent='上年度动态';break;
   }
-  updateRangeLabel();
 }
-
-function resetAll(){applyPreset('yesterday');loadData()}
-function doSearch(){loadData()}
-
-/* ── Tab Scroll Sync ── */
-function setupTabNav(){
-  const tabs=document.querySelectorAll('#tabNav button[data-target]');
-  const sections=Array.from(tabs).map(t=>document.getElementById('section-'+t.dataset.target)).filter(Boolean);
-
-  tabs.forEach(btn=>{
-    btn.addEventListener('click',()=>{
-      const el=document.getElementById('section-'+btn.dataset.target);
-      if(el) el.scrollIntoView({behavior:'smooth',block:'start'});
-    });
-  });
-
-  const observer=new IntersectionObserver(entries=>{
-    entries.forEach(e=>{
-      if(e.isIntersecting){
-        tabs.forEach(b=>b.classList.remove('active'));
-        document.querySelector('#tabNav button[data-target="'+e.target.id.replace('section-','')+'"]')?.classList.add('active');
-      }
-    });
-  },{rootMargin:'-60px 0px -70% 0px',threshold:0});
-
-  sections.forEach(s=>observer.observe(s));
-}
-
-const _origRender=render;
-render=function(brief){
-  _origRender(brief);
-  setupTabNav();
-};
 
 /* ── Data ── */
 async function loadData(){
-  const searchTerm=document.getElementById('searchInput').value.trim().toLowerCase();
+  const term=document.getElementById('searchInput').value.trim().toLowerCase();
   let brief;
   const isMulti=startDate!==endDate;
 
-  try{
-    if(!isMulti){
-      const resp=await fetch(`${ARCHIVE}${startDate}.json?_t=${Date.now()}`);
-      if(!resp.ok) throw new Error('not found');
+  if(!isMulti){
+    const resp=await fetch(`${ARCHIVE}${startDate}.json`);
+    if(resp.ok){
       brief=await resp.json();
     }else{
-      brief=await aggregate(startDate,endDate);
+      const r2=await fetch(DATA_URL);
+      if(r2.ok) brief=await r2.json();
+      else{brief=null}
     }
-  }catch(e){
-    try{
-      const resp=await fetch(DATA_URL+`?_t=${Date.now()}`);
-      if(!resp.ok) throw new Error('fallback failed');
-      brief=await resp.json();
-    }catch(e2){
-      document.getElementById('content').innerHTML='<div class="empty">暂无日报数据<br><small style="font-size:12px">系统正在采集中，请稍后查看</small></div>';
-      return;
-    }
+  }else{
+    brief=await aggregate(startDate,endDate);
   }
 
-  if(searchTerm) brief=filterBrief(brief,searchTerm);
+  if(!brief){document.getElementById('content').innerHTML='<div class="empty">暂无数据，系统采集中</div>';return}
+  if(term) brief=filterBrief(brief,term);
   render(brief);
 }
 
-async function aggregate(start,end){
-  const sections={A:{name:'CRM行业动态',items:[]},B:{name:'汽车行业动态',items:[]},C:{name:'汽车品牌舆情',items:[]},D:{name:'政策法规速递',items:[]},E:{name:'数字营销',items:[]},F:{name:'消费者购车洞察',items:[]}};
-  let total=0,days=0;
-  const s=new Date(start),e=new Date(end);
-  for(let d=new Date(s);d<=e;d.setDate(d.getDate()+1)){
-    const dateStr=ds(d);
-    try{
-      const resp=await fetch(`${ARCHIVE}${dateStr}.json?_t=${Date.now()}`);
-      if(!resp.ok) continue;
-      const daily=await resp.json();days++;
-      for(const sec of['A','B','C','D','E','F']){
-        const items=daily.sections?.[sec]?.items||[];
-        items.forEach(i=>{i._date=dateStr;});
-        sections[sec].items.push(...items);
-      }
-    }catch(_){}
+async function aggregate(s,e){
+  const secs={};['A','B','C','D','E','F'].forEach(k=>secs[k]={items:[]});
+  let days=0;
+  const st=new Date(s+'T00:00:00'),et=new Date(e+'T00:00:00');
+  for(let d=new Date(st);d<=et;d.setDate(d.getDate()+1)){
+    const ds=fmt(d);
+    const resp=await fetch(`${ARCHIVE}${ds}.json`);
+    if(!resp.ok) continue;
+    const daily=await resp.json();days++;
+    for(const k of['A','B','C','D','E','F']){
+      const items=daily.sections?.[k]?.items||[];
+      items.forEach(i=>{i._date=ds});
+      secs[k].items.push(...items);
+    }
   }
-  for(const sec of['A','B','C','D','E','F']){
-    sections[sec].items.sort((a,b)=>b._date?.localeCompare(a._date||'')||(b.importance_score||0)-(a.importance_score||0));
-    total+=sections[sec].items.length;
+  let total=0;
+  for(const k of['A','B','C','D','E','F']){
+    secs[k].items.sort((a,b)=>(b._date||'').localeCompare(a._date||'')||(b.importance_score||0)-(a.importance_score||0));
+    total+=secs[k].items.length;
   }
-  return{date:`${start} ~ ${end}`,sections,total_articles:total,days_covered:days};
+  return {sections:secs,total_articles:total,days_covered:days};
 }
 
-function filterBrief(brief,term){
-  const f=JSON.parse(JSON.stringify(brief));
-  for(const sec of['A','B','C','D','E','F']){
-    f.sections[sec].items=f.sections[sec].items.filter(i=>
-      (i.title||'').toLowerCase().includes(term)||(i.summary||'').toLowerCase().includes(term)
-    );
-    f.sections[sec].count=f.sections[sec].items.length;
+function filterBrief(b,term){
+  const f=JSON.parse(JSON.stringify(b));
+  for(const k of['A','B','C','D','E','F']){
+    f.sections[k].items=f.sections[k].items.filter(i=>(i.title||'').toLowerCase().includes(term)||(i.summary||'').toLowerCase().includes(term));
   }
-  f.total_articles=['A','B','C','D','E','F'].reduce((s,sec)=>s+f.sections[sec].items.length,0);
   return f;
 }
 
 /* ── Render ── */
 function render(brief){
-  let html='';
-  for(const sec of['A','B','C','D','E','F']){
-    const cfg=SECTIONS[sec];
-    const items=brief.sections?.[sec]?.items||[];
-    html+=`<div class="section" id="section-${sec}">
-      <div class="section-head" onclick="toggleSection(this)">
-        <span class="ico" style="color:${cfg.color}">${cfg.icon}</span>
-        <span class="label">${cfg.name}</span>
-        <span class="chevron">▼</span>
-      </div>
+  let h='';
+  for(const k of['A','B','C','D','E','F']){
+    const cfg=SECTIONS[k],items=brief.sections?.[k]?.items||[];
+    h+=`<div class="section" id="section-${k}">
+      <div class="section-head" onclick="toggleSection(this)"><span class="ico" style="color:${cfg.color}"><svg viewBox="0 0 24 24" fill="none" stroke="${cfg.color}" stroke-width="2"><rect x="6" y="4" width="12" height="16" rx="2"/><line x1="9" y1="9" x2="15" y2="9"/><line x1="9" y1="13" x2="15" y2="13"/><line x1="9" y1="17" x2="12" y2="17"/></svg></span><span class="label">${cfg.name}</span><span class="chevron">▼</span></div>
       <div class="section-body">`;
-    if(items.length===0){
-      html+=`<div class="empty">暂无相关动态</div>`;
-    }else if(sec==='C'){
-      html+=renderC(items);
-    }else{
-      items.forEach(i=>html+=renderItem(i));
-    }
-    html+=`</div></div>`;
+    if(!items.length){h+='<div class="empty">暂无相关动态</div>'}
+    else if(k==='C'){h+=renderC(items)}
+    else{items.forEach(i=>{h+=renderItem(i)})}
+    h+='</div></div>';
   }
-  document.getElementById('content').innerHTML=html;
+  document.getElementById('content').innerHTML=h;
+  setupTabs();
 }
 
 function renderC(items){
   let h='';
-  const our=items.filter(i=>i.is_our_brand && i.sentiment==='negative');
-  const comp=items.filter(i=>!i.is_our_brand && i.sentiment==='negative');
-
-  if(our.length>0){
-    h+='<div class="sub-label">本品舆情</div>';
-    our.forEach(i=>h+=renderItem(i));
-  }
-  if(comp.length>0){
-    h+='<div class="sub-label">竞品舆情</div>';
-    comp.forEach(i=>h+=renderItem(i));
-  }
+  const our=items.filter(i=>i.is_our_brand&&i.sentiment==='negative');
+  const comp=items.filter(i=>!i.is_our_brand&&i.sentiment==='negative');
+  if(our.length){h+='<div class="sub-label">本品舆情</div>';our.forEach(i=>h+=renderItem(i))}
+  if(comp.length){h+='<div class="sub-label">竞品舆情</div>';comp.forEach(i=>h+=renderItem(i))}
   if(!our.length&&!comp.length) h+='<div class="empty">暂无负面舆情</div>';
   return h;
 }
@@ -870,49 +398,44 @@ function renderItem(item){
   if(item.sentiment==='negative') tags.push('<span class="tag tag-neg">负面</span>');
   if(item.is_our_brand) tags.push('<span class="tag tag-our">本品</span>');
   (item.companies||[]).forEach(c=>tags.push(`<span class="tag tag-cp">${c}</span>`));
-
-  let srcInfo='';
-  if(item.source||item._date){
-    srcInfo=`<span class="item-source">${item.source||''}${item.source&&item._date?' · ':''}${item._date||''}</span>`;
-  }
-
-  let summary='';
-  if(item.summary){
-    summary=item.summary.length>100?item.summary.slice(0,97)+'...':item.summary;
-  }
-
-  return`<div class="item"${!validateUrl(item.url)?' data-invalid="1" style="display:none"':''} onclick="event.target.closest('a')||window.open('${item.url||'#'}','_blank')">
-    <div class="item-row1">
-      <a class="item-title" href="${item.url||'#'}" target="_blank" rel="noopener">${item.title||'(无标题)'}</a>
-    </div>
-    ${summary?`<div class="item-summary">${summary}</div>`:''}
-    <div class="item-row2">
-      ${tags.join('')}
-      ${srcInfo?`<span class="item-sep"></span>`:''}
-      ${srcInfo}
-      <a class="item-url" href="${item.url||'#'}" target="_blank" rel="noopener">查看原文 →</a>
-    </div>
+  let src='';
+  if(item.source||item._date) src=`<span class="item-source">${item.source||''}${item.source&&item._date?' · ':''}${item._date||''}</span>`;
+  let sum='';
+  if(item.summary) sum=item.summary.length>100?item.summary.slice(0,97)+'...':item.summary;
+  const url=item.url||'#';
+  return`<div class="item" onclick="var a=this.querySelector('a');a?window.open(a.href,'_blank'):window.open('${url}','_blank')">
+    <div class="item-row1"><a class="item-title" href="${url}" target="_blank" rel="noopener" onclick="event.stopPropagation()">${item.title||'(无标题)'}</a></div>
+    ${sum?`<div class="item-summary">${sum}</div>`:''}
+    <div class="item-row2">${tags.join('')}${src?`<span class="item-sep"></span>`+src:''}<a class="item-url" href="${url}" target="_blank" rel="noopener" onclick="event.stopPropagation()">查看原文 →</a></div>
   </div>`;
 }
 
-function validateUrl(url){
-  if(!url||url==='#') return true;
-  try{
-    const u=new URL(url);
-    return u.protocol==='http:'||u.protocol==='https:';
-  }catch(e){return false;}
+function toggleSection(head){
+  const body=head.nextElementSibling,chev=head.querySelector('.chevron');
+  if(body.style.display==='none'){body.style.display='';chev.style.transform=''}
+  else{body.style.display='none';chev.style.transform='rotate(-90deg)'}
 }
 
-function toggleSection(head){
-  const body=head.nextElementSibling;
-  const chev=head.querySelector('.chevron');
-  if(body.style.display==='none'){
-    body.style.display='block';
-    chev.style.transform='rotate(0deg)';
-  }else{
-    body.style.display='none';
-    chev.style.transform='rotate(-90deg)';
-  }
+function setupTabs(){
+  const tabs=document.querySelectorAll('#tabNav button[data-target]');
+  tabs.forEach(btn=>{
+    btn.onclick=()=>{
+      const el=document.getElementById('section-'+btn.dataset.target);
+      if(el) el.scrollIntoView({behavior:'smooth',block:'start'});
+    };
+  });
+  const obs=new IntersectionObserver(entries=>{
+    entries.forEach(e=>{
+      if(e.isIntersecting){
+        tabs.forEach(b=>b.classList.remove('active'));
+        const t=document.querySelector('#tabNav button[data-target="'+e.target.id.replace('section-','')+'"]');
+        if(t) t.classList.add('active');
+      }
+    });
+  },{rootMargin:'-60px 0px -70% 0px',threshold:0});
+  ['A','B','C','D','E','F'].forEach(k=>{
+    const el=document.getElementById('section-'+k);if(el) obs.observe(el);
+  });
 }
 </script>
 </body>
