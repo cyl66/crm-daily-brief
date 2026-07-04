@@ -12,7 +12,11 @@
           "source": "博客园",
           "importance_level": "medium",
           "importance_score": 0.65,
-          "companies": ["探马SCRM", "微伴助手"]
+          "companies": [
+            "探马SCRM",
+            "微伴助手"
+          ],
+          "published_at": "2026-07-04"
         },
         {
           "title": "CRM选型新趋势：AI驱动与低代码成标配",
@@ -21,7 +25,12 @@
           "source": "搜狐",
           "importance_level": "medium",
           "importance_score": 0.62,
-          "companies": ["Salesforce", "HubSpot", "纷享销客"]
+          "companies": [
+            "Salesforce",
+            "HubSpot",
+            "纷享销客"
+          ],
+          "published_at": "2026-07-04"
         },
         {
           "title": "国内CRM市场竞争格局：12款主流系统深度对比",
@@ -30,7 +39,13 @@
           "source": "SegmentFault",
           "importance_level": "medium",
           "importance_score": 0.58,
-          "companies": ["Zoho", "Salesforce", "销售易", "纷享销客"]
+          "companies": [
+            "Zoho",
+            "Salesforce",
+            "销售易",
+            "纷享销客"
+          ],
+          "published_at": "2026-07-04"
         }
       ],
       "count": 3
@@ -44,8 +59,11 @@
           "url": "https://so.html5.qq.com/page/real/search_news?docid=70000021_1676a48577040752",
           "source": "财联社",
           "importance_level": "high",
-          "importance_score": 0.90,
-          "companies": ["国务院"]
+          "importance_score": 0.9,
+          "companies": [
+            "国务院"
+          ],
+          "published_at": "2026-07-03"
         },
         {
           "title": "三部门：2027年起取消新能源汽车车船税减免",
@@ -54,7 +72,11 @@
           "source": "财联社",
           "importance_level": "high",
           "importance_score": 0.95,
-          "companies": ["财政部", "工信部"]
+          "companies": [
+            "财政部",
+            "工信部"
+          ],
+          "published_at": "2026-07-03"
         },
         {
           "title": "中国乘用车在欧洲市场份额首次超越日本",
@@ -63,7 +85,11 @@
           "source": "财联社",
           "importance_level": "high",
           "importance_score": 0.85,
-          "companies": ["比亚迪", "吉利"]
+          "companies": [
+            "比亚迪",
+            "吉利"
+          ],
+          "published_at": "2026-07-04"
         },
         {
           "title": "奕境汽车携手华为乾崑亮相央视，发布天穹智盾安全架构",
@@ -72,7 +98,11 @@
           "source": "爱卡汽车",
           "importance_level": "medium",
           "importance_score": 0.72,
-          "companies": ["奕境汽车", "华为"]
+          "companies": [
+            "奕境汽车",
+            "华为"
+          ],
+          "published_at": "2026-07-02"
         },
         {
           "title": "鸿蒙智行6月交付50624台，尚界Z7交付破万",
@@ -81,7 +111,11 @@
           "source": "车主之家",
           "importance_level": "medium",
           "importance_score": 0.68,
-          "companies": ["鸿蒙智行", "尚界"]
+          "companies": [
+            "鸿蒙智行",
+            "尚界"
+          ],
+          "published_at": "2026-07-04"
         }
       ],
       "count": 5
@@ -95,10 +129,13 @@
           "url": "https://browser.qq.com/mobile/news?doc_id=720698aa6b789152",
           "source": "腾讯新闻",
           "importance_level": "high",
-          "importance_score": 0.90,
+          "importance_score": 0.9,
           "sentiment": "negative",
-          "companies": ["极氪"],
-          "is_our_brand": 1
+          "companies": [
+            "极氪"
+          ],
+          "is_our_brand": 1,
+          "published_at": "2026-07-04"
         },
         {
           "title": "吉利召回1473辆极星4纯电动车型",
@@ -108,8 +145,12 @@
           "importance_level": "high",
           "importance_score": 0.82,
           "sentiment": "negative",
-          "companies": ["吉利", "极星"],
-          "is_our_brand": 1
+          "companies": [
+            "吉利",
+            "极星"
+          ],
+          "is_our_brand": 1,
+          "published_at": "2026-05-16"
         },
         {
           "title": "领克08/09车机OTA升级故障投诉持续上榜",
@@ -119,8 +160,11 @@
           "importance_level": "high",
           "importance_score": 0.78,
           "sentiment": "negative",
-          "companies": ["领克"],
-          "is_our_brand": 1
+          "companies": [
+            "领克"
+          ],
+          "is_our_brand": 1,
+          "published_at": "2026-07-04"
         },
         {
           "title": "奔驰及国产E级因前驱动轴缺陷召回",
@@ -128,10 +172,13 @@
           "url": "http://news.16888.com/2026/0629/",
           "source": "车主之家",
           "importance_level": "medium",
-          "importance_score": 0.60,
+          "importance_score": 0.6,
           "sentiment": "negative",
-          "companies": ["奔驰"],
-          "is_our_brand": 0
+          "companies": [
+            "奔驰"
+          ],
+          "is_our_brand": 0,
+          "published_at": "2026-06-29"
         },
         {
           "title": "国产沃尔沃EX30因电池热失控风险召回",
@@ -141,8 +188,11 @@
           "importance_level": "medium",
           "importance_score": 0.65,
           "sentiment": "negative",
-          "companies": ["沃尔沃"],
-          "is_our_brand": 0
+          "companies": [
+            "沃尔沃"
+          ],
+          "is_our_brand": 0,
+          "published_at": "2026-06-18"
         }
       ],
       "count": 5
@@ -157,7 +207,10 @@
           "source": "财联社",
           "importance_level": "high",
           "importance_score": 0.95,
-          "companies": ["财政部"]
+          "companies": [
+            "财政部"
+          ],
+          "published_at": "2026-07-03"
         },
         {
           "title": "国务院印发美丽中国「十五五」规划：推广新能源汽车下乡",
@@ -166,7 +219,10 @@
           "source": "财联社",
           "importance_level": "high",
           "importance_score": 0.88,
-          "companies": ["国务院"]
+          "companies": [
+            "国务院"
+          ],
+          "published_at": "2026-07-03"
         }
       ],
       "count": 2
@@ -181,7 +237,11 @@
           "source": "博客园",
           "importance_level": "medium",
           "importance_score": 0.68,
-          "companies": ["微伴助手", "探马SCRM"]
+          "companies": [
+            "微伴助手",
+            "探马SCRM"
+          ],
+          "published_at": "2026-07-04"
         },
         {
           "title": "2026企微SCRM评估：AI全链路赋能私域（权威体验）",
@@ -190,7 +250,11 @@
           "source": "IT之家",
           "importance_level": "medium",
           "importance_score": 0.62,
-          "companies": ["微伴助手", "探马SCRM"]
+          "companies": [
+            "微伴助手",
+            "探马SCRM"
+          ],
+          "published_at": "2026-07-04"
         }
       ],
       "count": 2
@@ -205,7 +269,8 @@
           "source": "汽车流通协会",
           "importance_level": "medium",
           "importance_score": 0.75,
-          "companies": []
+          "companies": [],
+          "published_at": "2026-07-04"
         },
         {
           "title": "2026年购车决策周期缩短至2.5个月，Z世代仅1.9月",
@@ -213,8 +278,9 @@
           "url": "https://baijiahao.baidu.com/s?id=1860886421796555885",
           "source": "百度百家号",
           "importance_level": "medium",
-          "importance_score": 0.70,
-          "companies": []
+          "importance_score": 0.7,
+          "companies": [],
+          "published_at": "2026-03-27"
         }
       ],
       "count": 2
@@ -222,11 +288,29 @@
   },
   "total_articles": 19,
   "coverage_summary": {
-    "A": {"name": "CRM行业动态", "count": 3},
-    "B": {"name": "汽车行业动态", "count": 5},
-    "C": {"name": "汽车品牌舆情", "count": 5},
-    "D": {"name": "政策法规速递", "count": 2},
-    "E": {"name": "数字营销", "count": 2},
-    "F": {"name": "消费者购车洞察", "count": 2}
+    "A": {
+      "name": "CRM行业动态",
+      "count": 3
+    },
+    "B": {
+      "name": "汽车行业动态",
+      "count": 5
+    },
+    "C": {
+      "name": "汽车品牌舆情",
+      "count": 5
+    },
+    "D": {
+      "name": "政策法规速递",
+      "count": 2
+    },
+    "E": {
+      "name": "数字营销",
+      "count": 2
+    },
+    "F": {
+      "name": "消费者购车洞察",
+      "count": 2
+    }
   }
 }
