@@ -329,7 +329,10 @@ async function loadData(){
     brief=await aggregate(startDate,endDate);
   }
 
-  if(!brief){document.getElementById('content').innerHTML='<div class="empty">暂无数据，系统采集中</div>';return}
+  if(!brief){
+    brief={sections:{}};
+    ['A','B','C','D','E','F'].forEach(k=>{brief.sections[k]={items:[]}});
+  }
   if(term) brief=filterBrief(brief,term);
   render(brief);
 }
