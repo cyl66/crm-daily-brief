@@ -62,19 +62,15 @@ body{
   margin-right:2px;
 }
 
-/* Date range picker (always visible, inline with presets) */
-.date-range{
-  display:flex;align-items:center;gap:6px;
-  margin-left:auto;flex-shrink:0;
-}
-.date-range input[type="date"]{
+/* Date range picker - single date input for start, auto-calculate end */
+.date-picker-single{
   border:1px solid var(--border);border-radius:8px;
   padding:6px 10px;font-size:12px;font-family:inherit;
   background:var(--surface);color:var(--text);outline:none;
+  margin-left:auto;flex-shrink:0;
   transition:border-color var(--t);
 }
-.date-range input[type="date"]:focus{border-color:var(--blue)}
-.date-range .sep{font-size:11px;color:var(--text3)}
+.date-picker-single:focus{border-color:var(--blue)}
 
 /* Search row */
 .search-row{
@@ -271,11 +267,7 @@ body{
       <button data-preset="last_quarter">上季</button>
       <button data-preset="this_year">本年</button>
       <button data-preset="last_year">上年</button>
-      <div class="date-range">
-        <input type="date" id="dateStart">
-        <span class="sep">至</span>
-        <input type="date" id="dateEnd">
-      </div>
+      <input type="date" id="dateRangePicker" class="date-picker-single">
     </div>
 
     <div class="search-row">
@@ -350,37 +342,40 @@ let startDate='',endDate='';
 
 /* ── Init ── */
 document.addEventListener('DOMContentLoaded',()=>{
-  applyPreset('yesterday');
-  loadData();
+  // 实时计算昨日日期
+  const now=new Date();
+  const yest=new Date(now);yest.setDate(yest.getDate()-1);
+  const yestStr=yest.toISOString().split('T')[0];
 
+  // 设置日期选择器默认值=昨日
+  const dp=document.getElementById('dateRangePicker');
+  dp.value=yestStr;
+  startDate=endDate=yestStr;
+
+  // 日期选择器变更 → 自定义模式
+  dp.addEventListener('change',function(){
+    startDate=endDate=this.value;
+    document.querySelectorAll('#presets button[data-preset]').forEach(b=>b.classList.remove('active'));
+    document.getElementById('headerSub').textContent='自定义时间';
+    loadData();
+  });
+
+  // 预设按钮
   document.querySelectorAll('#presets button[data-preset]').forEach(btn=>{
     btn.addEventListener('click',function(){
       applyPreset(this.dataset.preset);
+      dp.value=startDate;  // 同步日期选择器
       loadData();
     });
   });
-
-  // Date input change → switch to custom
-  const dsEl=document.getElementById('dateStart');
-  const deEl=document.getElementById('dateEnd');
-  dsEl.addEventListener('change',()=>{onDateChange()});
-  deEl.addEventListener('change',()=>{onDateChange()});
 
   document.getElementById('searchInput').addEventListener('keydown',e=>{
     if(e.key==='Enter') doSearch();
   });
   document.getElementById('searchInput').addEventListener('input',toggleClear);
-});
 
-function onDateChange(){
-  const dsEl=document.getElementById('dateStart');
-  const deEl=document.getElementById('dateEnd');
-  startDate=dsEl.value;endDate=deEl.value;
-  // Switch to custom preset
-  document.querySelectorAll('#presets button[data-preset]').forEach(b=>b.classList.remove('active'));
-  document.getElementById('headerSub').textContent='自定义时间';
   loadData();
-}
+});
 
 function toggleClear(){
   const el=document.getElementById('searchClear');
@@ -439,8 +434,6 @@ function applyPreset(preset){
   if(btn) btn.classList.add('active');
 
   const now=today(),y=yesterday(),dsy=ds(y);
-  const dsEl=document.getElementById('dateStart');
-  const deEl=document.getElementById('dateEnd');
 
   switch(preset){
     case'yesterday':
@@ -491,9 +484,6 @@ function applyPreset(preset){
       document.getElementById('headerSub').textContent='上年度动态';
       break;
   }
-
-  dsEl.value=startDate;
-  deEl.value=endDate;
 }
 
 function resetAll(){applyPreset('yesterday');loadData()}
