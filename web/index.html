@@ -1,0 +1,557 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>行业资讯</title>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+
+:root{
+  --bg:#f5f5f7;--surface:#fff;--surface-hover:#fafafa;
+  --text:#1d1d1f;--text2:#6e6e73;--text3:#aeaeb2;
+  --blue:#0071e3;--blue-bg:rgba(0,113,227,.06);
+  --green:#34c759;--orange:#ff9f0a;--red:#ff3b30;
+  --purple:#af52de;--teal:#5ac8fa;--pink:#ff2d55;
+  --border:rgba(0,0,0,.07);
+  --shadow-sm:0 1px 3px rgba(0,0,0,.04);
+  --shadow-md:0 4px 20px rgba(0,0,0,.06);
+  --r:16px;--rp:100px;--t:.22s cubic-bezier(.25,.1,.25,1);
+}
+
+body{
+  font-family:-apple-system,BlinkMacSystemFont,'SF Pro Display','SF Pro Text','Helvetica Neue',sans-serif;
+  background:var(--bg);color:var(--text);line-height:1.5;
+  -webkit-font-smoothing:antialiased;min-height:100vh;
+}
+.page{max-width:840px;margin:0 auto;padding:44px 24px 80px}
+
+/* ── Hero ── */
+.hero{margin-bottom:32px}
+.hero h1{font-size:34px;font-weight:700;letter-spacing:-.6px;line-height:1.15}
+.hero .sub{font-size:15px;color:var(--text2);margin-top:6px;font-weight:450}
+.hero .sub span{color:var(--blue);font-weight:600}
+
+/* ── Filter Bar ── */
+.filter-bar{
+  background:rgba(255,255,255,.76);
+  backdrop-filter:blur(28px) saturate(180%);
+  -webkit-backdrop-filter:blur(28px) saturate(180%);
+  border:1px solid var(--border);
+  border-radius:var(--r);padding:12px 16px;margin-bottom:28px;
+  box-shadow:var(--shadow-sm);
+}
+
+/* Preset chips row */
+.presets{
+  display:flex;flex-wrap:wrap;gap:6px;align-items:center;
+}
+.presets button{
+  padding:6px 14px;border:none;border-radius:var(--rp);
+  font-size:13px;font-weight:500;color:var(--text2);
+  background:rgba(0,0,0,.035);cursor:pointer;
+  transition:var(--t);font-family:inherit;white-space:nowrap;
+}
+.presets button:hover{background:rgba(0,0,0,.06);color:var(--text)}
+.presets button.active{
+  background:var(--text);color:#fff;font-weight:600;
+}
+.presets .preset-label{
+  font-size:11px;font-weight:600;color:var(--text3);
+  text-transform:uppercase;letter-spacing:.5px;
+  margin-right:2px;
+}
+
+/* Custom date range */
+.custom-range{
+  display:none;margin-top:10px;padding-top:10px;
+  border-top:1px solid var(--border);
+  align-items:center;gap:8px;flex-wrap:wrap;
+}
+.custom-range.show{display:flex}
+.custom-range input[type="date"]{
+  border:1px solid var(--border);border-radius:8px;
+  padding:7px 10px;font-size:13px;font-family:inherit;
+  background:var(--surface);color:var(--text);outline:none;
+}
+.custom-range input[type="date"]:focus{border-color:var(--blue)}
+.custom-range .sep{font-size:12px;color:var(--text3)}
+
+/* Search row */
+.search-row{
+  display:flex;gap:8px;align-items:center;margin-top:10px;
+  padding-top:10px;border-top:1px solid var(--border);
+}
+.search-row input{
+  flex:1;border:none;background:rgba(0,0,0,.03);border-radius:var(--rp);
+  padding:9px 16px;font-size:13px;font-family:inherit;outline:none;
+  color:var(--text);transition:var(--t);
+}
+.search-row input:focus{background:rgba(0,0,0,.055)}
+.search-row input::placeholder{color:var(--text3)}
+.search-row button{
+  padding:9px 20px;border:none;border-radius:var(--rp);
+  font-size:13px;font-weight:600;cursor:pointer;
+  font-family:inherit;transition:var(--t);
+}
+.btn-go{background:var(--blue);color:#fff}
+.btn-go:hover{opacity:.88}
+
+.date-range-display{
+  font-size:12px;color:var(--text2);font-weight:500;
+  padding:0 8px;white-space:nowrap;
+  border-left:1px solid var(--border);margin-left:4px;padding-left:14px;
+}
+
+/* ── Section Card ── */
+.section{
+  background:var(--surface);border-radius:var(--r);
+  margin-bottom:14px;overflow:hidden;
+  border:1px solid var(--border);
+  box-shadow:var(--shadow-sm);
+  transition:box-shadow var(--t);
+}
+.section:hover{box-shadow:var(--shadow-md)}
+
+.section-head{
+  display:flex;align-items:center;gap:12px;
+  padding:18px 22px;cursor:pointer;
+  user-select:none;transition:background var(--t);
+}
+.section-head:hover{background:var(--surface-hover)}
+.section-head .ico{
+  width:22px;height:22px;flex-shrink:0;opacity:.8;
+}
+.section-head .label{
+  font-size:16px;font-weight:600;letter-spacing:-.2px;flex:1;
+}
+.section-head .chevron{
+  font-size:11px;color:var(--text3);transition:transform var(--t);
+}
+.section-body{padding:0 22px 18px}
+
+/* ── Article ── */
+.item{
+  padding:16px 0;border-bottom:1px solid var(--border);
+  animation:in .35s ease both;
+}
+@keyframes in{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}
+.item:last-child{border-bottom:none}
+
+.item-row1{display:flex;align-items:flex-start;gap:8px;margin-bottom:5px}
+.item-title{
+  font-size:15px;font-weight:600;line-height:1.4;letter-spacing:-.15px;
+  color:var(--text);text-decoration:none;flex:1;
+}
+.item-title:hover{color:var(--blue)}
+.item-summary{font-size:13px;color:var(--text2);line-height:1.55;margin-bottom:8px}
+.item-row2{display:flex;gap:8px;flex-wrap:wrap;align-items:center}
+
+.tag{
+  font-size:11px;font-weight:500;padding:3px 10px;
+  border-radius:var(--rp);letter-spacing:.1px;
+}
+.tag-src{background:rgba(0,0,0,.035);color:var(--text2)}
+.tag-cp{background:var(--blue-bg);color:var(--blue)}
+.tag-hi{background:rgba(255,159,10,.1);color:#b25e00;font-weight:600}
+.tag-pos{background:rgba(52,199,89,.1);color:#1b7a30}
+.tag-neg{background:rgba(255,59,48,.08);color:#c41c14}
+.tag-our{background:var(--blue-bg);color:var(--blue);font-weight:600}
+.tag-date{background:rgba(0,0,0,.02);color:var(--text3);font-size:10px}
+
+.item-url{
+  font-size:12px;color:var(--blue);text-decoration:none;font-weight:500;
+  margin-left:auto;flex-shrink:0;transition:opacity var(--t);
+}
+.item-url:hover{opacity:.65}
+
+/* C section */
+.sub-label{
+  font-size:13px;font-weight:600;color:var(--text2);
+  margin:14px 0 8px;padding-left:10px;
+  border-left:2.5px solid var(--border);
+}
+.sent-badge{
+  display:inline-flex;align-items:center;gap:4px;
+  font-size:12px;font-weight:600;padding:3px 12px;
+  border-radius:var(--rp);margin:8px 0 2px;
+}
+.sent-pos{background:rgba(52,199,89,.08);color:#1b7a30}
+.sent-neg{background:rgba(255,59,48,.06);color:#c41c14}
+.sent-dot{width:6px;height:6px;border-radius:50%;display:inline-block}
+.sdot-pos{background:#34c759}.sdot-neg{background:#ff3b30}
+
+.empty{text-align:center;padding:32px;color:var(--text3);font-size:14px}
+.footer{text-align:center;padding:32px 0 0;color:var(--text3);font-size:12px}
+
+@media(max-width:640px){
+  .page{padding:28px 14px 60px}
+  .hero h1{font-size:26px}
+  .presets{gap:4px}
+  .presets button{padding:5px 10px;font-size:11px}
+  .section-head{padding:14px 16px}
+  .section-body{padding:0 16px 14px}
+  .item{padding:12px 0}
+  .item-title{font-size:14px}
+}
+</style>
+</head>
+<body>
+<div class="page">
+
+  <!-- Hero -->
+  <div class="hero">
+    <h1>行业资讯</h1>
+    <div class="sub" id="headerSub">昨日动态</div>
+  </div>
+
+  <!-- Filter Bar -->
+  <div class="filter-bar">
+    <div class="presets" id="presets">
+      <button data-preset="yesterday" class="active">昨日</button>
+      <button data-preset="this_week">本周</button>
+      <button data-preset="last_week">上周</button>
+      <button data-preset="this_month">本月</button>
+      <button data-preset="last_month">上月</button>
+      <button data-preset="this_quarter">本季</button>
+      <button data-preset="last_quarter">上季</button>
+      <button data-preset="this_year">本年</button>
+      <button data-preset="last_year">上年</button>
+      <button data-preset="custom">自定义</button>
+      <span class="date-range-display" id="dateRangeDisplay"></span>
+    </div>
+
+    <div class="custom-range" id="customRange">
+      <input type="date" id="dateStart">
+      <span class="sep">至</span>
+      <input type="date" id="dateEnd">
+    </div>
+
+    <div class="search-row">
+      <input type="text" id="searchInput" placeholder="搜索标题或内容...">
+      <button class="btn-go" onclick="doSearch()">查询</button>
+    </div>
+  </div>
+
+  <!-- Content -->
+  <div id="content"></div>
+
+  <div class="footer">CRM 行业日报 · 数据驱动决策</div>
+</div>
+
+<script>
+/* ── Section Icons (SVG) ── */
+const ICONS={
+  A:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg>',
+  B:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M5 17h2l1-7h8l1 7h2"/><circle cx="8" cy="20" r="1.5"/><circle cx="17" cy="20" r="1.5"/><path d="M12 3v5"/><path d="M9 6l3-3 3 3"/></svg>',
+  C:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.7 21a2 2 0 0 1-3.4 0"/></svg>',
+  D:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>',
+  E:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>',
+  F:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="8" r="4"/><path d="M4 22c0-4.4 3.6-8 8-8s8 3.6 8 8"/></svg>'
+};
+
+const ICON_COLORS={A:'var(--blue)',B:'var(--orange)',C:'var(--pink)',D:'var(--purple)',E:'var(--teal)',F:'var(--green)'};
+
+const SECTIONS={
+  A:{name:'CRM行业动态',icon:ICONS.A,color:ICON_COLORS.A},
+  B:{name:'汽车行业动态',icon:ICONS.B,color:ICON_COLORS.B},
+  C:{name:'汽车品牌舆情',icon:ICONS.C,color:ICON_COLORS.C},
+  D:{name:'政策法规速递',icon:ICONS.D,color:ICON_COLORS.D},
+  E:{name:'数字营销',icon:ICONS.E,color:ICON_COLORS.E},
+  F:{name:'消费者购车洞察',icon:ICONS.F,color:ICON_COLORS.F}
+};
+
+const DATA_URL='latest.json';
+const ARCHIVE='archive/';
+
+let activePreset='yesterday';
+let startDate='',endDate='';
+
+/* ── 内嵌数据（默认视图，无需网络请求）── */
+const EMBEDDED_DATA={"date":"2026-07-03","generated_at":"2026-07-04 23:05:00","sections":{"A":{"name":"CRM行业动态","items":[{"title":"2026年CRM系统AI化趋势加速","summary":"2026年主流CRM厂商全面拥抱AI，Salesforce、HubSpot、Zoho均推出AI驱动的销售助手和客户洞察功能，低代码平台与全渠道协同成为标配","url":"https://www.cnblogs.com/saasdianping/p/20302023","source":"SaaS点评","importance_level":"high","importance_score":0.85,"companies":["Salesforce","HubSpot","Zoho","纷享销客"]},{"title":"国内CRM市场持续增长，SCRM赛道火热","summary":"2026年中国CRM SaaS市场规模持续扩大，SCRM成为增长最快赛道，探马SCRM、EC等企业在企微生态中占据领先位置","url":"https://www.toutiao.com/article/7621494921123480116/","source":"今日头条","importance_level":"medium","importance_score":0.68,"companies":["探马SCRM","EC","微伴助手"]},{"title":"纷享销客入选2026年CRM推荐系统TOP5","summary":"纷享销客CRM凭借连接型平台定位和行业化解决方案，入选2026年智能CRM系统推荐TOP5，在制造和零售行业优势明显","url":"https://www.cnblogs.com/saasdianping/p/20302023","source":"SaaS点评","importance_level":"medium","importance_score":0.62,"companies":["纷享销客"]}],"count":3},"B":{"name":"汽车行业动态","items":[{"title":"特斯拉Q2交付48万辆，同比增25%超预期","summary":"特斯拉发布2026年Q2交付报告，全球交付纯电动车480,126辆，同比增长25%，环比增长34%，大幅超出市场预期（406,024辆）","url":"https://m.techweb.com.cn/article/2026-07-03/2977119.shtml","source":"TechWeb","importance_level":"high","importance_score":0.92,"companies":["特斯拉"]},{"title":"吉利汽车6月销量24万辆，连续4个月双增长","summary":"吉利汽车公布6月销量240,799辆，同比增2%，1-6月累计超142万辆创同期新高，领克品牌销量持续增长","url":"https://mp.weixin.qq.com/s?__biz=MjM5MjQ1MjMwNw==&mid=2652174252&idx=2","source":"中国汽车流通协会","importance_level":"high","importance_score":0.88,"companies":["吉利","领克"]},{"title":"比亚迪领涨德国6月进口车市，增幅273.7%","summary":"德国6月新车注册29.6万辆同比增15.7%，比亚迪进口车注册量暴增273.7%，特斯拉增317.6%，中国品牌加速欧洲渗透","url":"https://finance.eastmoney.com/a/202607033793616493.html","source":"东方财富","importance_level":"medium","importance_score":0.72,"companies":["比亚迪","特斯拉"]},{"title":"6月新能源车批发销量151万辆，环比增12%","summary":"乘联会数据，6月全国新能源乘用车厂商批发销量预估达151万辆，同比增长22%，环比增长12%，新能源板块进入复苏通道","url":"https://finance.eastmoney.com/a/202607033793561376.html","source":"东方财富","importance_level":"medium","importance_score":0.75,"companies":[]},{"title":"北汽蓝谷6月销量增速领跑行业开始上量","summary":"北汽蓝谷6月单月销量突破，增速领跑新能源行业，标志着北汽蓝谷进入垂直上量阶段，为下半年市场布局奠定基础","url":"https://finance.eastmoney.com/a/202607033793561376.html","source":"央广网","importance_level":"medium","importance_score":0.58,"companies":["北汽蓝谷"]}],"count":5},"C":{"name":"汽车品牌舆情","items":[{"title":"吉利汽车上半年销量超142万辆创历史新高","summary":"吉利汽车6月销量240,799辆，1-6月累计超142万辆创同期历史新高，海外出口超10万辆再创新纪录，实现连续4个月双增长","url":"https://mp.weixin.qq.com/s?__biz=MjM5MjQ1MjMwNw==&mid=2652174252&idx=2","source":"中国汽车流通协会","importance_level":"high","importance_score":0.88,"sentiment":"positive","companies":["吉利","领克"],"is_our_brand":1},{"title":"蔚来汽车上半年召回量激增681.2%","summary":"车质网发布2026上半年召回报告，自主品牌召回308,431辆同比增681.2%，蔚来因软件故障导致仪表黑屏问题大批召回","url":"https://www.12365auto.com/dcbg/20260703/571227.shtml","source":"车质网","importance_level":"high","importance_score":0.82,"sentiment":"negative","companies":["蔚来"],"is_our_brand":0},{"title":"领克08/09车机OTA升级故障投诉上榜","summary":"2026年新能源车投诉数据显示，领克08/09因车机OTA升级失败、系统长期卡顿、中控黑屏等问题位列315投诉前列","url":"https://post.smzdm.com/p/a036gonz","source":"什么值得买","importance_level":"high","importance_score":0.78,"sentiment":"negative","companies":["领克"],"is_our_brand":1},{"title":"特斯拉Q2交付超预期但股价反应平淡","summary":"特斯拉Q2交付48万辆超预期，但资本市场给出'不信任票'，交付量增长未完全转化为利润增长，投资者担忧毛利率压力","url":"http://k.sina.com.cn/article_2868676035_aafc85c302001rzlw.html","source":"新浪汽车","importance_level":"medium","importance_score":0.64,"sentiment":"negative","companies":["特斯拉"],"is_our_brand":0},{"title":"比亚迪6月德国市场注册量暴增273.7%","summary":"德国联邦汽车交通局数据显示比亚迪6月在德国注册量暴增273.7%，中国新能源汽车在高端市场的品牌认可度持续提升","url":"https://finance.eastmoney.com/a/202607033793616493.html","source":"东方财富","importance_level":"medium","importance_score":0.66,"sentiment":"positive","companies":["比亚迪"],"is_our_brand":0}],"count":5},"D":{"name":"政策法规速递","items":[{"title":"智能网联汽车驾驶辅助系统国标正式发布","summary":"工信部发布《智能网联汽车 组合驾驶辅助系统安全要求》强制性国标(GB 47955-2026)，2027年1月实施，覆盖L2级ADAS功能安全","url":"https://chejiahao.autohome.com.cn/info/25864880","source":"汽车之家","importance_level":"high","importance_score":0.90,"companies":[]},{"title":"自动驾驶系统安全要求等2项国标征求意见","summary":"工信部就《智能网联汽车 自动驾驶系统安全要求》等2项强制性国标公开征求意见，涉及L3级自动驾驶和车载事故紧急呼叫系统","url":"https://www.miit.gov.cn/zwgk/wjgs/art/2026/art_87a73a22fd22496c9b62238651ed98e4.html","source":"工信部官网","importance_level":"high","importance_score":0.88,"companies":[]}],"count":2},"E":{"name":"数字营销","items":[{"title":"2026年企微SCRM市场进入深水区竞争","summary":"企微SCRM从认知普及进入能力比拼阶段，探马SCRM凭借全链路私域运营能力霸榜，AI驱动的自动化营销成为新增长点","url":"https://www.toutiao.com/article/7621494921123480116/","source":"今日头条","importance_level":"medium","importance_score":0.62,"companies":["探马SCRM","微伴助手"]},{"title":"AI重塑私域运营：2026年SCRM工具实测","summary":"大模型驱动的AI销售助手、智能线索评分和自动化跟客功能成为2026年SCRM标配，微伴助手获企微生态最大ISV地位","url":"https://www.sohu.com/a/993345769_122486860","source":"搜狐科技","importance_level":"medium","importance_score":0.58,"companies":["微伴助手"]}],"count":2},"F":{"name":"消费者购车洞察","items":[{"title":"麦肯锡发布2026中国汽车消费者六大趋势","summary":"麦肯锡调研近2500名消费者，总结六大趋势：新能源渗透加速、智能化成购车决策核心、渠道线上化、品牌忠诚度下降、置换需求崛起、Z世代成主力","url":"https://www.mckinsey.com.cn/%e5%85%ad%e5%a4%a7%e6%b6%88%e8%b4%b9%e8%b6%8b%e5%8a%bf%e5%8a%a0%e9%80%9f%e4%b8%ad%e5%9b%bd%e6%b1%bd%e8%bd%a6%e5%b8%82%e5%9c%ba%e8%bf%9b%e5%8c%96%e8%bf%9b%e7%a8%8b/","source":"麦肯锡","importance_level":"high","importance_score":0.86,"companies":[]},{"title":"Z世代汽车消费：颜值和操控成核心驱动力","summary":"J.D. Power研究显示，95后购车决策中高颜值、强操控和先进配置成为'最强驱动力'，短视频和社区口碑是购车信息主要获取渠道","url":"https://news.qq.com/rain/a/20250520A07XX100","source":"腾讯新闻","importance_level":"medium","importance_score":0.65,"companies":[]}],"count":2}},"total_articles":19};
+
+/* ── Init ── */
+document.addEventListener('DOMContentLoaded',()=>{
+  applyPreset('yesterday');
+  loadData();
+
+  document.querySelectorAll('#presets button[data-preset]').forEach(btn=>{
+    btn.addEventListener('click',function(){
+      const p=this.dataset.preset;
+      applyPreset(p);
+      loadData();
+    });
+  });
+
+  document.getElementById('searchInput').addEventListener('keydown',e=>{
+    if(e.key==='Enter') doSearch();
+  });
+});
+
+/* ── Date logic ── */
+const ds=d=>d.toISOString().split('T')[0];
+const today=()=>new Date();
+const yesterday=()=>{const d=today();d.setDate(d.getDate()-1);return d;};
+
+function applyPreset(preset){
+  activePreset=preset;
+
+  document.querySelectorAll('#presets button[data-preset]').forEach(b=>b.classList.remove('active'));
+  document.querySelector(`#presets button[data-preset="${preset}"]`).classList.add('active');
+
+  const cr=document.getElementById('customRange');
+  const now=today(),y=yesterday(),dsy=ds(y);
+  let displayText='';
+
+  switch(preset){
+    case'yesterday':
+      startDate=endDate=dsy;
+      displayText=dsy;
+      cr.classList.remove('show');
+      document.getElementById('headerSub').textContent='昨日动态';
+      break;
+    case'this_week':
+      const mon=new Date(now);mon.setDate(now.getDate()-(now.getDay()||7)+1);
+      startDate=ds(mon);endDate=ds(y);
+      displayText=`${startDate} ~ ${endDate}`;
+      cr.classList.remove('show');
+      document.getElementById('headerSub').textContent='本周动态';
+      break;
+    case'last_week':
+      const lastMon=new Date(now);lastMon.setDate(now.getDate()-(now.getDay()||7)-6);
+      const lastSun=new Date(lastMon);lastSun.setDate(lastSun.getDate()+6);
+      startDate=ds(lastMon);endDate=ds(lastSun);
+      displayText=`${startDate} ~ ${endDate}`;
+      cr.classList.remove('show');
+      document.getElementById('headerSub').textContent='上周动态';
+      break;
+    case'this_month':
+      startDate=ds(new Date(now.getFullYear(),now.getMonth(),1));
+      endDate=ds(y);
+      displayText=`${startDate} ~ ${endDate}`;
+      cr.classList.remove('show');
+      document.getElementById('headerSub').textContent='本月动态';
+      break;
+    case'last_month':
+      startDate=ds(new Date(now.getFullYear(),now.getMonth()-1,1));
+      endDate=ds(new Date(now.getFullYear(),now.getMonth(),0));
+      displayText=`${startDate} ~ ${endDate}`;
+      cr.classList.remove('show');
+      document.getElementById('headerSub').textContent='上月动态';
+      break;
+    case'this_quarter':
+      const tq=Math.floor(now.getMonth()/3)*3;
+      startDate=ds(new Date(now.getFullYear(),tq,1));
+      endDate=ds(y);
+      displayText=`${startDate} ~ ${endDate}`;
+      cr.classList.remove('show');
+      document.getElementById('headerSub').textContent='本季度动态';
+      break;
+    case'last_quarter':
+      const lq=Math.floor(now.getMonth()/3)*3-3;
+      startDate=ds(new Date(now.getFullYear(),lq,1));
+      endDate=ds(new Date(now.getFullYear(),lq+3,0));
+      displayText=`${startDate} ~ ${endDate}`;
+      cr.classList.remove('show');
+      document.getElementById('headerSub').textContent='上季度动态';
+      break;
+    case'this_year':
+      startDate=ds(new Date(now.getFullYear(),0,1));
+      endDate=ds(y);
+      displayText=`${startDate} ~ ${endDate}`;
+      cr.classList.remove('show');
+      document.getElementById('headerSub').textContent='本年度动态';
+      break;
+    case'last_year':
+      startDate=ds(new Date(now.getFullYear()-1,0,1));
+      endDate=ds(new Date(now.getFullYear()-1,11,31));
+      displayText=`${startDate} ~ ${endDate}`;
+      cr.classList.remove('show');
+      document.getElementById('headerSub').textContent='上年度动态';
+      break;
+    case'custom':
+      cr.classList.add('show');
+      document.getElementById('headerSub').textContent='自定义时间';
+      displayText='自定义范围';
+      const dsEl=document.getElementById('dateStart');
+      const deEl=document.getElementById('dateEnd');
+      if(!dsEl.value) dsEl.value=dsy;
+      if(!deEl.value) deEl.value=dsy;
+      startDate=dsEl.value;endDate=deEl.value;
+
+      dsEl.onchange=()=>{startDate=dsEl.value;endDate=deEl.value;loadData()};
+      deEl.onchange=()=>{startDate=dsEl.value;endDate=deEl.value;loadData()};
+      break;
+  }
+
+  document.getElementById('dateRangeDisplay').textContent=displayText;
+
+  if(preset!=='custom'){
+    document.getElementById('dateStart').value=startDate;
+    document.getElementById('dateEnd').value=endDate;
+  }
+}
+
+function resetAll(){applyPreset('yesterday');loadData()}
+function doSearch(){loadData()}
+
+/* ── Data ── */
+async function loadData(){
+  const searchTerm=document.getElementById('searchInput').value.trim().toLowerCase();
+  let brief;
+  const isMulti=startDate!==endDate;
+
+  // 默认视图（昨日）直接使用内嵌数据，无需网络请求
+  if(!isMulti && startDate===yesterdayStr()){
+    brief = JSON.parse(JSON.stringify(EMBEDDED_DATA));
+    if(searchTerm) brief=filterBrief(brief,searchTerm);
+    render(brief);
+    return;
+  }
+
+  try{
+    if(!isMulti){
+      const resp=await fetch(`${ARCHIVE}${startDate}.json`);
+      if(!resp.ok) throw new Error('not found');
+      brief=await resp.json();
+    }else{
+      brief=await aggregate(startDate,endDate);
+    }
+  }catch(e){
+    // 最终兜底：使用内嵌数据
+    brief = JSON.parse(JSON.stringify(EMBEDDED_DATA));
+  }
+
+  if(searchTerm) brief=filterBrief(brief,searchTerm);
+  render(brief);
+}
+
+function yesterdayStr(){
+  const d=new Date();d.setDate(d.getDate()-1);
+  return d.toISOString().split('T')[0];
+}
+
+async function aggregate(start,end){
+  const sections={A:{name:'CRM行业动态',items:[]},B:{name:'汽车行业动态',items:[]},C:{name:'汽车品牌舆情',items:[]},D:{name:'政策法规速递',items:[]},E:{name:'数字营销',items:[]},F:{name:'消费者购车洞察',items:[]}};
+  let total=0,days=0;
+  const s=new Date(start),e=new Date(end);
+  for(let d=new Date(s);d<=e;d.setDate(d.getDate()+1)){
+    const dateStr=ds(d);
+    try{
+      const resp=await fetch(`${ARCHIVE}${dateStr}.json`);
+      if(!resp.ok) continue;
+      const daily=await resp.json();days++;
+      for(const sec of['A','B','C','D','E','F']){
+        const items=daily.sections?.[sec]?.items||[];
+        items.forEach(i=>{i._date=dateStr;});
+        sections[sec].items.push(...items);
+      }
+    }catch(_){}
+  }
+  for(const sec of['A','B','C','D','E','F']){
+    sections[sec].items.sort((a,b)=>b._date?.localeCompare(a._date||'')||(b.importance_score||0)-(a.importance_score||0));
+    total+=sections[sec].items.length;
+  }
+  return{date:`${start} ~ ${end}`,sections,total_articles:total,days_covered:days};
+}
+
+function filterBrief(brief,term){
+  const f=JSON.parse(JSON.stringify(brief));
+  for(const sec of['A','B','C','D','E','F']){
+    f.sections[sec].items=f.sections[sec].items.filter(i=>
+      (i.title||'').toLowerCase().includes(term)||(i.summary||'').toLowerCase().includes(term)
+    );
+    f.sections[sec].count=f.sections[sec].items.length;
+  }
+  f.total_articles=['A','B','C','D','E','F'].reduce((s,sec)=>s+f.sections[sec].items.length,0);
+  return f;
+}
+
+/* ── Render ── */
+function render(brief){
+  let html='';
+  for(const sec of['A','B','C','D','E','F']){
+    const cfg=SECTIONS[sec];
+    const items=brief.sections?.[sec]?.items||[];
+    html+=`<div class="section">
+      <div class="section-head" onclick="toggleSection(this)">
+        <span class="ico" style="color:${cfg.color}">${cfg.icon}</span>
+        <span class="label">${cfg.name}</span>
+        <span class="chevron">▼</span>
+      </div>
+      <div class="section-body">`;
+    if(items.length===0){
+      html+=`<div class="empty">暂无相关动态</div>`;
+    }else if(sec==='C'){
+      html+=renderC(items);
+    }else{
+      items.forEach(i=>html+=renderItem(i));
+    }
+    html+=`</div></div>`;
+  }
+  document.getElementById('content').innerHTML=html;
+}
+
+function renderC(items){
+  let h='';
+  const our=items.filter(i=>i.is_our_brand);
+  const comp=items.filter(i=>!i.is_our_brand);
+
+  if(our.length>0){
+    h+='<div class="sub-label">本品舆情 · 领克 / 吉利 / 极氪</div>';
+    const p=our.filter(i=>i.sentiment==='positive');
+    const n=our.filter(i=>i.sentiment==='negative');
+    const o=our.filter(i=>!['positive','negative'].includes(i.sentiment));
+    if(p.length>0){h+='<div class="sent-badge sent-pos"><span class="sent-dot sdot-pos"></span>正面</div>';p.forEach(i=>h+=renderItem(i));}
+    if(n.length>0){h+='<div class="sent-badge sent-neg"><span class="sent-dot sdot-neg"></span>负面</div>';n.forEach(i=>h+=renderItem(i));}
+    o.forEach(i=>h+=renderItem(i));
+  }
+  if(comp.length>0){
+    h+='<div class="sub-label">竞品舆情</div>';
+    const p=comp.filter(i=>i.sentiment==='positive');
+    const n=comp.filter(i=>i.sentiment==='negative');
+    const o=comp.filter(i=>!['positive','negative'].includes(i.sentiment));
+    if(p.length>0){h+='<div class="sent-badge sent-pos"><span class="sent-dot sdot-pos"></span>正面</div>';p.forEach(i=>h+=renderItem(i));}
+    if(n.length>0){h+='<div class="sent-badge sent-neg"><span class="sent-dot sdot-neg"></span>负面</div>';n.forEach(i=>h+=renderItem(i));}
+    o.forEach(i=>h+=renderItem(i));
+  }
+  return h;
+}
+
+function renderItem(item){
+  const tags=[];
+  if(item.importance_level==='high') tags.push('<span class="tag tag-hi">高优</span>');
+  if(item.sentiment==='positive') tags.push('<span class="tag tag-pos">正面</span>');
+  if(item.sentiment==='negative') tags.push('<span class="tag tag-neg">负面</span>');
+  if(item.is_our_brand) tags.push('<span class="tag tag-our">本品</span>');
+  if(item._date) tags.push(`<span class="tag tag-date">${item._date}</span>`);
+  if(item.source) tags.push(`<span class="tag tag-src">${item.source}</span>`);
+  (item.companies||[]).forEach(c=>tags.push(`<span class="tag tag-cp">${c}</span>`));
+
+  return`<div class="item">
+    <div class="item-row1">
+      ${tags.slice(0,2).join('')}
+      <a class="item-title" href="${item.url||'#'}" target="_blank" rel="noopener">${item.title||'(无标题)'}</a>
+    </div>
+    ${item.summary?`<div class="item-summary">${item.summary}</div>`:''}
+    <div class="item-row2">
+      ${tags.slice(2).join('')}
+      <a class="item-url" href="${item.url||'#'}" target="_blank" rel="noopener">查看原文 →</a>
+    </div>
+  </div>`;
+}
+
+function toggleSection(head){
+  const body=head.nextElementSibling;
+  const chev=head.querySelector('.chevron');
+  if(body.style.display==='none'){
+    body.style.display='block';
+    chev.style.transform='rotate(0deg)';
+  }else{
+    body.style.display='none';
+    chev.style.transform='rotate(-90deg)';
+  }
+}
+</script>
+</body>
+</html>
