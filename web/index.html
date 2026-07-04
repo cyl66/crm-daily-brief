@@ -3,6 +3,9 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1.0">
+<meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+<meta http-equiv="Pragma" content="no-cache">
+<meta http-equiv="Expires" content="0">
 <title>行业资讯</title>
 <style>
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
@@ -317,11 +320,11 @@ async function loadData(){
   const isMulti=startDate!==endDate;
 
   if(!isMulti){
-    const resp=await fetch(`${ARCHIVE}${startDate}.json`);
+    const resp=await fetch(`${ARCHIVE}${startDate}.json?cb=${Date.now()}`);
     if(resp.ok){
       brief=await resp.json();
     }else{
-      const r2=await fetch(DATA_URL);
+      const r2=await fetch(DATA_URL+`?cb=${Date.now()}`);
       if(r2.ok) brief=await r2.json();
       else{brief=null}
     }
@@ -343,7 +346,7 @@ async function aggregate(s,e){
   const st=new Date(s+'T00:00:00'),et=new Date(e+'T00:00:00');
   for(let d=new Date(st);d<=et;d.setDate(d.getDate()+1)){
     const ds=fmt(d);
-    const resp=await fetch(`${ARCHIVE}${ds}.json`);
+    const resp=await fetch(`${ARCHIVE}${ds}.json?cb=${Date.now()}`);
     if(!resp.ok) continue;
     const daily=await resp.json();days++;
     for(const k of['A','B','C','D','E','F']){
