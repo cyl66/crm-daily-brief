@@ -502,27 +502,18 @@ function render(brief){
 
 function renderC(items){
   let h='';
-  const our=items.filter(i=>i.is_our_brand);
-  const comp=items.filter(i=>!i.is_our_brand);
+  const our=items.filter(i=>i.is_our_brand && i.sentiment==='negative');
+  const comp=items.filter(i=>!i.is_our_brand && i.sentiment==='negative');
 
   if(our.length>0){
     h+='<div class="sub-label">本品舆情 · 领克 / 吉利 / 极氪</div>';
-    const p=our.filter(i=>i.sentiment==='positive');
-    const n=our.filter(i=>i.sentiment==='negative');
-    const o=our.filter(i=>!['positive','negative'].includes(i.sentiment));
-    if(p.length>0){h+='<div class="sent-badge sent-pos"><span class="sent-dot sdot-pos"></span>正面</div>';p.forEach(i=>h+=renderItem(i));}
-    if(n.length>0){h+='<div class="sent-badge sent-neg"><span class="sent-dot sdot-neg"></span>负面</div>';n.forEach(i=>h+=renderItem(i));}
-    o.forEach(i=>h+=renderItem(i));
+    our.forEach(i=>h+=renderItem(i));
   }
   if(comp.length>0){
     h+='<div class="sub-label">竞品舆情</div>';
-    const p=comp.filter(i=>i.sentiment==='positive');
-    const n=comp.filter(i=>i.sentiment==='negative');
-    const o=comp.filter(i=>!['positive','negative'].includes(i.sentiment));
-    if(p.length>0){h+='<div class="sent-badge sent-pos"><span class="sent-dot sdot-pos"></span>正面</div>';p.forEach(i=>h+=renderItem(i));}
-    if(n.length>0){h+='<div class="sent-badge sent-neg"><span class="sent-dot sdot-neg"></span>负面</div>';n.forEach(i=>h+=renderItem(i));}
-    o.forEach(i=>h+=renderItem(i));
+    comp.forEach(i=>h+=renderItem(i));
   }
+  if(!our.length&&!comp.length) h+='<div class="empty">暂无负面舆情</div>';
   return h;
 }
 
