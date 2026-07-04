@@ -38,7 +38,7 @@ body{
   backdrop-filter:blur(28px) saturate(180%);
   -webkit-backdrop-filter:blur(28px) saturate(180%);
   border:1px solid var(--border);
-  border-radius:var(--r);padding:12px 16px;margin-bottom:28px;
+  border-radius:var(--r);padding:14px 16px 16px;margin-bottom:28px;
   box-shadow:var(--shadow-sm);
 }
 
@@ -56,26 +56,61 @@ body{
 .presets button.active{
   background:var(--text);color:#fff;font-weight:600;
 }
-.presets .preset-label{
-  font-size:11px;font-weight:600;color:var(--text3);
-  text-transform:uppercase;letter-spacing:.5px;
-  margin-right:2px;
-}
 
-/* Date range picker - single date input for start, auto-calculate end */
-.date-picker-single{
+/* Date range trigger button */
+.date-range-trigger{
+  margin-left:auto;
+  display:inline-flex;align-items:center;gap:8px;
+  padding:6px 12px;border:1px solid var(--border);border-radius:10px;
+  font-size:13px;font-weight:500;color:var(--text);
+  background:var(--surface);cursor:pointer;transition:var(--t);
+  font-family:inherit;white-space:nowrap;
+}
+.date-range-trigger:hover{border-color:var(--blue);background:var(--blue-bg);color:var(--blue)}
+.date-range-trigger.active{border-color:var(--blue);background:var(--blue-bg);color:var(--blue)}
+.date-range-trigger .ico{
+  width:14px;height:14px;display:flex;align-items:center;justify-content:center;
+}
+.date-range-trigger .ico svg{width:100%;height:100%}
+
+/* Date range panel */
+.date-range-panel{
+  display:none;
+  margin-top:12px;padding:14px;
+  background:var(--surface);border:1px solid var(--border);
+  border-radius:12px;box-shadow:var(--shadow-md);
+}
+.date-range-panel.open{display:block;animation:panelIn .2s ease}
+@keyframes panelIn{from{opacity:0;transform:translateY(-6px)}to{opacity:1;transform:translateY(0)}}
+
+.drp-title{
+  font-size:13px;font-weight:600;color:var(--text);margin-bottom:12px;
+}
+.drp-row{
+  display:flex;gap:10px;align-items:center;flex-wrap:wrap;
+}
+.drp-row label{
+  font-size:12px;color:var(--text2);font-weight:500;
+}
+.drp-row input[type=date]{
   border:1px solid var(--border);border-radius:8px;
-  padding:6px 10px;font-size:12px;font-family:inherit;
-  background:var(--surface);color:var(--text);outline:none;
-  margin-left:auto;flex-shrink:0;
+  padding:7px 10px;font-size:13px;font-family:inherit;
+  background:var(--bg);color:var(--text);outline:none;
   transition:border-color var(--t);
 }
-.date-picker-single:focus{border-color:var(--blue)}
+.drp-row input[type=date]:focus{border-color:var(--blue)}
+.drp-row .btn-go{
+  padding:7px 18px;border:none;border-radius:var(--rp);
+  font-size:13px;font-weight:600;cursor:pointer;
+  font-family:inherit;transition:var(--t);
+  background:var(--blue);color:#fff;margin-left:auto;
+}
+.drp-row .btn-go:hover{opacity:.88}
 
 /* Search row */
 .search-row{
-  display:flex;gap:8px;align-items:center;margin-top:10px;
-  padding-top:10px;border-top:1px solid var(--border);
+  display:flex;gap:8px;align-items:center;margin-top:12px;
+  padding-top:12px;border-top:1px solid var(--border);
 }
 .search-wrap{
   flex:1;position:relative;display:flex;align-items:center;
@@ -101,6 +136,15 @@ body{
 }
 .btn-go{background:var(--blue);color:#fff}
 .btn-go:hover{opacity:.88}
+
+@media(max-width:640px){
+  .date-range-trigger{margin-left:0;width:100%;justify-content:center;margin-top:4px}
+  .presets{gap:4px}
+  .presets button{padding:5px 10px;font-size:11px}
+  .drp-row{gap:8px}
+  .drp-row input[type=date]{flex:1;min-width:120px}
+  .drp-row .btn-go{width:100%;margin-left:0}
+}
 
 /* ── Tab Navigation ── */
 .tab-nav{
@@ -179,7 +223,6 @@ body{
   box-shadow:0 2px 12px rgba(0,0,0,.04);
 }
 @keyframes in{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}
-.item:last-child{border-bottom:1px solid var(--border)}
 
 .item-row1{display:flex;align-items:flex-start;gap:8px;margin-bottom:4px}
 .item-title{
@@ -237,8 +280,6 @@ body{
 @media(max-width:640px){
   .page{padding:28px 14px 60px}
   .hero h1{font-size:26px}
-  .presets{gap:4px}
-  .presets button{padding:5px 10px;font-size:11px}
   .section-head{padding:14px 16px}
   .section-body{padding:0 14px 14px;gap:8px}
   .item{padding:12px 14px;border-radius:10px}
@@ -267,7 +308,21 @@ body{
       <button data-preset="last_quarter">上季</button>
       <button data-preset="this_year">本年</button>
       <button data-preset="last_year">上年</button>
-      <input type="date" id="dateRangePicker" class="date-picker-single">
+      <button id="rangeTrigger" class="date-range-trigger">
+        <span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg></span>
+        <span id="rangeLabel">选择时间段</span>
+      </button>
+    </div>
+
+    <div class="date-range-panel" id="rangePanel">
+      <div class="drp-title">自定义时间段</div>
+      <div class="drp-row">
+        <label for="startDate">开始</label>
+        <input type="date" id="startDate">
+        <label for="endDate">结束</label>
+        <input type="date" id="endDate">
+        <button class="btn-go" onclick="applyCustomRange()">应用</button>
+      </div>
     </div>
 
     <div class="search-row">
@@ -339,34 +394,41 @@ const ARCHIVE='archive/';
 
 let activePreset='yesterday';
 let startDate='',endDate='';
+let isCustomRange=false;
+
+/* ── Helpers ── */
+const pad=n=>String(n).padStart(2,'0');
+const formatDate=d=>`${d.getFullYear()}-${pad(d.getMonth()+1)}-${pad(d.getDate())}`;
+const today=()=>new Date();
+const yesterday=()=>{const d=today();d.setDate(d.getDate()-1);return d;};
+const ds=d=>formatDate(d);
 
 /* ── Init ── */
 document.addEventListener('DOMContentLoaded',()=>{
-  // 实时计算昨日日期
-  const now=new Date();
-  const yest=new Date(now);yest.setDate(yest.getDate()-1);
-  const yestStr=yest.toISOString().split('T')[0];
-
-  // 设置日期选择器默认值=昨日
-  const dp=document.getElementById('dateRangePicker');
-  dp.value=yestStr;
-  startDate=endDate=yestStr;
-
-  // 日期选择器变更 → 自定义模式
-  dp.addEventListener('change',function(){
-    startDate=endDate=this.value;
-    document.querySelectorAll('#presets button[data-preset]').forEach(b=>b.classList.remove('active'));
-    document.getElementById('headerSub').textContent='自定义时间';
-    loadData();
-  });
+  applyPreset('yesterday');
+  syncRangeInputs();
+  updateRangeLabel();
 
   // 预设按钮
   document.querySelectorAll('#presets button[data-preset]').forEach(btn=>{
     btn.addEventListener('click',function(){
+      closeRangePanel();
       applyPreset(this.dataset.preset);
-      dp.value=startDate;  // 同步日期选择器
       loadData();
     });
+  });
+
+  // 自定义时间段触发按钮
+  document.getElementById('rangeTrigger').addEventListener('click',()=>{
+    toggleRangePanel();
+  });
+
+  // 时间段输入框变化
+  document.getElementById('startDate').addEventListener('change',()=>{
+    enforceStartBeforeEnd();
+  });
+  document.getElementById('endDate').addEventListener('change',()=>{
+    enforceStartBeforeEnd();
   });
 
   document.getElementById('searchInput').addEventListener('keydown',e=>{
@@ -388,72 +450,102 @@ function clearSearch(){
   loadData();
 }
 
-/* ── Tab Scroll Sync ── */
-function setupTabNav(){
-  const tabs=document.querySelectorAll('#tabNav button[data-target]');
-  const sections=Array.from(tabs).map(t=>document.getElementById('section-'+t.dataset.target)).filter(Boolean);
-
-  // Click to scroll
-  tabs.forEach(btn=>{
-    btn.addEventListener('click',()=>{
-      const el=document.getElementById('section-'+btn.dataset.target);
-      if(el) el.scrollIntoView({behavior:'smooth',block:'start'});
-    });
-  });
-
-  // Scroll to sync active tab
-  const observer=new IntersectionObserver(entries=>{
-    entries.forEach(e=>{
-      if(e.isIntersecting){
-        tabs.forEach(b=>b.classList.remove('active'));
-        document.querySelector('#tabNav button[data-target=\"'+e.target.id.replace('section-','')+'\"]')?.classList.add('active');
-      }
-    });
-  },{rootMargin:'-60px 0px -70% 0px',threshold:0});
-
-  sections.forEach(s=>observer.observe(s));
+/* ── Range panel ── */
+function toggleRangePanel(){
+  const p=document.getElementById('rangePanel');
+  const t=document.getElementById('rangeTrigger');
+  if(p.classList.contains('open')){
+    closeRangePanel();
+  }else{
+    p.classList.add('open');
+    p.style.display='block';
+    t.classList.add('active');
+  }
+}
+function closeRangePanel(){
+  const p=document.getElementById('rangePanel');
+  const t=document.getElementById('rangeTrigger');
+  p.classList.remove('open');
+  p.style.display='none';
+  t.classList.remove('active');
+}
+function syncRangeInputs(){
+  document.getElementById('startDate').value=startDate;
+  document.getElementById('endDate').value=endDate;
+}
+function enforceStartBeforeEnd(){
+  const s=document.getElementById('startDate').value;
+  const e=document.getElementById('endDate').value;
+  if(s&&e&&s>e){
+    document.getElementById('endDate').value=s;
+  }
+}
+function updateRangeLabel(){
+  const label=document.getElementById('rangeLabel');
+  if(startDate&&endDate){
+    label.textContent=`${startDate} 至 ${endDate}`;
+  }else{
+    label.textContent='选择时间段';
+  }
+}
+function applyCustomRange(){
+  const s=document.getElementById('startDate').value;
+  const e=document.getElementById('endDate').value;
+  if(!s||!e){
+    alert('请选择开始和结束日期');
+    return;
+  }
+  if(s>e){
+    alert('开始日期不能晚于结束日期');
+    return;
+  }
+  activePreset='';
+  isCustomRange=true;
+  startDate=s;endDate=e;
+  document.querySelectorAll('#presets button[data-preset]').forEach(b=>b.classList.remove('active'));
+  document.getElementById('headerSub').textContent=`${startDate} 至 ${endDate}`;
+  updateRangeLabel();
+  closeRangePanel();
+  loadData();
 }
 
-// Hook into render to re-setup after content changes
-const _origRender=render;
-render=function(brief){
-  _origRender(brief);
-  setupTabNav();
-};
-
 /* ── Date logic ── */
-const ds=d=>d.toISOString().split('T')[0];
-const today=()=>new Date();
-const yesterday=()=>{const d=today();d.setDate(d.getDate()-1);return d;};
-
 function applyPreset(preset){
   activePreset=preset;
+  isCustomRange=false;
 
   document.querySelectorAll('#presets button[data-preset]').forEach(b=>b.classList.remove('active'));
   const btn=document.querySelector(`#presets button[data-preset="${preset}"]`);
   if(btn) btn.classList.add('active');
 
-  const now=today(),y=yesterday(),dsy=ds(y);
+  const now=today();
+  const y=yesterday();
+  const yestStr=ds(y);
 
   switch(preset){
     case'yesterday':
-      startDate=endDate=dsy;
+      startDate=endDate=yestStr;
       document.getElementById('headerSub').textContent='昨日动态';
       break;
-    case'this_week':
-      const mon=new Date(now);mon.setDate(now.getDate()-(now.getDay()||7)+1);
-      startDate=ds(mon);endDate=ds(y);
+    case'this_week':{
+      const mon=new Date(now);
+      mon.setDate(now.getDate()-(now.getDay()||7)+1);
+      startDate=ds(mon);endDate=yestStr;
       document.getElementById('headerSub').textContent='本周动态';
       break;
-    case'last_week':
-      const lastMon=new Date(now);lastMon.setDate(now.getDate()-(now.getDay()||7)-6);
-      const lastSun=new Date(lastMon);lastSun.setDate(lastSun.getDate()+6);
+    }
+    case'last_week':{
+      const lastMon=new Date(now);
+      lastMon.setDate(now.getDate()-(now.getDay()||7)-6);
+      const lastSun=new Date(lastMon);
+      lastSun.setDate(lastSun.getDate()+6);
       startDate=ds(lastMon);endDate=ds(lastSun);
       document.getElementById('headerSub').textContent='上周动态';
       break;
+    }
     case'this_month':
       startDate=ds(new Date(now.getFullYear(),now.getMonth(),1));
-      endDate=ds(y);
+      endDate=yestStr;
       document.getElementById('headerSub').textContent='本月动态';
       break;
     case'last_month':
@@ -461,21 +553,25 @@ function applyPreset(preset){
       endDate=ds(new Date(now.getFullYear(),now.getMonth(),0));
       document.getElementById('headerSub').textContent='上月动态';
       break;
-    case'this_quarter':
+    case'this_quarter':{
       const tq=Math.floor(now.getMonth()/3)*3;
       startDate=ds(new Date(now.getFullYear(),tq,1));
-      endDate=ds(y);
+      endDate=yestStr;
       document.getElementById('headerSub').textContent='本季度动态';
       break;
-    case'last_quarter':
+    }
+    case'last_quarter':{
       const lq=Math.floor(now.getMonth()/3)*3-3;
-      startDate=ds(new Date(now.getFullYear(),lq,1));
-      endDate=ds(new Date(now.getFullYear(),lq+3,0));
+      const year=now.getFullYear()+Math.floor(lq/12);
+      const month=((lq%12)+12)%12;
+      startDate=ds(new Date(year,month,1));
+      endDate=ds(new Date(year,month+3,0));
       document.getElementById('headerSub').textContent='上季度动态';
       break;
+    }
     case'this_year':
       startDate=ds(new Date(now.getFullYear(),0,1));
-      endDate=ds(y);
+      endDate=yestStr;
       document.getElementById('headerSub').textContent='本年度动态';
       break;
     case'last_year':
@@ -484,10 +580,42 @@ function applyPreset(preset){
       document.getElementById('headerSub').textContent='上年度动态';
       break;
   }
+  syncRangeInputs();
+  updateRangeLabel();
 }
 
 function resetAll(){applyPreset('yesterday');loadData()}
 function doSearch(){loadData()}
+
+/* ── Tab Scroll Sync ── */
+function setupTabNav(){
+  const tabs=document.querySelectorAll('#tabNav button[data-target]');
+  const sections=Array.from(tabs).map(t=>document.getElementById('section-'+t.dataset.target)).filter(Boolean);
+
+  tabs.forEach(btn=>{
+    btn.addEventListener('click',()=>{
+      const el=document.getElementById('section-'+btn.dataset.target);
+      if(el) el.scrollIntoView({behavior:'smooth',block:'start'});
+    });
+  });
+
+  const observer=new IntersectionObserver(entries=>{
+    entries.forEach(e=>{
+      if(e.isIntersecting){
+        tabs.forEach(b=>b.classList.remove('active'));
+        document.querySelector('#tabNav button[data-target="'+e.target.id.replace('section-','')+'"]')?.classList.add('active');
+      }
+    });
+  },{rootMargin:'-60px 0px -70% 0px',threshold:0});
+
+  sections.forEach(s=>observer.observe(s));
+}
+
+const _origRender=render;
+render=function(brief){
+  _origRender(brief);
+  setupTabNav();
+};
 
 /* ── Data ── */
 async function loadData(){
@@ -504,7 +632,6 @@ async function loadData(){
       brief=await aggregate(startDate,endDate);
     }
   }catch(e){
-    // 兜底：尝试 latest.json
     try{
       const resp=await fetch(DATA_URL);
       if(!resp.ok) throw new Error('fallback failed');
@@ -517,11 +644,6 @@ async function loadData(){
 
   if(searchTerm) brief=filterBrief(brief,searchTerm);
   render(brief);
-}
-
-function yesterdayStr(){
-  const d=new Date();d.setDate(d.getDate()-1);
-  return d.toISOString().split('T')[0];
 }
 
 async function aggregate(start,end){
@@ -609,13 +731,11 @@ function renderItem(item){
   if(item.is_our_brand) tags.push('<span class="tag tag-our">本品</span>');
   (item.companies||[]).forEach(c=>tags.push(`<span class="tag tag-cp">${c}</span>`));
 
-  // Source + date combined in special format
   let srcInfo='';
   if(item.source||item._date){
     srcInfo=`<span class="item-source">${item.source||''}${item.source&&item._date?' · ':''}${item._date||''}</span>`;
   }
 
-  // Cap summary at 100 chars
   let summary='';
   if(item.summary){
     summary=item.summary.length>100?item.summary.slice(0,97)+'...':item.summary;
@@ -636,7 +756,7 @@ function renderItem(item){
 }
 
 function validateUrl(url){
-  if(!url||url==='#') return true; // allow placeholder
+  if(!url||url==='#') return true;
   try{
     const u=new URL(url);
     return u.protocol==='http:'||u.protocol==='https:';
