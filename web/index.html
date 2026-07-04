@@ -402,7 +402,8 @@ function renderItem(item){
   if(item.is_our_brand) tags.push('<span class="tag tag-our">本品</span>');
   (item.companies||[]).forEach(c=>tags.push(`<span class="tag tag-cp">${c}</span>`));
   let src='';
-  if(item.source||item._date) src=`<span class="item-source">${item.source||''}${item.source&&item._date?' · ':''}${item._date||''}</span>`;
+  const dt=item.published_at||item._date||'';
+  if(item.source||dt) src=`<span class="item-source">${item.source||''}${item.source&&dt?' · ':''}${dt||''}</span>`;
   let sum='';
   if(item.summary) sum=item.summary.length>100?item.summary.slice(0,97)+'...':item.summary;
   const url=item.url||'#';
