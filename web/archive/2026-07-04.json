@@ -1,55 +1,45 @@
 {
   "date": "2026-07-04",
-  "generated_at": "2026-07-05 01:55:00",
+  "generated_at": "2026-07-05 02:10:00",
   "sections": {
     "A": {
       "name": "CRM行业动态",
       "items": [
         {
-          "title": "华为鸿蒙5.1.3全量推送，新增AI通话实时翻译与智慧出行功能",
-          "summary": "华为7月4日完成鸿蒙5.1.3版本全量推送，新增AI通话实时翻译、智慧出行多设备接力功能，覆盖手机、平板、车机全终端协同，CRM数字化生态进一步完善",
-          "url": "https://zhuanlan.zhihu.com/p/2056664221774090369",
-          "source": "知乎日报",
-          "published_at": "2026-07-04",
+          "title": "2026企业微信SCRM系统实测榜单：全链路能力与落地效果成竞争核心",
+          "summary": "企业微信SCRM市场渗透率突破85%，赛道从功能堆砌转向综合实力比拼，超85%企业因选型不当导致工具闲置，合规资质与AI智能化成为关键差异化指标",
+          "url": "https://www.cnblogs.com/1689-20260616/p/20481939",
+          "source": "博客园",
+          "published_at": "2026-06-12",
+          "importance_level": "medium",
+          "importance_score": 0.72,
+          "companies": [
+            "企业微信"
+          ]
+        },
+        {
+          "title": "2026企业微信SCRM全维度体验报告：255亿市场规模，62%企业选型失败",
+          "summary": "IT之家发布企微SCRM全维度评测，国内市场规模突破255亿元，超85%企业已纳入私域运营核心布局，但62%企业因选型不当导致工具闲置",
+          "url": "https://www.ithome.com/0/958/867.htm",
+          "source": "IT之家",
+          "published_at": "2026-06-20",
+          "importance_level": "medium",
+          "importance_score": 0.68,
+          "companies": [
+            "企业微信"
+          ]
+        },
+        {
+          "title": "企业微信SCRM最新实测榜单发布：合规优先与全链路功能成评选标准",
+          "summary": "搜狐发布2026企微SCRM最新实测榜单，合规资质、全链路功能完整性、AI智能化程度、多系统数据打通能力成为私域运营效率与增长天花板的决定因素",
+          "url": "https://www.sohu.com/a/1016219034_121097634",
+          "source": "搜狐",
+          "published_at": "2026-04-29",
           "importance_level": "medium",
           "importance_score": 0.65,
           "companies": [
-            "华为"
+            "企业微信"
           ]
-        },
-        {
-          "title": "微信支付推出暑期小微商户手续费减免，单笔100元以下交易免手续费",
-          "summary": "微信支付7月4日推出暑期小微商户手续费减免活动，线下餐饮、零售类商户单笔100元以下交易免手续费，活动持续至9月底，利好中小企业数字化经营",
-          "url": "https://zhuanlan.zhihu.com/p/2056664221774090369",
-          "source": "知乎日报",
-          "published_at": "2026-07-04",
-          "importance_level": "medium",
-          "importance_score": 0.6,
-          "companies": [
-            "腾讯"
-          ]
-        },
-        {
-          "title": "淘宝上线暑期AI穿搭助手，输入场景自动搭配服饰",
-          "summary": "淘宝7月4日上线AI穿搭助手功能，输入出行场景即可自动搭配服饰并联动商品一键下单，面向所有用户免费开放，AI+电商应用加速落地",
-          "url": "https://zhuanlan.zhihu.com/p/2056664221774090369",
-          "source": "知乎日报",
-          "published_at": "2026-07-04",
-          "importance_level": "medium",
-          "importance_score": 0.58,
-          "companies": [
-            "阿里巴巴"
-          ]
-        },
-        {
-          "title": "八部门AI消费以旧换新政策落地首月，补贴超12亿元",
-          "summary": "八部门联合发布的AI消费以旧换新政策落地首月，全国AI手机、AI PC、家用机器人累计补贴超12亿元，带动相关品类销量增长65%，消费升级趋势明显",
-          "url": "https://zhuanlan.zhihu.com/p/2056664221774090369",
-          "source": "知乎日报",
-          "published_at": "2026-07-04",
-          "importance_level": "medium",
-          "importance_score": 0.7,
-          "companies": []
         }
       ]
     },
@@ -57,76 +47,84 @@
       "name": "汽车行业动态",
       "items": [
         {
-          "title": "蔚来换电站突破2800座，暑期新增42座高速临时站",
-          "summary": "蔚来汽车7月4日官宣全国换电站总量突破2800座，暑期新增42座高速临时换电站全部投运，热门线路换电等待时长同比缩短42%，推出暑期免费车辆安检服务",
-          "url": "https://zhuanlan.zhihu.com/p/2056664221774090369",
-          "source": "知乎日报",
-          "published_at": "2026-07-04",
-          "importance_level": "high",
-          "importance_score": 0.82,
-          "companies": [
-            "蔚来"
-          ]
-        },
-        {
-          "title": "理想汽车6月交付量首次突破6万台，L系列三款月销过万",
-          "summary": "理想汽车7月4日发布6月交付预告，单月交付量首次突破6万台，L系列三款车型均实现月销过万，城市NOA功能累计开通用户超120万",
-          "url": "https://zhuanlan.zhihu.com/p/2056664221774090369",
-          "source": "知乎日报",
+          "title": "中国车企半年考交卷：比亚迪上汽吉利奇瑞领跑，行业利润率仅3.4%",
+          "summary": "乘联会数据显示截至6月21日国内乘用车零售801.2万辆同比下滑20%，6月新能源渗透率突破60%，前5个月整车行业利润率仅3.4%创近年新低",
+          "url": "https://baijiahao.baidu.com/s?id=1869763144173769223&wfr=spider&for=pc",
+          "source": "百家号",
           "published_at": "2026-07-04",
           "importance_level": "high",
           "importance_score": 0.88,
           "companies": [
-            "理想汽车"
+            "比亚迪",
+            "上汽",
+            "吉利",
+            "奇瑞"
           ]
         },
         {
-          "title": "比亚迪海豚荣耀版上市，9.98万起首款10万级标配高阶智驾",
-          "summary": "比亚迪7月4日宣布海豚荣耀版正式上市，起售价下探至9.98万元，搭载DiPilot 100智驾系统，成为首款10万级标配高阶智驾的纯电车型",
-          "url": "https://zhuanlan.zhihu.com/p/2056664221774090369",
-          "source": "知乎日报",
+          "title": "零跑销量创新高，比亚迪继续领跑，6月主流车企销量汇总",
+          "summary": "太平洋汽车汇总6月主流车企销量，6月前21天全国乘用车零售同比下降23%，新能源乘用车零售突破592万辆，整体渗透率达57.4%",
+          "url": "https://www.pcauto.com.cn/nation/5161/51618355.html",
+          "source": "太平洋汽车",
           "published_at": "2026-07-04",
           "importance_level": "high",
           "importance_score": 0.85,
           "companies": [
+            "零跑",
             "比亚迪"
           ]
         },
         {
-          "title": "乘联会6月新能源销量107万辆，渗透率达64.2%",
-          "summary": "乘联会7月4日发布6月新能源销量数据，国内新能源乘用车零售107万辆同比增长32%，渗透率达64.2%创历史新高，新能源市场持续高速增长",
-          "url": "https://zhuanlan.zhihu.com/p/2056664221774090369",
-          "source": "知乎日报",
-          "published_at": "2026-07-04",
+          "title": "乘联分会：6月全国新能源乘用车零售103.7万辆，批发150.6万辆",
+          "summary": "乘联分会7月3日发布6月新能源市场数据，零售103.7万辆同比下降7%，厂商批发150.6万辆同比增长22%，今年以来累计批发681.2万辆",
+          "url": "https://www.guandian.cn/article/20260703/571143.html",
+          "source": "观点网",
+          "published_at": "2026-07-03",
           "importance_level": "high",
-          "importance_score": 0.92,
+          "importance_score": 0.9,
           "companies": [
-            "比亚迪",
-            "特斯拉"
+            "乘联会"
           ]
         },
         {
-          "title": "地平线发布征程7 Ultra智驾芯片，算力512TOPS",
-          "summary": "地平线7月4日发布征程7 Ultra智驾芯片，算力达512TOPS，支持端到端全域智驾，已获得多家头部车企定点订单，国产智驾芯片加速突破",
-          "url": "https://zhuanlan.zhihu.com/p/2056664221774090369",
-          "source": "知乎日报",
+          "title": "新势力半年考：零跑断层领跑月销9.34万辆，理想成唯一双降品牌",
+          "summary": "7月1日多家新势力披露6月交付数据，零跑以9.34万辆断层领跑创纪录，蔚来小鹏双双突破4万辆，理想成为头部唯一同比环比双降品牌",
+          "url": "https://baijiahao.baidu.com/s?id=1869572731945000227&wfr=spider&for=pc",
+          "source": "百家号",
+          "published_at": "2026-07-01",
+          "importance_level": "high",
+          "importance_score": 0.86,
+          "companies": [
+            "零跑",
+            "蔚来",
+            "小鹏",
+            "理想"
+          ]
+        },
+        {
+          "title": "2027年打飞的成真？深圳广州已备好跑道，低空经济写入国家法律",
+          "summary": "新修订民用航空法7月1日正式施行首次将低空经济写入国家法律，深圳低空物流无人机穿梭如织，广州双座飞行汽车完成实景首飞",
+          "url": "https://baijiahao.baidu.com/s?id=1869735000331709864&wfr=spider&for=pc",
+          "source": "百家号",
           "published_at": "2026-07-04",
           "importance_level": "medium",
           "importance_score": 0.75,
           "companies": [
-            "地平线"
+            "小鹏汇天",
+            "广汽"
           ]
         },
         {
-          "title": "小鹏汇天飞行汽车完成首次城际低空试飞，广州至佛山仅14分钟",
-          "summary": "小鹏汇天X6飞行汽车7月4日完成首次城际低空试飞，广州至佛山全程32公里仅用时14分钟，验证城际通勤场景可行性",
-          "url": "https://zhuanlan.zhihu.com/p/2056664221774090369",
-          "source": "知乎日报",
+          "title": "三次降油也难抚燃油车主焦虑，新能源渗透率63.6%燃油车零售暴跌38%",
+          "summary": "乘联会6月销量数据显示新能源车批发151万辆渗透率63.6%，燃油车零售同比下降38.3%，热销榜单几乎见不到燃油车身影",
+          "url": "https://baijiahao.baidu.com/s?id=1869805863500605319&wfr=spider&for=pc",
+          "source": "百家号",
           "published_at": "2026-07-04",
-          "importance_level": "medium",
-          "importance_score": 0.72,
+          "importance_level": "high",
+          "importance_score": 0.82,
           "companies": [
-            "小鹏"
+            "比亚迪",
+            "特斯拉"
           ]
         }
       ]
@@ -135,43 +133,29 @@
       "name": "汽车品牌舆情",
       "items": [
         {
-          "title": "6月汽车召回月度汇总发布，多家车企上榜电池与智驾问题突出",
-          "summary": "市场监管总局7月3日发布6月汽车召回月度汇总，电池热失控、智能驾驶辅助系统故障成为召回主因，涉及极氪、奔驰、沃尔沃等多个品牌",
-          "url": "https://www.samr.gov.cn/zlfzj/qxcpzh/zhdt/art/2026/art_7db4a6dee3ea4bb5a33089c5756b76ff.html",
-          "source": "市场监管总局",
+          "title": "2026上半年汽车召回排行：总量165万辆创十年新低，日系居首蔚来召回24.6万辆",
+          "summary": "车质网汇总上半年召回公告50个涉及26品牌165万辆，日系688146辆居首，蔚来因软件黑屏问题召回246229辆ES8/ES6/EC6成自主品牌单次之最",
+          "url": "https://society.sohu.com/a/1045139979_269032",
+          "source": "搜狐汽车",
           "published_at": "2026-07-03",
           "importance_level": "high",
-          "importance_score": 0.8,
+          "importance_score": 0.85,
           "sentiment": "negative",
           "companies": [
-            "极氪",
-            "奔驰",
-            "沃尔沃"
+            "蔚来",
+            "丰田",
+            "东风日产"
           ],
           "is_our_brand": 1
         },
         {
-          "title": "蔚来车型因新旧款迭代纠纷遭集中投诉，乐道L90投诉量飙升",
-          "summary": "车质网投诉数据显示，蔚来乐道L90和firefly萤火虫因新旧款迭代纠纷投诉量环比大幅飙升，购车不久遭遇配置快速迭代引发老车主集体维权",
-          "url": "http://auto.cnfol.com/cheshidongtai/20260508/32208711.shtml",
-          "source": "中金在线",
-          "published_at": "2026-07-04",
-          "importance_level": "medium",
-          "importance_score": 0.65,
-          "sentiment": "negative",
-          "companies": [
-            "蔚来"
-          ],
-          "is_our_brand": 0
-        },
-        {
-          "title": "东风日产召回部分N7、N6车型，涉及制动安全隐患",
-          "summary": "7月4日市场监管总局更新召回信息，东风汽车有限公司召回部分东风日产N7、N6汽车，涉及制动系统安全隐患，需进店检修",
+          "title": "市场监管总局更新召回信息：东风日产N7/N6因制动隐患被召回",
+          "summary": "市场监管总局缺陷产品召回页面更新，东风汽车有限公司召回部分东风日产N7、N6汽车，涉及制动系统安全隐患需进店检修",
           "url": "https://www.samr.gov.cn/zlfzj/qxcpzh/index.html",
           "source": "市场监管总局",
-          "published_at": "2026-07-04",
+          "published_at": "2026-07-03",
           "importance_level": "medium",
-          "importance_score": 0.6,
+          "importance_score": 0.65,
           "sentiment": "negative",
           "companies": [
             "东风日产"
@@ -179,18 +163,34 @@
           "is_our_brand": 0
         },
         {
-          "title": "福特因软件缺陷在美召回5252辆汽车，存在起火隐患",
-          "summary": "美国国家公路交通安全管理局消息，福特因软件缺陷存在起火隐患将召回5252辆汽车，数据包溢出致驻车系统受损问题同时影响探险者车型",
-          "url": "http://www.qiche365.org.cn/",
-          "source": "汽车365",
-          "published_at": "2026-07-04",
+          "title": "福特因后悬架断裂隐患扩大召回进口探险者车型",
+          "summary": "福特汽车因后悬架前束连接臂存在断裂隐患召回2017-2019款进口探险者，系三年前召回方案的扩大召回，体现车企追溯共性问题责任意识",
+          "url": "https://society.sohu.com/a/1045139979_269032",
+          "source": "搜狐汽车",
+          "published_at": "2026-07-03",
           "importance_level": "medium",
-          "importance_score": 0.55,
+          "importance_score": 0.58,
           "sentiment": "negative",
           "companies": [
             "福特"
           ],
           "is_our_brand": 0
+        },
+        {
+          "title": "极氪001、奔驰EQA/EQB、沃尔沃EX30因动力电池问题被召回",
+          "summary": "2026上半年动力电池相关召回频次明显增多，涉及极氪001、奔驰EQA、奔驰EQB、沃尔沃EX30、极星4等多款纯电与插电混动车型",
+          "url": "https://society.sohu.com/a/1045139979_269032",
+          "source": "搜狐汽车",
+          "published_at": "2026-07-03",
+          "importance_level": "medium",
+          "importance_score": 0.62,
+          "sentiment": "negative",
+          "companies": [
+            "极氪",
+            "奔驰",
+            "沃尔沃"
+          ],
+          "is_our_brand": 1
         }
       ]
     },
@@ -198,38 +198,42 @@
       "name": "政策法规速递",
       "items": [
         {
-          "title": "八部门联合推进AI消费以旧换新政策落地，首月补贴超12亿元",
-          "summary": "八部门联合发布的AI消费以旧换新政策落地首月成效显著，全国AI手机、AI PC、家用机器人累计补贴超12亿元，带动相关品类销量增长65%",
-          "url": "https://zhuanlan.zhihu.com/p/2056664221774090369",
-          "source": "知乎日报",
+          "title": "购置税补贴新政7月4日落地：燃油车首次减半，新能源30万红线明确",
+          "summary": "财政部等三部门7月4日发布购置税补贴公告，1.6L以下低油耗燃油车首次纳入减半范围，新能源延续减半但单辆不超过30万元",
+          "url": "https://baijiahao.baidu.com/s?id=1869753716509852669&wfr=spider&for=pc",
+          "source": "百家号",
           "published_at": "2026-07-04",
+          "importance_level": "high",
+          "importance_score": 0.95,
+          "companies": [
+            "财政部",
+            "税务总局",
+            "工信部"
+          ]
+        },
+        {
+          "title": "工信部发布《智能网联汽车组合驾驶辅助系统安全要求》强制性国标",
+          "summary": "工信部组织制定GB 47955-2026强制性国家标准由国家市场监管总局批准发布，对智能网联汽车组合驾驶辅助系统提出强制安全要求",
+          "url": "https://www.miit.gov.cn/jgsj/zbys/qcgy/art/2026/art_7bcb480b0db5432f8542157a9fc12841.html",
+          "source": "工信部",
+          "published_at": "2026-07-02",
           "importance_level": "high",
           "importance_score": 0.85,
           "companies": [
-            "国务院"
+            "工信部"
           ]
         },
         {
-          "title": "国家医保局上线异地就医备案一键通，覆盖全国统筹地区",
-          "summary": "国家医保局7月4日上线异地就医备案一键通功能，参保人线上即可办理跨省异地就医备案，无需线下提交材料，覆盖全国所有统筹地区",
-          "url": "https://zhuanlan.zhihu.com/p/2056664221774090369",
-          "source": "知乎日报",
+          "title": "新修订《民用航空法》7月1日施行，首次将低空经济写入国家法律",
+          "summary": "新修订民用航空法7月1日正式施行，首次将低空经济写入国家法律，为飞行汽车、eVTOL等低空飞行器运营提供法律保障",
+          "url": "https://baijiahao.baidu.com/s?id=1869735000331709864&wfr=spider&for=pc",
+          "source": "百家号",
           "published_at": "2026-07-04",
           "importance_level": "medium",
-          "importance_score": 0.68,
+          "importance_score": 0.72,
           "companies": [
-            "国家医保局"
+            "民航局"
           ]
-        },
-        {
-          "title": "市场监管部门开展暑期校外培训专项整治，查处违规机构120余家",
-          "summary": "市场监管部门7月4日起开展暑期校外培训专项整治，查处无证办学、虚假宣传机构120余家，保障学生与家长合法权益",
-          "url": "https://zhuanlan.zhihu.com/p/2056664221774090369",
-          "source": "知乎日报",
-          "published_at": "2026-07-04",
-          "importance_level": "medium",
-          "importance_score": 0.55,
-          "companies": []
         }
       ]
     },
@@ -237,62 +241,42 @@
       "name": "数字营销",
       "items": [
         {
-          "title": "抖音暑期消费数据：夜市景区亲子乐园交易额同比增长78%",
-          "summary": "抖音生活服务发布暑期首周消费数据，全国夜市、景区、亲子乐园交易额同比增长78%，夜间消费占比提升至45%，直播+本地生活模式持续扩大",
-          "url": "https://zhuanlan.zhihu.com/p/2056664221774090369",
-          "source": "知乎日报",
-          "published_at": "2026-07-04",
-          "importance_level": "medium",
-          "importance_score": 0.72,
+          "title": "2026全球数字经济大会在北京举办，80余项前沿技术集中首发",
+          "summary": "7月2日至4日全球数字经济大会在北京举办，高德空间智能世界模型、人形机器人、医疗贸易城市多领域大模型智能体集中亮相，AI从智能计算走向实体行动",
+          "url": "https://mp.weixin.qq.com/s?__biz=MjM5OTQzNDkzMw==&mid=2658915688&idx=1&sn=ee651771eaf3a58cad91554515b64bab&chksm=bdf8e039604945095a3651ffc15b678d7b7b5df2cb857bb0e0ead15c2bbc47db8c6cc61990d4&scene=27",
+          "source": "中国会展",
+          "published_at": "2026-07-02",
+          "importance_level": "high",
+          "importance_score": 0.8,
           "companies": [
-            "抖音"
+            "高德",
+            "软通智慧"
           ]
         },
         {
-          "title": "淘宝上线AI穿搭助手，场景化购物重塑电商体验",
-          "summary": "淘宝7月4日上线AI穿搭助手功能，输入出行场景自动搭配服饰并联动一键下单，AI电商个性化推荐进入场景智能时代",
-          "url": "https://zhuanlan.zhihu.com/p/2056664221774090369",
-          "source": "知乎日报",
-          "published_at": "2026-07-04",
+          "title": "2026电商内容营销新趋势：AIGC、GEO优化与数字人重塑行业",
+          "summary": "内容营销成本比传统营销低62%但线索量是3倍，直播带货从风口变基础设施，AI数字人成新趋势，私域运营复购率可提升30-50%",
+          "url": "https://baijiahao.baidu.com/s?id=1864573986919609648&wfr=spider&for=pc",
+          "source": "百家号",
+          "published_at": "2026-05-07",
           "importance_level": "medium",
-          "importance_score": 0.65,
+          "importance_score": 0.68,
           "companies": [
-            "阿里巴巴"
+            "抖音",
+            "淘宝"
           ]
         },
         {
-          "title": "微信支付暑期小微商户免手续费，线下交易激励升级",
-          "summary": "微信支付推出暑期小微商户手续费减免活动，线下餐饮零售单笔100元以下交易免手续费至9月底，数字化支付工具进一步降低商家经营成本",
-          "url": "https://zhuanlan.zhihu.com/p/2056664221774090369",
-          "source": "知乎日报",
-          "published_at": "2026-07-04",
-          "importance_level": "medium",
-          "importance_score": 0.62,
-          "companies": [
-            "腾讯"
-          ]
-        },
-        {
-          "title": "京东暑期制冷节启动，下沉市场县域订单同比增长92%",
-          "summary": "京东家电7月4日启动暑期制冷节，空调冰箱品类推出当日达免费安装服务，下沉市场县域订单同比增长92%，电商渠道下沉效果显著",
-          "url": "https://zhuanlan.zhihu.com/p/2056664221774090369",
-          "source": "知乎日报",
-          "published_at": "2026-07-04",
+          "title": "微赞私域电商直播分销裂变功能上线，门店拓客转化双提升",
+          "summary": "微赞上线私域电商直播分销裂变功能，搭载AI+人工双重评论审核和防盗链防护，所有用户数据和经营订单数据完整归属企业自身",
+          "url": "https://baijiahao.baidu.com/s?id=1869327304962107575&wfr=spider&for=pc",
+          "source": "百家号",
+          "published_at": "2026-06-28",
           "importance_level": "medium",
           "importance_score": 0.6,
           "companies": [
-            "京东"
+            "微赞"
           ]
-        },
-        {
-          "title": "全国多地发放暑期消费券超6亿元，带动线下消费持续回暖",
-          "summary": "全国多地7月4日起发放新一轮暑期消费券，涵盖餐饮文旅家电品类，累计投放金额超6亿元，政府消费券拉动线下消费效果显著",
-          "url": "https://zhuanlan.zhihu.com/p/2056664221774090369",
-          "source": "知乎日报",
-          "published_at": "2026-07-04",
-          "importance_level": "medium",
-          "importance_score": 0.58,
-          "companies": []
         }
       ]
     },
@@ -300,58 +284,51 @@
       "name": "消费者购车洞察",
       "items": [
         {
-          "title": "乘联会6月新能源销量107万辆，渗透率64.2%创历史新高",
-          "summary": "乘联会7月4日发布数据，6月新能源乘用车零售107万辆同比增长32%，渗透率达64.2%创新高，新能源车已成为消费者购车绝对主力",
-          "url": "https://zhuanlan.zhihu.com/p/2056664221774090369",
-          "source": "知乎日报",
+          "title": "购置税减半新政落地：15万的车省6635元，叠加补贴最高省上万",
+          "summary": "7月4日购置税新政落地，1.6L以下燃油车减半可省6000余元，新能源延续减半叠加地方以旧换新补贴最高省上万元，被称为今年买车最佳时机",
+          "url": "https://baijiahao.baidu.com/s?id=1869753716509852669&wfr=spider&for=pc",
+          "source": "百家号",
           "published_at": "2026-07-04",
           "importance_level": "high",
-          "importance_score": 0.9,
+          "importance_score": 0.92,
+          "companies": [
+            "财政部"
+          ]
+        },
+        {
+          "title": "新能源车销量前十全是电车，燃油车首次被挤出月度榜单前十",
+          "summary": "乘联会6月数据显示新能源车零售95万辆渗透率62.9%创历史新高，月度销量排行榜前十全部是新能源，燃油车历史上首次被彻底挤出前十",
+          "url": "https://baijiahao.baidu.com/s?id=1869709234056943543&wfr=spider&for=pc",
+          "source": "百家号",
+          "published_at": "2026-07-03",
+          "importance_level": "high",
+          "importance_score": 0.85,
           "companies": [
             "比亚迪",
             "特斯拉"
           ]
         },
         {
-          "title": "全国二手车6月交易量同比增长18%，新能源二手车增长72%",
-          "summary": "7月4日中国汽车流通协会数据显示，全国二手车市场6月交易量同比增长18%，新能源二手车交易量同比增长72%，车龄3年内车型最受青睐",
-          "url": "https://zhuanlan.zhihu.com/p/2056664221774090369",
-          "source": "知乎日报",
-          "published_at": "2026-07-04",
-          "importance_level": "medium",
-          "importance_score": 0.75,
-          "companies": []
-        },
-        {
-          "title": "全国高速新能源充电量暑运首周同比增长56%，快充站覆盖率达89%",
-          "summary": "7月4日数据显示全国高速新能源充电量暑运首周同比增长56%，高速快充站覆盖率达89%，200台移动充电车全部在岗保障高峰出行，充电基础设施持续完善",
-          "url": "https://zhuanlan.zhihu.com/p/2056664221774090369",
-          "source": "知乎日报",
-          "published_at": "2026-07-04",
-          "importance_level": "medium",
-          "importance_score": 0.7,
-          "companies": []
-        },
-        {
-          "title": "国内动力电池6月装车量75GWh，储能电池出货量翻倍",
-          "summary": "7月4日数据显示国内动力电池6月装车量达75GWh同比增长29%，储能电池出货量同比增长112%，储能赛道增速持续领跑新能源产业链",
-          "url": "https://zhuanlan.zhihu.com/p/2056664221774090369",
-          "source": "知乎日报",
-          "published_at": "2026-07-04",
-          "importance_level": "medium",
-          "importance_score": 0.68,
+          "title": "7月1日起电池新国标全面实施，新能源汽车迈入安全最后三级跳",
+          "summary": "2026年7月1日起以电池新国标为首的电车安全新规全面实施，5月新能源渗透率突破62%燃油车销量近乎腰斩，市场正式由燃油车主导切换为新能源主导",
+          "url": "https://baijiahao.baidu.com/s?id=1869406015954988274&wfr=spider&for=pc",
+          "source": "百家号",
+          "published_at": "2026-06-29",
+          "importance_level": "high",
+          "importance_score": 0.78,
           "companies": [
+            "比亚迪",
             "宁德时代"
           ]
         }
       ]
     }
   },
-  "total_articles": 26,
+  "total_articles": 22,
   "coverage_summary": {
     "A": {
       "name": "CRM行业动态",
-      "count": 4
+      "count": 3
     },
     "B": {
       "name": "汽车行业动态",
@@ -367,11 +344,11 @@
     },
     "E": {
       "name": "数字营销",
-      "count": 5
+      "count": 3
     },
     "F": {
       "name": "消费者购车洞察",
-      "count": 4
+      "count": 3
     }
   }
 }
