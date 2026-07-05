@@ -1,6 +1,6 @@
 {
   "date": "2026-07-05",
-  "total_articles": 23,
+  "total_articles": 21,
   "sources": {
     "web": 21,
     "wechat": 2
@@ -183,16 +183,6 @@
           "data_source": "web",
           "quality_score": 72,
           "importance_level": "high"
-        },
-        {
-          "title": "2025年新能源汽车消费激励政策整理",
-          "url": "https://www.hangyan.co/charts/3688691610259818318",
-          "source": "汗颜",
-          "published_at": "2025-07-31",
-          "summary": "2025年我国新能源汽车政策持续发力，延续量质齐升的发展导向，继续免征车辆购置税，实施以旧换新补贴政策，并增加超长期特别国债资金支持。",
-          "data_source": "web",
-          "quality_score": 72,
-          "importance_level": "high"
         }
       ]
     },
@@ -215,16 +205,6 @@
           "source": "百家号",
           "published_at": "2026-05-27",
           "summary": "2025年AI生成内容爆发式增长后，2026年的内容营销正在经历挤泡沫。AI模型对内容的判断已从关键词匹配升级到语义理解和多源交叉验证。",
-          "data_source": "web",
-          "quality_score": 72,
-          "importance_level": "normal"
-        },
-        {
-          "title": "AI营销从探索到落地：2025企业增长的新转折点",
-          "url": "https://zhuanlan.zhihu.com/p/1931325268141770054",
-          "source": "知乎",
-          "published_at": "2025-07-23",
-          "summary": "企业面临市场增长疲软、营销预算紧缩等压力，数字营销环境愈加复杂，用户触点日益碎片化，内容生产需求呈指数级上升。AI营销正在成为解决内容与效率困境的现实方案。",
           "data_source": "web",
           "quality_score": 72,
           "importance_level": "normal"
