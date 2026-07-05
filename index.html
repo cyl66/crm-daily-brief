@@ -1,0 +1,417 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+<meta http-equiv="Pragma" content="no-cache">
+<title>行业资讯</title>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+
+:root{
+  --bg:#f5f5f7;--surface:#fff;--surface-hover:#fafafa;
+  --text:#1d1d1f;--text2:#6e6e73;--text3:#aeaeb2;
+  --blue:#0071e3;--blue-bg:rgba(0,113,227,.06);
+  --green:#34c759;--orange:#ff9f0a;--red:#ff3b30;
+  --purple:#af52de;--teal:#5ac8fa;--pink:#ff2d55;
+  --border:rgba(0,0,0,.07);
+  --shadow-sm:0 1px 3px rgba(0,0,0,.04);
+  --shadow-md:0 4px 20px rgba(0,0,0,.06);
+  --r:16px;--rp:100px;--t:.22s cubic-bezier(.25,.1,.25,1);
+}
+
+body{
+  font-family:-apple-system,BlinkMacSystemFont,'SF Pro Display','SF Pro Text','Helvetica Neue',sans-serif;
+  background:var(--bg);color:var(--text);line-height:1.5;
+  -webkit-font-smoothing:antialiased;min-height:100vh;
+}
+.page{max-width:840px;margin:0 auto;padding:44px 24px 80px}
+
+/* ── Hero ── */
+.hero{margin-bottom:32px}
+.hero h1{font-size:34px;font-weight:700;letter-spacing:-.6px;line-height:1.15}
+.hero .sub{font-size:15px;color:var(--text2);margin-top:6px;font-weight:450}
+
+/* ── Date Filter ── */
+.filter-bar{
+  background:rgba(255,255,255,.76);
+  backdrop-filter:blur(28px) saturate(180%);
+  -webkit-backdrop-filter:blur(28px) saturate(180%);
+  border:1px solid var(--border);
+  border-radius:var(--r);padding:14px;margin-bottom:24px;
+  box-shadow:var(--shadow-sm);
+}
+.presets{display:flex;gap:6px}
+.presets button{
+  flex:1;padding:9px 0;border:none;border-radius:12px;
+  font-size:13px;font-weight:500;color:var(--text2);
+  background:rgba(0,0,0,.035);cursor:pointer;
+  transition:var(--t);font-family:inherit;white-space:nowrap;
+}
+.presets button:hover{background:rgba(0,0,0,.06);color:var(--text)}
+.presets button.active{background:var(--text);color:#fff;font-weight:600}
+.hero .date-range{font-size:15px;color:var(--text2);margin-top:6px;font-weight:450}
+
+/* ── Tab Navigation ── */
+.tab-nav{
+  position:sticky;top:0;z-index:10;
+  display:flex;gap:2px;padding:6px;
+  background:rgba(245,245,247,.88);
+  backdrop-filter:blur(20px) saturate(180%);
+  -webkit-backdrop-filter:blur(20px) saturate(180%);
+  border:1px solid var(--border);
+  border-radius:var(--r);margin-bottom:20px;
+  box-shadow:0 1px 3px rgba(0,0,0,.03);
+  overflow:hidden;max-width:100%;
+}
+.tab-nav button{
+  display:flex;align-items:center;gap:6px;
+  padding:8px 12px;border:none;background:transparent;
+  border-radius:11px;cursor:pointer;transition:all var(--t);
+  font-size:13px;font-weight:500;color:var(--text2);
+  white-space:nowrap;flex:1 1 0;justify-content:center;
+  min-width:0;overflow:hidden;
+}
+.tab-nav button:hover{background:rgba(0,0,0,.04);color:var(--text)}
+.tab-nav button.active{
+  background:var(--surface);color:var(--text);
+  box-shadow:0 1px 4px rgba(0,0,0,.06);
+}
+.tab-ico{width:18px;height:18px;display:flex;flex-shrink:0}
+.tab-ico svg{width:100%;height:100%}
+.tab-nav button.active .tab-ico svg{stroke-width:2.5}
+.tab-short{display:none}
+
+/* ── Section Card ── */
+.section{
+  background:var(--surface);border-radius:var(--r);
+  margin-bottom:14px;overflow:hidden;
+  border:1px solid var(--border);
+  box-shadow:var(--shadow-sm);
+  transition:box-shadow var(--t);
+  scroll-margin-top:64px;
+}
+.section:hover{box-shadow:var(--shadow-md)}
+.section-head{
+  display:flex;align-items:center;gap:12px;
+  padding:18px 22px;cursor:pointer;
+  user-select:none;transition:background var(--t);
+}
+.section-head:hover{background:var(--surface-hover)}
+.section-head .ico{width:24px;height:24px;flex-shrink:0}
+.section-head .label{font-size:16px;font-weight:600;letter-spacing:-.2px;flex:1}
+.section-head .chevron{font-size:11px;color:var(--text3);transition:transform var(--t)}
+.section-body{padding:0 22px 22px;display:flex;flex-direction:column;gap:10px}
+
+/* ── Article Card ── */
+.item{
+  background:var(--bg);border-radius:12px;
+  padding:14px 16px;border:1px solid var(--border);
+  transition:all var(--t);animation:in .35s ease both;cursor:pointer;
+}
+.item:hover{border-color:rgba(0,113,227,.15);box-shadow:0 2px 12px rgba(0,0,0,.04)}
+@keyframes in{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}
+
+.item-row1{display:flex;align-items:flex-start;gap:8px;margin-bottom:4px}
+.item-title{font-size:15px;font-weight:600;line-height:1.4;letter-spacing:-.15px;color:var(--text);text-decoration:none;flex:1}
+.item-title:hover{color:var(--blue)}
+.item-summary{font-size:13px;color:var(--text2);line-height:1.6;margin-bottom:10px}
+.item-source{font-size:12px;color:var(--text3);font-weight:400;white-space:nowrap}
+.item-sep{width:1px;height:14px;background:var(--border);flex-shrink:0;align-self:center}
+.item-row2{display:flex;gap:8px;flex-wrap:wrap;align-items:center}
+
+.tag{font-size:11px;font-weight:500;padding:3px 10px;border-radius:var(--rp);letter-spacing:.1px}
+.tag-cp{background:var(--blue-bg);color:var(--blue)}
+.tag-hi{background:rgba(255,159,10,.1);color:#b25e00;font-weight:600}
+.tag-neg{background:rgba(255,59,48,.08);color:#c41c14}
+.tag-our{background:var(--blue-bg);color:var(--blue);font-weight:600}
+
+.item-url{font-size:12px;color:var(--blue);text-decoration:none;font-weight:500;margin-left:auto;flex-shrink:0;transition:opacity var(--t)}
+.item-url:hover{opacity:.65}
+
+.sub-label{font-size:13px;font-weight:600;color:var(--text2);margin:14px 0 8px;padding-left:10px;border-left:2.5px solid var(--border)}
+
+.empty{text-align:center;padding:32px;color:var(--text3);font-size:14px}
+.footer{text-align:center;padding:32px 0 0;color:var(--text3);font-size:12px}
+
+/* 移动端/窄屏 Tab 竖排：图标在上，短文字在下 */
+@media(max-width:768px){
+  .tab-label{display:none!important}
+  .tab-short{display:block;font-size:10px;font-weight:500;margin-top:3px;line-height:1}
+  .tab-ico{width:18px;height:18px}
+  .tab-nav{gap:0;padding:4px}
+  .tab-nav button{flex-direction:column;gap:2px;padding:8px 2px;min-width:0;flex:1 1 0}
+}
+@media(max-width:640px){
+  .page{padding:28px 14px 60px}
+  .hero h1{font-size:26px}
+  .presets{gap:4px}
+  .presets button{padding:8px 0;font-size:12px}
+  .section-head{padding:14px 16px}
+  .section-body{padding:0 14px 14px;gap:8px}
+  .item{padding:12px 14px;border-radius:10px}
+  .item-title{font-size:14px}
+  .tab-nav{padding:4px;gap:0}
+  .tab-nav button{padding:6px 2px}
+  .tab-ico{width:16px;height:16px}
+  .tab-short{font-size:9px}
+}
+</style>
+</head>
+<body>
+<div class="page">
+
+  <div class="hero">
+    <h1>行业资讯</h1>
+    <div class="date-range" id="dateRange"></div>
+  </div>
+
+  <div class="filter-bar">
+    <div class="presets" id="presets">
+      <button data-preset="yesterday" class="active">昨日</button>
+      <button data-preset="this_week">本周</button>
+      <button data-preset="last_week">上周</button>
+      <button data-preset="this_month">本月</button>
+      <button data-preset="last_month">上月</button>
+    </div>
+  </div>
+
+  <div class="tab-nav" id="tabNav">
+    <button data-target="A" class="active"><span class="tab-ico" style="color:#0071e3"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round" stroke-linecap="round"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg></span><span class="tab-label">CRM行业</span><span class="tab-short">CRM</span></button>
+    <button data-target="B"><span class="tab-ico" style="color:#ff9f0a"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round" stroke-linecap="round"><path d="M4 14v-3l2-5a2 2 0 0 1 1.9-1.2h8.2A2 2 0 0 1 18 6l2 5v3a1 1 0 0 1-1 1h-1v1a1 1 0 0 1-2 0v-1H8v1a1 1 0 0 1-2 0v-1H5a1 1 0 0 1-1-1z"/><path d="M7.5 11l1-2h7l1 2"/></svg></span><span class="tab-label">汽车行业</span><span class="tab-short">汽车</span></button>
+    <button data-target="C"><span class="tab-ico" style="color:#ff2d55"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round" stroke-linecap="round"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.7 21a2 2 0 0 1-3.4 0"/></svg></span><span class="tab-label">品牌舆情</span><span class="tab-short">舆情</span></button>
+    <button data-target="D"><span class="tab-ico" style="color:#af52de"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round" stroke-linecap="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></span><span class="tab-label">政策法规</span><span class="tab-short">政策</span></button>
+    <button data-target="E"><span class="tab-ico" style="color:#5ac8fa"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round" stroke-linecap="round"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg></span><span class="tab-label">数字营销</span><span class="tab-short">营销</span></button>
+    <button data-target="F"><span class="tab-ico" style="color:#34c759"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round" stroke-linecap="round"><circle cx="12" cy="8" r="4"/><path d="M4 22c0-4.4 3.6-8 8-8s8 3.6 8 8"/></svg></span><span class="tab-label">消费者洞察</span><span class="tab-short">消费</span></button>
+  </div>
+
+  <div id="content">
+    <div class="empty" id="loadingMsg">加载中...</div>
+  </div>
+  <script type="application/json" id="fallback-data">{"date":"2026-07-02","total_articles":28,"sections":{"A":{"name":"CRM行业动态","items":[{"title":"招采速递 | 7月2日奇瑞集团采购服务平台招标信息","url":"https://mp.weixin.qq.com/s?src=11&timestamp=1783238102&ver=6823&signature=QHiTf5VAyXGXIsAD4FGcCOSsGyrMAYnQb2RnvVCe0PSn4WdJP7VrQTVK8yoNDW3etQjF9AiwEYLvahSOeg3kV67etmR9UhxctXITNul861YSyayQ41MzF6YTjCUsi1vL&new=1","source":"瑞鲸安徽供应链科技有限公司","published_at":"2026-07-02","summary":"际加拿大CRM采购项目2.2采购范围本项目需要覆盖4大部分系统主... 2026年7月6日 23:594.联系方式地址:安徽省芜湖市镜湖区张家山...","importance_level":"normal"},{"title":"7月2日全球研报汇总","url":"https://mp.weixin.qq.com/s?src=11&timestamp=1783238102&ver=6823&signature=-jFOT7TqpHPaFDyfibGG31oGscqIkbLhZpttfQb5x0lWBw74ObzJJRP4Sfe-k5GvRy-ArHI8AW5sdaVFdr1AP3NuEKV60RZoz*eF17TqHPwHZcFC-nA2ZSPmX79CeExl&new=1","source":"小小小豆鱼","published_at":"2026-07-02","summary":"(NET, DOCN, SHOP, OKTA, CRM)-260701高盛-科技:软件处于... 2026年7月更新-260701 Goldman Sachs-US Autos &amp; Industrial ...","importance_level":"normal"},{"title":"AI速递2026年07月02日","url":"https://mp.weixin.qq.com/s?src=11&timestamp=1783238102&ver=6823&signature=CcV8br43aoZtknM-X3IM7v7OmqdagRnGF-Ii3o0*odH35wpxWwhJQeMqpKfcgVr6Mm*bX*SOjSHvn*8mxfyE4GgK8SR-v2W7ixrsr6nURCS3hfpl6q3dAA6z63XhD6rD&new=1","source":"JINGRANLIFEHALL","published_at":"2026-07-02","summary":"7月2日早报披露:Claude Code 被发现利用隐写术标记疑似中国大... CRM / 工控系统中嵌入 Agent,而不是只做一个&ldquo;外部聊天工具&rdquo;...","importance_level":"normal"},{"title":"7月2日AI资讯TOP10","url":"https://mp.weixin.qq.com/s?src=11&timestamp=1783238106&ver=6823&signature=DzGiREjkirM5P9pVVCDL4YvpCPOmeIQAqSdvR6Xc4ExF2qj8iQOT2Q9QHau0tk-KgwbggFR7Ion-fRTUjmcKp*tQ**D1gelwQFZFzT-Xzhyer9gXSczyJt1OASuYv*OJ&new=1","source":"智盒引擎","published_at":"2026-07-02","summary":"7月2日AI资讯TOP10:Fable 5重启,AI Agent攻占真实职场作者:智盒引擎 | 2026年7月2日 今日导读2026年7月2日,AI行业迎来戏剧性...","importance_level":"normal"},{"title":"7月1日起AI新规两连发:搞AI营销的人,该紧张吗?","url":"https://mp.weixin.qq.com/s?src=11&timestamp=1783238106&ver=6823&signature=wkyPDDdufDGBCDx26uhCQTWMZGdMrnEjytGXbJdzuuy6pyWiB3PHpiL0Wde1E0zZFP7A3k8JWPB-IXrP7vaZ-k0e-0-BQc8xKsel8JqTEgc5qQ-QJxYr-bK6VTLS5Hab&new=1","source":"Ai营销专家何尊","published_at":"2026-07-02","summary":"7月1日起AI新规两连发:搞AI营销的人,该紧张吗?昨天我差点把... AI客服、AI主播、AI销售助手、AI心理陪伴、AI教育辅导&mdash;&mdash;甚至...","importance_level":"high"},{"title":"AI日报 | 7月2日:Meta进军云计算、可灵AI融资30亿美元、英伟达Token成本暴降80%","url":"https://mp.weixin.qq.com/s?src=11&timestamp=1783238108&ver=6823&signature=mfK87Jy*WRrnW8XMbMXBuHkcymF*Ml35DIc85FISNp6hovIYWwYLj7MNmrMGIRL*sSlNwJqRLC7-X9vI2m7SwYXyLLtBHJqRohXhYk9NMOZLVE*dAIgaM1JLNKR4ZeNz&new=1","source":"小阳学AI","published_at":"2026-07-02","summary":"《AI日报 | 7月2日:Meta进军云计算、可灵AI融资30亿美元、英伟达Token成本暴降80%》开篇Meta今天宣布了一个大胆的计划.这家...","importance_level":"high"}]},"B":{"name":"汽车行业动态","items":[{"title":"汽车行业每日资讯 | 2026年7月2日 周四(洞见不一样的市场)","url":"https://mp.weixin.qq.com/s?src=11&timestamp=1783238156&ver=6823&signature=nQxfQdF*tNoBLguILvVGdwSqmjEVTgUnWTfXx-*W5U95CcJloUgCNpPwoenkYDFnVqt97P-syJ-2ulqEquyTvHPLDvshEKBPPCVdKBVY4p5W2kkL*9r7XzchIDwYe98L&new=1","source":"两江时光便民通","published_at":"2026-07-02","summary":"汽车行业每日资讯 2026年7月2日 周四每日精选 20 条核心资讯,覆盖宏观经济、政策法规、新车上市、技术动态、汽车出口五大维度...","importance_level":"normal"},{"title":"汽车三膜行业日报 · 2026年7月2日","url":"https://mp.weixin.qq.com/s?src=11&timestamp=1783238156&ver=6823&signature=9z64i01IGPwfFs3YGWloFnzWz8YDje-J2-1FDbnpJEMq*J2TonKGboH-0*zvzvLIU5y7OSMiP8dUDafUGBJ6RW1YYv45f2-6ZCbrOIToKJV9bUl88o0uOCaSK3s1ZHwG&new=1","source":"一鹿大吉","published_at":"2026-07-02","summary":"汽车三膜行业日报 &middot; 2026年7月2日过去24小时行业资讯汇总 | 情报顾问:WorkBuddy 今日核心摘要1. TPU原料价格大幅波动:2026年...","importance_level":"normal"},{"title":"7月02日 | 汽车出口每日要闻 今日关注:南沙启航、汇率升值、出口新高","url":"https://mp.weixin.qq.com/s?src=11&timestamp=1783238156&ver=6823&signature=TyEPTq8POwyRYERXNtHk*7OsEuNx9KcynFtK-Nt8XAgMJZcgGSvHCQfN5ynm2PUXwaPnM*GH5dE1jBO4mQenV8SGuBpLH1twH-o1BAwQrHnnyvsMVVeibnExXUtZUkl-&new=1","source":"Jhon Auto出海","published_at":"2026-07-02","summary":"7月02日 | 汽车出口每日要闻今日关注:南沙启航、汇率升值、出口新高昨天华南又传来好消息,今天来聊聊.【口岸动态】南沙近洋...","importance_level":"normal"},{"title":"7月1日: 给新能源汽车划“红线”|汽势笔记","url":"https://mp.weixin.qq.com/s?src=11&timestamp=1783238157&ver=6823&signature=2ZRQw2swZaaOEiIwHCxw2scXzRXug*k18Ed5GYws2tfB7MTHoWlQM5g39BPEJX2DDDYLCURYFwACn35W7TVldcHtG7PDXuil2jU9Ma9W2iGTszGB8esX8c05oGi2qJLA&new=1","source":"汽势传媒","published_at":"2026-07-02","summary":"汽势Auto-First|撒马尔2026年7月1日,中国新能源汽车行业迎来真正意义上＂被规范＂的时刻.三项新规同日落地.《电动汽车安全要...","importance_level":"normal"},{"title":"新能源日报 | 2026年07月02日 6月新能源车企销量放榜/协鑫钙钛矿叠层量产线已投产/储能41号令生效","url":"https://mp.weixin.qq.com/s?src=11&timestamp=1783238159&ver=6823&signature=904AZg3qF5b2Caz*Y6DbhWUi*hEJRuC0161t76nAkKLypFNwAGWSviNPy0trxb3BwMKT5vO3SZCJtlZtaKzZaZCWBvJI-E25ouujIDrgTBxEXJ0Qwisfu4QHbfCEgxe5&new=1","source":"猎聘新能源招聘","published_at":"2026-07-02","summary":"今日2条快讯 + 1条深度解读,预计阅读3分钟 快讯6月新能源车企销量放榜,零跑单月9.3万辆逼近10万大关:7月1日,主要新能源车企...","importance_level":"high"}]},"C":{"name":"汽车新品发布","items":[{"title":"5分钟补能400km!比亚迪新车官宣:7月2日,上市开售","url":"https://mp.weixin.qq.com/s?src=11&timestamp=1783238194&ver=6823&signature=y*NiZfdWtWDm3rVzI*TIstz5s-TC*A821wtLqGF4uO*3jc2FjFEUAvaoD541en0RRDTLpcOXG95dRDgTgk5Qqcg4jdG7EeJyF1vGiFoTZqDKsutdEtyIrn6nLvNupTUu&new=1","source":"科技阿维","published_at":"2026-07-02","summary":"目前比亚迪已经官宣7月2日比亚迪海豹08将正式上市开售,定位海洋网中大型旗舰轿跑,其实这一新车6月12日就已经全国开启盲订了...","importance_level":"high"},{"title":"7月2日,比亚迪海洋网旗舰家轿海豹08重磅上市,推出插混、纯电双动力6款车型,售价19.69万-23.99万元,购车可享万元置换补贴、1年免费闪","url":"https://mp.weixin.qq.com/s?src=11&timestamp=1783238194&ver=6823&signature=o20a1ui4m6f5VXEhnGplw2V7Rxvszb9*tXsrsLfElcj3U3JK2vmxvCdkjS6Ns4EVeYAirzw-oKf3WZVvdRShdiIBn0wbCXK96XWHMvXmWOlxl-7xZYZy6-39n2urQuBW&new=1","source":"婉酱u","published_at":"2026-07-02","summary":"7月2日,比亚迪海洋网旗舰家轿海豹08重磅上市,推出插混、纯电双动力6款车型,售价19.69万-23.99万元,购车可享万元置换补贴、...","importance_level":"high"}]},"D":{"name":"行业舆情与政策","items":[{"title":"新能源及用电行业政策日报 2026年7月2日","url":"https://mp.weixin.qq.com/s?src=11&timestamp=1783238216&ver=6823&signature=v1Nhb*Z7vd--9KfsTLc*JRgVpNDupdI1dmtorayEANiXa76H17g2LjlgwZl9uXOiVV2QjyPVTInibi2kMgu6om2l8TjGUNzUSCzIQKxSd4WRctXyB0k0BQ4bVwkLDCqe&new=1","source":"普电","published_at":"2026-07-02","summary":"新能源及用电行业政策日报日期:2026年7月2日(周四)覆盖时段:2026年6月29日 - 7月2日(重点:储能行业＂四梁八柱＂标准体系...","importance_level":"normal"},{"title":"今天最新新能源|7月2日重磅:最严电池国标落地、华润新能源上市、算电协同开闸","url":"https://mp.weixin.qq.com/s?src=11&timestamp=1783238216&ver=6823&signature=ooCCK*wiDUHeV8UGVFzOBvkE73fJzj8kO7WhnomSJIhgcbOUvp1EjyN7Vmds*tUVVImJLDQBvdbzKHRl9ipCZlvwGXBMo34bB3gZFpFoAJcqeSOCI94ywvUW1X9yoeP4&new=1","source":"三晋商会","published_at":"2026-07-02","summary":"今天(7月2日)新能源行业迎来政策、资本、产业三重爆发,每一条都影响买车、投资与行业格局,一文看懂今日核心动态 最严电池...","importance_level":"high"},{"title":"7月2日重点行业资讯,点击进入","url":"https://mp.weixin.qq.com/s?src=11&timestamp=1783238217&ver=6823&signature=bnxiZatoT2L9xVtsAf*yV3z7XR7l2y-4QKEVcgdtt10VAGc3U0LrAbWmWwgjp9DLqseQxoXY*AIoGlCXFXu52rObzw9bYs6rUlqIOKdoPtCMGgqVnkZZRLY8aBnmy-s8&new=1","source":"江苏省化工行业协会","published_at":"2026-07-02","summary":"闻2026年7月2日 星期四无条件批准!中国石化收购一央企6月30... 《电动汽车用固态电池 第1部分:术语和分类》国家标准.道克特...","importance_level":"normal"},{"title":"今日汽车资讯要闻(2026年7月2日)","url":"https://mp.weixin.qq.com/s?src=11&timestamp=1783238217&ver=6823&signature=65qNUWPeZmQqBLxQZtQD9CnYacD3qsYSBWXPoMQbSgdSxc5U7scIOL45yWJo9dXtP5hjQmwFfavxZeIfDO08aMZxVNpP-tFBvUh810kxT2ngSnIhUWG5Va0Nv5MAiwIV&new=1","source":"驰喔车","published_at":"2026-07-02","summary":"时间:6月30日递表,7月2日深度解读密集发布＂三无＂标签:无制造:长安汽车负责制造无智能化自研:引望/华为提供智驾、智舱无...","importance_level":"normal"},{"title":"2026年7月2日,AI 行业新闻资讯12条","url":"https://mp.weixin.qq.com/s?src=11&timestamp=1783238217&ver=6823&signature=hCFQJ3-yphDeeOlZL4smbF7HkJK7EiIzSH94guZ*A7U0vuXwLugRpR1O-mhIFqcd8*gBupGJ0EyXWj3DNfx6AenhX*cipFkWEoJvM0Gb9Cwce-iyQDF7IW*6ujhFr0ec&new=1","source":"虎鲸AI","published_at":"2026-07-02","summary":"Microsoft Teams今日资讯2026 全球数字经济大会在京开幕,人形... 工具隐蔽地域标记引发行业信任危机,数据透明化成为硬性行业诉...","importance_level":"normal"},{"title":"智能网联新能源汽车每日资讯20260701","url":"https://mp.weixin.qq.com/s?src=11&timestamp=1783238217&ver=6823&signature=5wN-NH*rJBD7o3dgjZS45CHRkPf1rioSA8QnBIPSav*cXN9EDPx6hcioWL82jpkiDVNnpB9F-ChOepFA0wW-a7cosuBm2udHCre2q0X1VR8hvk9hWjp4DyAhYtdp13xp&new=1","source":"me的自留地","published_at":"2026-07-02","summary":"政策1.资讯:7月1日起,工业和信息化部组织制定的强制性国家标准《电动汽车安全要求》(GB 18384&mdash;2025)、《电动汽车用动力...","importance_level":"normal"}]},"E":{"name":"数字营销与用户运营","items":[{"title":"【每日资讯】2026 年 07 月 02 日,当日 AI 应用 / 跨境电商 / 跨境物流核心动态汇总","url":"https://mp.weixin.qq.com/s?src=11&timestamp=1783238431&ver=6823&signature=2xG0SXjoLaYmwZniVotbZSz4BruhONPrtpiKSyhBJwvS6CBuJV-e2aZbkCDSlzJMC1kAYj0k5zdNXRpYnyVpYIgWMlndbkpdn5DyvINbgjd-6UEcS5VNxpIPMMKStPjn&new=1","source":"跨境明哥","published_at":"2026-07-02","summary":"跨境电商资讯俄罗斯市场俄三大平台Ozon/Avito/WB 签署新版卖家备忘录,明确核心规则调整:国内外卖家佣金统一、取消境外卖家额...","importance_level":"normal"},{"title":"跨境电商今日要闻速递(2026年7月2日)","url":"https://mp.weixin.qq.com/s?src=11&timestamp=1783238431&ver=6823&signature=2ljDj3H*uirDqzHUkNzH9YjgbGVLPJ88T9iySiBILCRjcZW3kWQSTuKLeIXD55PHYGTdeVytMOwDS8zYdZIkhd9LFLHWO4ryLGjCoDXHKlDUejyP3UedvR3ATEijqXGk&new=1","source":"智办公RPA数字员工AI虚拟机器人","published_at":"2026-07-02","summary":"跨境电商今日要闻速递(2026年7月2日)1、Shopee泰国本土店联盟计划7月1日升级 支持跨店推广并优化佣金结算Shopee泰国本土店...","importance_level":"normal"},{"title":"​【7月2日】日常电商早报-aimy","url":"https://mp.weixin.qq.com/s?src=11&timestamp=1783238434&ver=6823&signature=PTR5GcfoQB-gVyXxg47xu8d0Oi-xAT*XoxlzQMgpjsRceXHu*mi7zRx4uQct*k9FYE37HdAgSUWpmoqNebbtW7oh0NKP2FvJl*mC3vowlXzYayDmLmcKzf12Z5qxUboI&new=1","source":"电商信息的筛选者","published_at":"2026-07-02","summary":"朋友们早上好,我是aimy,带你一起筛选电商圈新鲜、有效资讯今天是2026年7月2日 周四,下面就和我一起看一下今天的电商早报吧1...","importance_level":"normal"},{"title":"两项酒类流通行标7月落地:合规大考下,快消渠道数字化的破局之路","url":"https://mp.weixin.qq.com/s?src=11&timestamp=1783238438&ver=6823&signature=kllKIW0IObkEycAdf9rKVvuTrjMrITZxzKwONfmTg8lR60ZiFvV--t8UCINR0urK-2-xEJhRvS6nlhcmK78zeyDxSwPE8903FCUoMc6xDB0xyTCSibDPegHeUF4meEKs&new=1","source":"数字化星球","published_at":"2026-07-02","summary":"排版:习丌&#55361;&#56950;2026年7月1日,SB/T10391-2026《酒类商品批发... 一物一码营销数字化,正是快消企业打通全链路、实现合规与增长...","importance_level":"normal"},{"title":"一文读懂AI营销243:从“大模型”到“生意转化”的产业跃迁","url":"https://mp.weixin.qq.com/s?src=11&timestamp=1783238438&ver=6823&signature=24g66dfS28fuZD6jpXPFJcTzFxLUWGDnEHLwv*G8FtlzMDW8-3d4UXozua0MPLvAshAw81FbP9q0Vpw*KzGDYjdB00Mzw6wrMn0yyRKSri8N2Dp102HBw*w5AJYUx3lC&new=1","source":"题材SKILL","published_at":"2026-07-02","summary":"7月2日广告营销概念盘中上涨2.96%,天娱数科涨停,福石控股涨超8%,蓝色光标涨超7%.多家机构密集调研后,AI营销已成为2026...","importance_level":"normal"}]},"F":{"name":"消费者购车洞察","items":[{"title":"新能源日报 | 2026年07月02日 6月新能源车企销量放榜/协鑫钙钛矿叠层量产线已投产/储能41号令生效","url":"https://mp.weixin.qq.com/s?src=11&timestamp=1783238159&ver=6823&signature=904AZg3qF5b2Caz*Y6DbhWUi*hEJRuC0161t76nAkKLypFNwAGWSviNPy0trxb3BwMKT5vO3SZCJtlZtaKzZaZCWBvJI-E25ouujIDrgTBxEXJ0Qwisfu4QHbfCEgxe5&new=1","source":"猎聘新能源招聘","published_at":"2026-07-02","summary":"今日2条快讯 + 1条深度解读,预计阅读3分钟 快讯6月新能源车企销量放榜,零跑单月9.3万辆逼近10万大关:7月1日,主要新能源车企...","importance_level":"high"},{"title":"今日汽车资讯要闻(2026年7月2日)","url":"https://mp.weixin.qq.com/s?src=11&timestamp=1783238217&ver=6823&signature=65qNUWPeZmQqBLxQZtQD9CnYacD3qsYSBWXPoMQbSgdSxc5U7scIOL45yWJo9dXtP5hjQmwFfavxZeIfDO08aMZxVNpP-tFBvUh810kxT2ngSnIhUWG5Va0Nv5MAiwIV&new=1","source":"驰喔车","published_at":"2026-07-02","summary":"时间:6月30日递表,7月2日深度解读密集发布＂三无＂标签:无制造:长安汽车负责制造无智能化自研:引望/华为提供智驾、智舱无...","importance_level":"normal"},{"title":"5分钟补能400km!比亚迪新车官宣:7月2日,上市开售","url":"https://mp.weixin.qq.com/s?src=11&timestamp=1783238194&ver=6823&signature=y*NiZfdWtWDm3rVzI*TIstz5s-TC*A821wtLqGF4uO*3jc2FjFEUAvaoD541en0RRDTLpcOXG95dRDgTgk5Qqcg4jdG7EeJyF1vGiFoTZqDKsutdEtyIrn6nLvNupTUu&new=1","source":"科技阿维","published_at":"2026-07-02","summary":"目前比亚迪已经官宣7月2日比亚迪海豹08将正式上市开售,定位海洋网中大型旗舰轿跑,其实这一新车6月12日就已经全国开启盲订了...","importance_level":"high"},{"title":"7月2日,比亚迪海洋网旗舰家轿海豹08重磅上市,推出插混、纯电双动力6款车型,售价19.69万-23.99万元,购车可享万元置换补贴、1年免费闪","url":"https://mp.weixin.qq.com/s?src=11&timestamp=1783238194&ver=6823&signature=o20a1ui4m6f5VXEhnGplw2V7Rxvszb9*tXsrsLfElcj3U3JK2vmxvCdkjS6Ns4EVeYAirzw-oKf3WZVvdRShdiIBn0wbCXK96XWHMvXmWOlxl-7xZYZy6-39n2urQuBW&new=1","source":"婉酱u","published_at":"2026-07-02","summary":"7月2日,比亚迪海洋网旗舰家轿海豹08重磅上市,推出插混、纯电双动力6款车型,售价19.69万-23.99万元,购车可享万元置换补贴、...","importance_level":"high"}]}}}</script>
+<div class="footer">CRM 行业日报 · 数据驱动决策</div>
+</div>
+
+<script>
+window.addEventListener('error',function(e){console.error('Global error:',e.message)});
+
+const SECTIONS={
+  A:{name:'CRM行业动态',color:'#0071e3',svg:'<rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/>'},
+  B:{name:'汽车行业动态',color:'#ff9f0a',svg:'<path d="M4 14v-3l2-5a2 2 0 0 1 1.9-1.2h8.2A2 2 0 0 1 18 6l2 5v3a1 1 0 0 1-1 1h-1v1a1 1 0 0 1-2 0v-1H8v1a1 1 0 0 1-2 0v-1H5a1 1 0 0 1-1-1z"/><path d="M7.5 11l1-2h7l1 2"/>'},
+  C:{name:'汽车品牌舆情',color:'#ff2d55',svg:'<path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.7 21a2 2 0 0 1-3.4 0"/>'},
+  D:{name:'政策法规速递',color:'#af52de',svg:'<path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>'},
+  E:{name:'数字营销',color:'#5ac8fa',svg:'<polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/>'},
+  F:{name:'消费者购车洞察',color:'#34c759',svg:'<circle cx="12" cy="8" r="4"/><path d="M4 22c0-4.4 3.6-8 8-8s8 3.6 8 8"/>'}
+};
+
+const ARCHIVE='archive/';
+const DATA_URL='latest.json';
+
+let startDate='',endDate='';
+
+/* ── Helpers ── */
+const pad=n=>String(n).padStart(2,'0');
+const fmt=d=>`${d.getFullYear()}-${pad(d.getMonth()+1)}-${pad(d.getDate())}`;
+const today=()=>new Date();
+const yesterday=()=>{const d=today();d.setDate(d.getDate()-1);return d};
+
+/* ── Init ── */
+document.addEventListener('DOMContentLoaded',()=>{
+  applyPreset('yesterday');
+  updateDateRange();
+
+  document.querySelectorAll('#presets button[data-preset]').forEach(btn=>{
+    btn.addEventListener('click',function(){
+      applyPreset(this.dataset.preset);
+      updateDateRange();
+      loadData();
+    });
+  });
+
+  loadData();
+});
+
+/* ── Date ── */
+function applyPreset(preset){
+  document.querySelectorAll('#presets button[data-preset]').forEach(b=>b.classList.remove('active'));
+  const btn=document.querySelector(`#presets button[data-preset="${preset}"]`);
+  if(btn) btn.classList.add('active');
+
+  const now=today(),y=yesterday(),yest=fmt(y);
+
+  switch(preset){
+    case'yesterday':startDate=endDate=yest;break;
+    case'this_week':{
+      const mon=new Date(now);mon.setDate(now.getDate()-(now.getDay()||7)+1);
+      startDate=fmt(mon);endDate=yest;break;
+    }
+    case'last_week':{
+      const lm=new Date(now);lm.setDate(now.getDate()-(now.getDay()||7)-6);
+      const ls=new Date(lm);ls.setDate(ls.getDate()+6);
+      startDate=fmt(lm);endDate=fmt(ls);break;
+    }
+    case'this_month':
+      startDate=fmt(new Date(now.getFullYear(),now.getMonth(),1));endDate=yest;break;
+    case'last_month':
+      startDate=fmt(new Date(now.getFullYear(),now.getMonth()-1,1));
+      endDate=fmt(new Date(now.getFullYear(),now.getMonth(),0));break;
+  }
+}
+
+function updateDateRange(){
+  const el=document.getElementById('dateRange');
+  if(el) el.textContent = startDate===endDate ? startDate : `${startDate} ~ ${endDate}`;
+}
+
+/* ── Data ── */
+async function loadData(){
+  let brief=null;
+  const isMulti=startDate!==endDate;
+
+  try{
+    if(!isMulti){
+      try{
+        const resp=await fetch(`${ARCHIVE}${startDate}.json?cb=${Date.now()}`);
+        if(resp.ok){
+          brief=await resp.json();
+        }else{
+          const r2=await fetch(DATA_URL+`?cb=${Date.now()}`);
+          if(r2.ok) brief=await r2.json();
+        }
+      }catch(e){
+        console.warn('fetch archive failed, trying latest:',e.message);
+        try{
+          const r2=await fetch(DATA_URL+`?cb=${Date.now()}`);
+          if(r2.ok) brief=await r2.json();
+        }catch(e2){console.warn('fetch latest also failed:',e2.message)}
+      }
+    }else{
+      try{
+        brief=await aggregate(startDate,endDate);
+      }catch(e){console.warn('aggregate failed:',e.message)}
+    }
+  }catch(e){
+    console.error('loadData unexpected error:',e);
+  }
+
+  /* fetch 全部失败时，使用内联兜底数据（保证页面始终有内容） */
+  if(!brief){
+    try{
+      const fb=document.getElementById('fallback-data');
+      if(fb&&fb.textContent.trim()) brief=JSON.parse(fb.textContent);
+    }catch(e){console.warn('fallback data parse failed:',e.message)}
+  }
+
+  /* 兜底：确保 brief 和 6 大模块始终存在 */
+  if(!brief) brief={sections:{}};
+  if(!brief.sections) brief.sections={};
+  ['A','B','C','D','E','F'].forEach(k=>{
+    if(!brief.sections[k]) brief.sections[k]={items:[]};
+    if(!brief.sections[k].items) brief.sections[k].items=[];
+  });
+
+  render(brief);
+}
+
+async function aggregate(s,e){
+  const secs={};['A','B','C','D','E','F'].forEach(k=>secs[k]={items:[]});
+  let days=0;
+  const st=new Date(s+'T00:00:00'),et=new Date(e+'T00:00:00');
+  for(let d=new Date(st);d<=et;d.setDate(d.getDate()+1)){
+    const ds=fmt(d);
+    const resp=await fetch(`${ARCHIVE}${ds}.json?cb=${Date.now()}`);
+    if(!resp.ok) continue;
+    const daily=await resp.json();days++;
+    for(const k of['A','B','C','D','E','F']){
+      const items=daily.sections?.[k]?.items||[];
+      items.forEach(i=>{i._date=ds});
+      secs[k].items.push(...items);
+    }
+  }
+  let total=0;
+  for(const k of['A','B','C','D','E','F']){
+    secs[k].items.sort((a,b)=>(b._date||'').localeCompare(a._date||'')||(b.importance_score||0)-(a.importance_score||0));
+    total+=secs[k].items.length;
+  }
+  return {sections:secs,total_articles:total,days_covered:days};
+}
+
+/* ── Render ── */
+function render(brief){
+  let h='';
+  let totalItems=0;
+  for(const k of['A','B','C','D','E','F']){
+    const cfg=SECTIONS[k],items=brief.sections?.[k]?.items||[];
+    totalItems+=items.length;
+    h+=`<div class="section" id="section-${k}">
+      <div class="section-head" onclick="toggleSection(this)"><span class="ico" style="color:${cfg.color}"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round" stroke-linecap="round">${cfg.svg}</svg></span><span class="label">${cfg.name}</span><span class="chevron">▼</span></div>
+      <div class="section-body">`;
+    if(!items.length){h+='<div class="empty">暂无相关动态</div>'}
+    else if(k==='C'){h+=renderC(items)}
+    else{items.forEach(i=>{h+=renderItem(i)})}
+    h+='</div></div>';
+  }
+  document.getElementById('content').innerHTML=h;
+  setupTabs();
+}
+
+function renderC(items){
+  let h='';
+  const our=items.filter(i=>i.is_our_brand&&i.sentiment==='negative');
+  const comp=items.filter(i=>!i.is_our_brand&&i.sentiment==='negative');
+  if(our.length){h+='<div class="sub-label">本品舆情</div>';our.forEach(i=>h+=renderItem(i))}
+  if(comp.length){h+='<div class="sub-label">竞品舆情</div>';comp.forEach(i=>h+=renderItem(i))}
+  if(!our.length&&!comp.length) h+='<div class="empty">暂无负面舆情</div>';
+  return h;
+}
+
+function renderItem(item){
+  const tags=[];
+  if(item.importance_level==='high') tags.push('<span class="tag tag-hi">高优</span>');
+  if(item.sentiment==='negative') tags.push('<span class="tag tag-neg">负面</span>');
+  if(item.is_our_brand) tags.push('<span class="tag tag-our">本品</span>');
+  (item.companies||[]).forEach(c=>tags.push(`<span class="tag tag-cp">${c}</span>`));
+  let src='';
+  const dt=item.published_at||item._date||'';
+  if(item.source||dt) src=`<span class="item-source">${item.source||''}${item.source&&dt?' · ':''}${dt||''}</span>`;
+  let sum='';
+  if(item.summary) sum=item.summary.length>100?item.summary.slice(0,97)+'...':item.summary;
+  const url=item.url||'#';
+  return`<div class="item" onclick="var a=this.querySelector('a');a?window.open(a.href,'_blank'):window.open('${url}','_blank')">
+    <div class="item-row1"><a class="item-title" href="${url}" target="_blank" rel="noopener" onclick="event.stopPropagation()">${item.title||'(无标题)'}</a></div>
+    ${sum?`<div class="item-summary">${sum}</div>`:''}
+    <div class="item-row2">${tags.join('')}${src?`<span class="item-sep"></span>`+src:''}<a class="item-url" href="${url}" target="_blank" rel="noopener" onclick="event.stopPropagation()">查看原文 →</a></div>
+  </div>`;
+}
+
+function toggleSection(head){
+  const body=head.nextElementSibling,chev=head.querySelector('.chevron');
+  if(body.style.display==='none'){body.style.display='';chev.style.transform=''}
+  else{body.style.display='none';chev.style.transform='rotate(-90deg)'}
+}
+
+function setupTabs(){
+  const tabs=document.querySelectorAll('#tabNav button[data-target]');
+  tabs.forEach(btn=>{
+    btn.onclick=()=>{
+      const el=document.getElementById('section-'+btn.dataset.target);
+      if(el) el.scrollIntoView({behavior:'smooth',block:'start'});
+    };
+  });
+  const obs=new IntersectionObserver(entries=>{
+    entries.forEach(e=>{
+      if(e.isIntersecting){
+        tabs.forEach(b=>b.classList.remove('active'));
+        const t=document.querySelector('#tabNav button[data-target="'+e.target.id.replace('section-','')+'"]');
+        if(t) t.classList.add('active');
+      }
+    });
+  },{rootMargin:'-60px 0px -70% 0px',threshold:0});
+  ['A','B','C','D','E','F'].forEach(k=>{
+    const el=document.getElementById('section-'+k);if(el) obs.observe(el);
+  });
+}
+</script>
+</body>
+</html>
